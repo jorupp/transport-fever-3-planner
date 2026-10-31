@@ -61,6 +61,8 @@ Capacity follows TF3's raw-capacity `/ 4` convention. Maximum speed is the slowe
 
 Initial loaded acceleration is estimated as tractive effort in newtons divided by loaded mass in kilograms. Payload uses TF3's cargo weight factor. This estimate excludes drag, grades and adhesion.
 
+The sortable **Time to max** (seconds) and **Dist. to max** (meters) columns use the same constant effective acceleration as throughput: `a = min(initial traction acceleration, power / (loaded mass × max(top speed / 2, 1)))`, with speed in m/s and power in watts. Time is `v / a`; distance is `v² / (2a)`. They measure acceleration from rest, excluding loading and braking, independently of trip length. Vehicle details and CSV exports also expose effective performance acceleration and the peak speed actually reached on the selected trip (which can be below top speed when braking must start early). This makes the current approximation auditable without changing its behavior.
+
 The reference performance benchmark is capacity transported per hour over the user-entered trip distance (10 km by default), starting and ending at rest, including a full load and unload. Enter a positive distance in kilometers and click **Calculate options** to update throughput and cost per performance. Travel uses constant estimated acceleration limited by traction and power at half top speed, and 1 m/s² braking. Loading applies the cargo's loading factor. It excludes curves, gradients, traffic, return trips and income. Each CSV row and vehicle detail includes the distance used.
 
 ```

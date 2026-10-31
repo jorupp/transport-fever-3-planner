@@ -103,6 +103,26 @@ test('minimum top speed applies to the slowest component and matches displayed k
     assert.throws(()=>options(minTopSpeed),/Minimum top speed/);
   }
 });
+test('time and distance to maximum speed use SI units and the performance acceleration', () => {
+  const engine = v({ speed: 72, weightEmpty: 10000, weightMaxPayload: 0, tractiveEffort: 10, power: 1000, capacities: { PASSENGERS: 20 } });
+  const [tractionLimited] = calculateOptions([engine], cargo, DEFAULT_SETTINGS);
+  assert.equal(tractionLimited.acceleration, 1);
+  assert.equal(tractionLimited.performanceAcceleration, 1);
+  assert.equal(tractionLimited.timeToMaxSpeed, 20);
+  assert.equal(tractionLimited.distanceToMaxSpeed, 200);
+  assert.equal(tractionLimited.peakSpeed, 72);
+  const powered = { ...engine, power: 50 };
+  const [powerLimited] = calculateOptions([powered], cargo, DEFAULT_SETTINGS);
+  assert.equal(powerLimited.acceleration, 1, 'initial traction-based acceleration is unchanged');
+  assert.equal(powerLimited.performanceAcceleration, .5);
+  assert.equal(powerLimited.timeToMaxSpeed, 40);
+  assert.equal(powerLimited.distanceToMaxSpeed, 400);
+  const [short] = calculateOptions([powered], cargo, { ...DEFAULT_SETTINGS, distanceKm: .01 });
+  assert.equal(short.timeToMaxSpeed, 40, 'theoretical launch-to-max metrics do not depend on the trip length');
+  assert.equal(short.distanceToMaxSpeed, 400);
+  assert(short.peakSpeed < short.speed, 'braking on a short trip prevents reaching max speed');
+});
+
 test('real TF3 catalog invariants across multiple eras and every cargo',()=>{
   assert.equal(data.game,'Transport Fever 3');assert.equal(data.vehicles.length,data.counts.vehicles);
   assert.equal(new Set(data.vehicles.map(v=>v.id)).size,data.vehicles.length);
@@ -121,6 +141,7 @@ test('real TF3 catalog invariants across multiple eras and every cargo',()=>{
       assert(o.length<=limit+1e-6);assert(o.capacity>0);assert(o.yearFrom<=(o.yearTo??Infinity));
       assert(o.yearFrom<=year+20&&(o.yearTo??Infinity)>=year);
       assert(Number.isFinite(o.acceleration)&&o.acceleration>0);assert(Number.isFinite(o.costPerformance)&&o.costPerformance>0);
+      assert(Number.isFinite(o.timeToMaxSpeed)&&o.timeToMaxSpeed>0);assert(Number.isFinite(o.distanceToMaxSpeed)&&o.distanceToMaxSpeed>0);
       if(o.wagon){assert(compatible(o.engine,o.wagon));assert(o.length+o.wagon.length>limit-1e-6);}
     }
     console.log(`${year}: ${rows.length} options in ${(performance.now()-start).toFixed(1)} ms`);

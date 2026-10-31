@@ -14,6 +14,7 @@ export type Option = {
   id: string; mode: Mode; engine: Vehicle; wagon: Vehicle | null; engines: number; wagons: number;
   cargo: string; // The selected cargo with the lowest estimated throughput (the metrics benchmark).
   cargos: string[]; capacity: number; length: number; speed: number; acceleration: number;
+  performanceAcceleration: number; timeToMaxSpeed: number; distanceToMaxSpeed: number; peakSpeed: number;
   noise: number; pollution: number; comfort: number | null; purchase: number; running: number;
   loadSpeed: number; throughput: number; costPerformance: number; distanceKm: number; yearFrom: number; yearTo: number | null;
   availableAtStart: boolean; availableAtEnd: boolean; fullRange: boolean; lightRail: boolean; loadedMass: number;
@@ -101,6 +102,8 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
   // Idealized power/traction-limited average acceleration; no grades, drag, traffic or curves.
   const vmax = speed / 3.6;
   const a = Math.min(acceleration, sum("power") * 1000 / (loadedMass * Math.max(vmax / 2, 1)));
+  const timeToMaxSpeed = vmax / a;
+  const distanceToMaxSpeed = vmax * vmax / (2 * a);
   const distanceMeters = settings.distanceKm * 1000;
   const peak = Math.min(vmax, Math.sqrt(2 * distanceMeters / (1 / a + 1)));
   const acceleratingDistance = peak * peak / (2 * a);
@@ -113,6 +116,7 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
   return {
     id: `${mode}:${engine.id}:${engines}:${wagon?.id ?? "self"}`, mode, engine, wagon, engines, wagons, cargo: cargo.id, cargos: [cargo.id],
     capacity, length: sum("length"), speed, acceleration, noise: sum("noise"), pollution: sum("pollution"),
+    performanceAcceleration: a, timeToMaxSpeed, distanceToMaxSpeed, peakSpeed: peak * 3.6,
     comfort: cargo.id === "PASSENGERS" ? ((engine.capacities.PASSENGERS ?? 0) * engines * engine.comfort + (wagon?.capacities.PASSENGERS ?? 0) * wagons * (wagon?.comfort ?? 0)) / capacity : null,
     purchase, running, loadSpeed, throughput, distanceKm: settings.distanceKm, costPerformance: throughput > 0 ? (running + purchase / 20) / throughput : Infinity,
     yearFrom, yearTo: Number.isFinite(until) ? until : null,

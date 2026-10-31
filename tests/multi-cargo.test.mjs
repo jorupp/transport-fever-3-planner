@@ -34,7 +34,7 @@ test('multi-cargo metrics use a consistent lowest-throughput load, independent o
     const worst = loads.reduce((x, y) => x.throughput <= y.throughput ? x : y);
     assert.equal(row.throughput, Math.min(...loads.map(o => o.throughput)));
     assert.equal(row.costPerformance, Math.max(...loads.map(o => o.costPerformance)));
-    for (const key of ['cargo', 'capacity', 'acceleration', 'loadedMass', 'loadSpeed', 'comfort']) assert.equal(row[key], worst[key], key);
+    for (const key of ['cargo', 'capacity', 'acceleration', 'performanceAcceleration', 'timeToMaxSpeed', 'distanceToMaxSpeed', 'peakSpeed', 'loadedMass', 'loadSpeed', 'comfort']) assert.equal(row[key], worst[key], key);
   }
   assert.deepEqual(calculate(['B', 'A', 'A']), rows);
   assert.equal(calculate([]).length, 0);

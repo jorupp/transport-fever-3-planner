@@ -1345,6 +1345,8 @@ main { max-width: none; padding: 26px 24px 0; margin: 0 auto; }
 .config-message:empty { display: none; }
 .config-error { color: #9b2222; }
 .parameter-grid { display: grid; grid-template-columns: 1.1fr 1.15fr 1.1fr 1fr; gap: 26px; padding: 20px; }
+.performance-fields { gap: 8px; }
+.performance-fields label > span { font-size: 10px; white-space: nowrap; }
 .highlight { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 17px 20px; border: 0; border-right: 1px solid var(--line); background: transparent; text-align: left; }
 .highlights { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); background: #f8faf8; }
 .table-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px 12px 10px; }
@@ -1389,6 +1391,54 @@ thead .sticky-column button { padding-left: 12px; }
 .name-year-badge.introduction { background: #e7edf2; border-color: #bbcbd6; color: #334e63; }
 .name-year-badge.removal { background: #ffe39b; border-color: #d6ac44; color: #674400; }
 .light-rail-badge { padding: 2px 3px; border: 1px solid #b9cbbd; border-radius: 2px; color: #36573f; font-size: 8px; font-style: normal; font-weight: 600; line-height: 1.2; }
+.vehicle-modal { max-width: 1100px; }
+.vehicle-modal .dialog-intro { margin-bottom: 12px; }
+.vehicle-detail-tabs { display: flex; gap: 4px; padding-bottom: 16px; border-bottom: 1px solid #c4cec7; margin-bottom: 18px; }
+.vehicle-detail-tabs button { padding: 8px 14px; border: 1px solid #b3c3b9; border-radius: 4px; color: #223e2d; background: #fff; font-size: 12px; font-weight: 600; }
+.vehicle-detail-tabs button[aria-pressed="true"] { background: #185b35; border-color: #185b35; color: #fff; }
+.calculation-context { font-size: 12px; color: #344d40; margin-bottom: 14px; }
+.calculation-section { margin-top: 26px; padding-top: 20px; border-top: 1px solid #c4cec7; }
+.calculation-section h3, .trip-graph h3 { font-size: 15px; color: #172e20; margin: 0 0 10px; }
+.calculation-section > p, .calculation-note { color: #3c5145; font-size: 12px; line-height: 1.65; margin: 8px 0 12px; }
+.calculation-breakdown table { width: 100%; table-layout: fixed; font-size: 11px; white-space: normal; margin: 14px 0; border: 1px solid #c4cec7; }
+.calculation-breakdown table th, .calculation-breakdown table td { padding: 9px 8px; height: auto; text-align: right; vertical-align: middle; border-bottom: 1px solid #dde4df; color: #213b2c; }
+.calculation-breakdown table thead th { position: static; background: #eef3f0; font-weight: 600; line-height: 1.5; }
+.calculation-breakdown table th:first-child { text-align: left; }
+.calculation-inputs th:first-child { width: 220px; }
+.calculation-inputs th small { display: block; margin-top: 3px; font-weight: 400; color: #4e6256; }
+.calculation-breakdown .calculation-total > * { background: #edf4ef; font-weight: 700; }
+.calculation-breakdown .calculation-forces th:nth-child(2), .calculation-breakdown .calculation-forces td:nth-child(2) { text-align: left; }
+.calculation-breakdown .calculation-phases th:first-child { width: 125px; }
+.calculation-breakdown .calculation-phases th:nth-child(2), .calculation-breakdown .calculation-phases th:nth-child(3) { width: 130px; }
+.calculation-breakdown .calculation-phases td:last-child, .calculation-breakdown .calculation-phases th:last-child { text-align: left; }
+.calculation-equations { display: grid; gap: 10px; margin-top: 14px; }
+.calculation-equations p { margin: 0; padding: 12px 14px; background: #f6f8f7; border-left: 3px solid #9db6a7; font-size: 12px; line-height: 1.65; }
+.calculation-equations b { display: block; color: #172e20; margin-bottom: 4px; }
+.calculation-equations code { display: block; font-size: 12px; color: #163b26; font-variant-numeric: tabular-nums; white-space: normal; overflow-wrap: anywhere; }
+.calculation-equations span { display: block; color: #40584a; margin-top: 4px; }
+.trip-graph { border: 1px solid #b6c7bc; border-radius: 5px; padding: 15px 16px; background: #fff; }
+.trip-graph-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+.trip-graph-heading > span { font-size: 11px; color: #40584a; }
+.trip-graph-scope { display: flex; gap: 4px; margin: 4px 0 12px; }
+.trip-graph-scope button { padding: 5px 9px; border: 1px solid #baccc0; background: #fff; color: #294735; font-size: 11px; border-radius: 3px; }
+.trip-graph-scope button[aria-pressed="true"] { border-color: #34774d; background: #e1eee5; color: #174227; font-weight: 600; }
+.trip-phase-legend { display: flex; gap: 18px; margin: 5px 0 9px; font-size: 11px; color: #263e30; }
+.trip-phase-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.trip-phase-legend i { width: 13px; height: 9px; border: 1px solid #71837955; }
+.trip-graph svg { width: 100%; display: block; overflow: visible; touch-action: pan-y; }
+.trip-graph svg text { font-size: 10px; fill: #2c4436; }
+.trip-graph .chart-speed-label { fill: #154d86; font-weight: 700; font-size: 11px; }
+.trip-graph .chart-acceleration-label { fill: #98430e; font-weight: 700; font-size: 11px; }
+.chart-grid { stroke: #536a5c33; stroke-width: 1; }
+.chart-grid.vertical { stroke-dasharray: 2 4; }
+.chart-speed { fill: none; stroke: #154d86; stroke-width: 2.5; }
+.chart-acceleration { fill: none; stroke: #a64b12; stroke-width: 2.2; }
+.chart-cursor { stroke: #192d22; stroke-width: 1; stroke-dasharray: 4 3; }
+.chart-speed-dot { fill: #154d86; stroke: #fff; stroke-width: 1.5; }
+.chart-acceleration-dot { fill: #a64b12; stroke: #fff; stroke-width: 1.5; }
+.trip-time-slider { display: block; width: calc(100% - 90px); margin: 8px 30px 12px 60px; accent-color: #185b35; }
+.trip-inspector { display: flex; flex-wrap: wrap; gap: 7px 18px; padding: 10px 12px; background: #f0f5f2; border: 1px solid #d5e0d9; color: #193824; font-size: 11px; font-variant-numeric: tabular-nums; }
+.trip-inspector strong { width: 100%; font-size: 12px; }
 .multiple-unit-badge {
   display: inline-block;
   flex-shrink: 0;

@@ -13,18 +13,18 @@ export type Mode = "train" | "tram" | "road";
 export type FinanceSettings = { vehicleCostPercent: number; maintenanceCostPercent: number };
 export const DEFAULT_FINANCE: FinanceSettings = { vehicleCostPercent: 125, maintenanceCostPercent: 125 };
 export const FINANCE_PRESETS = [{ id: "easy", name: "Easy", percent: 50 }, { id: "normal", name: "Normal", percent: 100 }, { id: "hard", name: "Hard", percent: 125 }, { id: "very-hard", name: "Very hard", percent: 150 }] as const;
-export type Settings = { year: number; extraYears: number; trainLength: number; tramLength: number; distanceKm: number; minTopSpeed: number; cargos: string[]; vehicleCostPercent?: number; maintenanceCostPercent?: number };
+export type Settings = { year: number; extraYears: number; trainLength: number; tramLength: number; distanceKm: number; additionalStops?: number; minTopSpeed: number; cargos: string[]; vehicleCostPercent?: number; maintenanceCostPercent?: number };
 export type Option = {
   id: string; mode: Mode; engine: Vehicle; wagon: Vehicle | null; engines: number; wagons: number;
   cargo: string; // The selected cargo with the lowest estimated throughput (the metrics benchmark).
   cargos: string[]; capacity: number; length: number; speed: number; acceleration: number;
-  performanceAcceleration: number | null; timeToMaxSpeed: number | null; distanceToMaxSpeed: number | null; peakSpeed: number;
+  performanceAcceleration: number | null; timeToMaxSpeed: number | null; distanceToMaxSpeed: number | null; peakSpeed: number; averageSpeed: number;
   motionModel: "calibrated-rail" | "constant-estimate"; motionMass: number;
   brakingAcceleration: number; brakingTime: number; brakingDistance: number; arrivalDelaySeconds: number;
   timeTo1Km: number; timeTo2Km: number; timeTo3Km: number; timeTo4Km: number; timeTo5Km: number;
   noise: number; pollution: number; comfort: number | null; purchase: number; running: number;
   vehicleCostPercent: number; maintenanceCostPercent: number;
-  loadSpeed: number; throughput: number; costPerformance: number; distanceKm: number; yearFrom: number; yearTo: number | null;
+  loadSpeed: number; throughput: number; costPerformance: number; distanceKm: number; additionalStops: number; yearFrom: number; yearTo: number | null;
   availableAtStart: boolean; availableAtEnd: boolean; fullRange: boolean; lightRail: boolean; loadedMass: number;
 };
 // Leave a 5 m buffer below the game's default 160 m station length.
@@ -58,6 +58,9 @@ export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings:
   }
   if (!Number.isFinite(settings.distanceKm) || settings.distanceKm <= 0) {
     throw new RangeError("Trip distance must be a positive number of kilometers.");
+  }
+  if (!Number.isSafeInteger(settings.additionalStops ?? 0) || (settings.additionalStops ?? 0) < 0 || (settings.additionalStops ?? 0) >= Number.MAX_SAFE_INTEGER) {
+    throw new RangeError("Additional stops must be a nonnegative whole number below the safe integer limit.");
   }
   if (!Number.isFinite(settings.minTopSpeed) || settings.minTopSpeed < 0) {
     throw new RangeError("Minimum top speed must be a nonnegative number of kilometers per hour.");
@@ -124,7 +127,8 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
   // Tram/light-rail and road equipment retain their uncalibrated estimate.
   const motionMass = engine.carrier === "RAIL" ? sum("weightEmpty") : loadedMass;
   const vmax = speed / 3.6;
-  const distanceMeters = settings.distanceKm * 1000;
+  const additionalStops = settings.additionalStops ?? 0, segmentCount = additionalStops + 1;
+  const distanceMeters = settings.distanceKm * 1000 / segmentCount;
   const rail = engine.carrier === "RAIL" ? createRailMotion(motionMass, sum("power") * 1000, sum("tractiveEffort") * 1000, vmax,
     (engine.friction * engine.weightEmpty * engines + (wagon ? wagon.friction * wagon.weightEmpty * wagons : 0)) / motionMass) : null;
   const brakingAcceleration = rail ? Math.min(engine.brakeDeceleration ?? DEFAULT_RAIL_BRAKING,
@@ -140,8 +144,9 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
     ? rail.launchAtDistance(distance).time
     : distance <= constantDistanceToMax ? Math.sqrt(2 * distance / a) : constantTimeToMax + (distance - constantDistanceToMax) / vmax);
   const peak = railTrip ? railTrip.speed : Math.min(vmax, Math.sqrt(2 * distanceMeters / (1 / a + 1)));
-  const travelSeconds = railTrip ? railTrip.time
+  const segmentSeconds = railTrip ? railTrip.time
     : peak / a + peak + Math.max(0, distanceMeters - peak * peak / (2 * a) - peak * peak / 2) / peak;
+  const travelSeconds = segmentSeconds * segmentCount;
   const brakingTime = peak / brakingAcceleration, brakingDistance = peak * peak / (2 * brakingAcceleration);
   const throughput = capacity * 3600 / (travelSeconds + 2 * capacity / Math.max(loadSpeed, 0.001) + arrivalDelaySeconds);
   const vehicleCostPercent = settings.vehicleCostPercent ?? DEFAULT_FINANCE.vehicleCostPercent;
@@ -153,12 +158,12 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
     id: `${mode}:${engine.id}:${engines}:${wagon?.id ?? "self"}`, mode, engine, wagon, engines, wagons, cargo: cargo.id, cargos: [cargo.id],
     capacity, length: sum("length"), speed, acceleration, noise: sum("noise"), pollution: sum("pollution"),
     performanceAcceleration: rail ? (timeToMaxSpeed === null ? null : vmax / timeToMaxSpeed) : a,
-    timeToMaxSpeed, distanceToMaxSpeed, peakSpeed: peak * 3.6,
+    timeToMaxSpeed, distanceToMaxSpeed, peakSpeed: peak * 3.6, averageSpeed: settings.distanceKm * 3600 / travelSeconds,
     motionModel: rail ? "calibrated-rail" : "constant-estimate", motionMass,
     brakingAcceleration, brakingTime, brakingDistance, arrivalDelaySeconds,
     timeTo1Km, timeTo2Km, timeTo3Km, timeTo4Km, timeTo5Km,
     comfort: cargo.id === "PASSENGERS" ? ((engine.capacities.PASSENGERS ?? 0) * engines * engine.comfort + (wagon?.capacities.PASSENGERS ?? 0) * wagons * (wagon?.comfort ?? 0)) / capacity : null,
-    purchase, running, loadSpeed, throughput, distanceKm: settings.distanceKm, costPerformance: throughput > 0 ? (running + purchase / 20) / throughput : Infinity,
+    purchase, running, loadSpeed, throughput, distanceKm: settings.distanceKm, additionalStops, costPerformance: throughput > 0 ? (running + purchase / 20) / throughput : Infinity,
     vehicleCostPercent, maintenanceCostPercent,
     yearFrom, yearTo: Number.isFinite(until) ? until : null,
     availableAtStart: yearFrom <= settings.year && until >= settings.year,
@@ -214,6 +219,10 @@ export function createRailMotion(mass: number, power: number, effort: number, to
   function peakForDistance(distance: number, braking: number) {
     if (initialAcceleration === 0) return { time: Infinity, distance: 0, speed: 0 };
     if (maximum && maximum.distance + topSpeed * topSpeed / (2 * braking) <= distance) return maximum;
+    // Tiny segments can be solved exactly while still traction limited.
+    const tractionEnd = Math.min(transitionSpeed, ceiling);
+    const tractionDistance = tractionEnd * tractionEnd / (2 * initialAcceleration) + tractionEnd * tractionEnd / (2 * braking);
+    if (distance <= tractionDistance) return atSpeed(Math.sqrt(2 * distance / (1 / initialAcceleration + 1 / braking)));
     let low = 0, high = ceiling;
     for (let i = 0; i < 32; i++) {
       const mid = (low + high) / 2, sample = atSpeed(mid);
@@ -226,6 +235,18 @@ export function createRailMotion(mass: number, power: number, effort: number, to
     initialAcceleration,
     timeToMaxSpeed: maximum?.time ?? null,
     distanceToMaxSpeed: maximum?.distance ?? null,
+    atSpeed,
+    atTime(time: number) {
+      if (time <= 0) return atSpeed(0);
+      if (maximum && time >= maximum.time) return { time, speed: topSpeed, distance: maximum.distance + (time - maximum.time) * topSpeed };
+      let low = 0, high = ceiling;
+      for (let i = 0; i < 32; i++) {
+        const mid = (low + high) / 2;
+        if (atSpeed(mid).time > time) high = mid;
+        else low = mid;
+      }
+      return atSpeed((low + high) / 2);
+    },
     launchAtDistance(distance: number) {
       const sample = peakForDistance(distance, Infinity);
       return { time: sample.time + (sample.speed > 0 ? Math.max(0, distance - sample.distance) / sample.speed : 0), speed: sample.speed };
@@ -233,7 +254,84 @@ export function createRailMotion(mass: number, power: number, effort: number, to
     trip(distance: number, braking = DEFAULT_RAIL_BRAKING) {
       const sample = peakForDistance(distance, braking);
       const cruise = Math.max(0, distance - sample.distance - sample.speed * sample.speed / (2 * braking));
-      return { time: sample.time + sample.speed / braking + (sample.speed > 0 ? cruise / sample.speed : 0), speed: sample.speed };
+      const cruiseTime = sample.speed > 0 ? cruise / sample.speed : 0;
+      return { time: sample.time + sample.speed / braking + cruiseTime, speed: sample.speed,
+        accelerationTime: sample.time, accelerationDistance: sample.distance, cruiseTime, cruiseDistance: cruise,
+        brakingTime: sample.speed / braking, brakingDistance: sample.speed * sample.speed / (2 * braking) };
     },
+  };
+}
+
+/** On-demand modal analysis. Uses the same curve as worker calculations, with no
+ * per-row graph generation or numerical time-stepping in the result table. */
+export function analyzeOption(o: Option) {
+  const sum = (key: "power" | "tractiveEffort" | "weightEmpty" | "length" | "purchase" | "running" | "noise" | "pollution") =>
+    o.engine[key] * o.engines + (o.wagon?.[key] ?? 0) * o.wagons;
+  const power = sum("power") * 1000, effort = sum("tractiveEffort") * 1000, mass = o.motionMass;
+  const rail = o.motionModel === "calibrated-rail";
+  const resistance = rail ? (o.engine.friction * o.engine.weightEmpty * o.engines
+    + (o.wagon ? o.wagon.friction * o.wagon.weightEmpty * o.wagons : 0)) / mass : 0;
+  const forceLimit = effort * (rail ? 2 : 1), transitionSpeed = power / forceLimit;
+  const curve = rail ? createRailMotion(mass, power, effort, o.speed / 3.6, resistance) : null;
+  const additionalStops = o.additionalStops ?? 0, segmentCount = additionalStops + 1;
+  const journeyDistance = o.distanceKm * 1000, distance = journeyDistance / segmentCount;
+  const peak = o.peakSpeed / 3.6, braking = o.brakingAcceleration;
+  const constantA = o.performanceAcceleration ?? 0;
+  const accelerationTime = peak / constantA, accelerationDistance = peak * peak / (2 * constantA);
+  const brakingTime = peak / braking, brakingDistance = peak * peak / (2 * braking);
+  const cruiseDistance = Math.max(0, distance - accelerationDistance - brakingDistance);
+  const segment = curve ? curve.trip(distance, braking) : {
+    accelerationTime, accelerationDistance, cruiseDistance, cruiseTime: cruiseDistance / peak,
+    brakingTime, brakingDistance, speed: peak,
+    time: accelerationTime + cruiseDistance / peak + brakingTime,
+  };
+  const trip = { speed: segment.speed, time: segment.time * segmentCount,
+    accelerationTime: segment.accelerationTime * segmentCount, accelerationDistance: segment.accelerationDistance * segmentCount,
+    cruiseTime: segment.cruiseTime * segmentCount, cruiseDistance: segment.cruiseDistance * segmentCount,
+    brakingTime: segment.brakingTime * segmentCount, brakingDistance: segment.brakingDistance * segmentCount };
+  const baseLoadSpeed = (o.engine.capacities[o.cargo] ? o.engine.loadSpeed * o.engines : 0) + (o.wagon?.loadSpeed ?? 0) * o.wagons;
+  const loadingTime = o.capacity / Math.max(o.loadSpeed, .001), arrivalTime = o.arrivalDelaySeconds;
+  const totalTime = trip.time + 2 * loadingTime + arrivalTime;
+  const transitionTime = curve && transitionSpeed < segment.speed ? curve.atSpeed(transitionSpeed).time : null;
+  const annualizedCost = o.running + o.purchase / 20;
+  function sampleAtTime(seconds: number) {
+    const time = Math.max(0, Math.min(seconds, trip.time));
+    const boundary = Math.round(time / segment.time);
+    const onBoundary = boundary > 0 && boundary < segmentCount
+      && Math.abs(time - boundary * segment.time) <= Number.EPSILON * Math.max(1, time) * 4;
+    const segmentIndex = onBoundary ? boundary : Math.min(segmentCount - 1, Math.floor(time / segment.time));
+    const localTime = onBoundary ? 0 : time - segmentIndex * segment.time;
+    let speed: number, position: number, acceleration: number, phase: string;
+    const brakeStart = segment.accelerationTime + segment.cruiseTime;
+    if (time >= trip.time) { speed = 0; position = distance; acceleration = 0; phase = "Stopped"; }
+    else if (segmentIndex > 0 && localTime === 0) { speed = 0; position = 0; acceleration = 0; phase = "Intermediate stop"; }
+    else if (localTime >= brakeStart) {
+      const dt = localTime - brakeStart;
+      speed = Math.max(0, segment.speed - braking * dt);
+      position = segment.accelerationDistance + segment.cruiseDistance + segment.speed * dt - braking * dt * dt / 2;
+      acceleration = -braking; phase = "Braking";
+    } else if (localTime >= segment.accelerationTime) {
+      speed = segment.speed; position = segment.accelerationDistance + (localTime - segment.accelerationTime) * speed;
+      acceleration = 0; phase = "Cruising";
+    } else {
+      const sample = curve?.atTime(localTime);
+      speed = sample ? sample.speed : constantA * localTime;
+      position = sample ? sample.distance : constantA * localTime * localTime / 2;
+      acceleration = rail ? Math.min(forceLimit / mass, speed > 0 ? power / (mass * speed) : Infinity) - resistance : constantA;
+      phase = rail ? (speed <= transitionSpeed ? "Traction limited" : "Power limited") : "Constant estimate";
+    }
+    const accelerating = phase === "Traction limited" || phase === "Power limited";
+    const drivingForce = rail && accelerating ? Math.min(forceLimit, speed > 0 ? power / speed : Infinity)
+      : rail && phase === "Cruising" ? mass * resistance : 0;
+    return { time, speed: speed * 3.6, distance: Math.min(distance, Math.max(0, position)) + segmentIndex * distance, acceleration, phase, segment: segmentIndex + 1,
+      drivingForce, powerUsed: drivingForce * speed, netForce: acceleration * mass };
+  }
+  return {
+    rail, power, effort, forceLimit, mass, resistance, resistanceForce: mass * resistance,
+    transitionSpeed, transitionTime, trip, segment, segmentCount, segmentDistance: distance, additionalStops,
+    baseLoadSpeed, cargoLoadFactor: baseLoadSpeed > 0 ? o.loadSpeed / baseLoadSpeed : 0,
+    loadingTime, unloadingTime: loadingTime, arrivalTime, totalTime, annualizedCost,
+    basePurchase: sum("purchase"), baseRunning: sum("running"), emptyMass: sum("weightEmpty"),
+    length: sum("length"), noise: sum("noise"), pollution: sum("pollution"), sampleAtTime,
   };
 }

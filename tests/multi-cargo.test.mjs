@@ -47,7 +47,7 @@ test('road and fixed vehicles must support every cargo themselves and do not rep
   const partial = engine({ id: 'partial', carrier: 'ROAD', modes: ['TRUCK'], engineModes: ['TRUCK'], capacities: { A: 20 } });
   const rows = calculateOptions([road, fixed, partial], cargos, settings);
   assert.equal(rows.filter(o => o.engine.id === 'truck').length, 1);
-  assert.equal(rows.filter(o => o.engine.id === 'set').length, 2);
+  assert.deepEqual(rows.filter(o => o.engine.id === 'set').map(o => o.engines), [5]);
   assert(rows.every(o => o.wagon === null && o.cargos.length === 2));
   assert(!rows.some(o => o.engine.id === 'partial'));
 });

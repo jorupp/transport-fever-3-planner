@@ -77,7 +77,15 @@ export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings:
     for (const mode of ["train", "tram", "road"] as const) {
       if (!belongsToMode(engine, mode)) continue;
       const limit = mode === "train" ? settings.trainLength : mode === "tram" ? settings.tramLength : Infinity;
-      for (const engines of mode === "road" ? [1] : [1, 2]) {
+      const multipleUnit = isMultipleUnitMenuVehicle(engine);
+      if (multipleUnit && Number.isFinite(limit) && engine.length > 0
+        && selectedCargos.every(c => engine.capacities[c.id] > 0)) {
+        // Compare whole formations at the length limit, including total emissions.
+        const maximum = Math.floor((limit + 1e-7) / engine.length);
+        if (maximum >= 1) result.push(makeMultiCargoOption(engine, null, maximum, 0, mode, selectedCargos, settings));
+      }
+      const engineCounts = mode === "road" ? [1] : multipleUnit ? [1, 2, 3, 4, 5] : [1, 2];
+      for (const engines of engineCounts) {
         if (engine.length * engines > limit + 1e-7) continue;
         let hasWagonOption = false;
         // An authored passenger multiple unit is one complete vehicle. Its loose parts never enter the catalog.
@@ -94,7 +102,7 @@ export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings:
             hasWagonOption = true;
           }
         }
-        if (!hasWagonOption && selectedCargos.every(c => engine.capacities[c.id] > 0)) {
+        if (!multipleUnit && !hasWagonOption && selectedCargos.every(c => engine.capacities[c.id] > 0)) {
           result.push(makeMultiCargoOption(engine, null, engines, 0, mode, selectedCargos, settings));
         }
       }

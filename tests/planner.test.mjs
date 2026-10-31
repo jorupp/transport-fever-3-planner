@@ -53,11 +53,71 @@ test('light rail appears in both tabs and cannot couple to railway wagons',()=>{
 test('fixed passenger sets stay intact; road vehicles remain single vehicles',()=>{
   const fixed=v({fixedFormation:true,capacities:{PASSENGERS:100},length:80});
   const sets=calculateOptions([fixed,w()],cargo,{...DEFAULT_SETTINGS,trainLength:200});
-  assert(sets.every(o=>o.wagon===null));assert.equal(sets.length,2);
+  assert(sets.every(o=>o.wagon===null));assert.equal(sets.length,1);assert.equal(sets[0].engines,2);
   const road=v({carrier:'ROAD',category:'bus',modes:['BUS'],engineModes:['BUS'],capacities:{PASSENGERS:20},length:200});
   const rows=calculateOptions([road],cargo,{...DEFAULT_SETTINGS,trainLength:1,tramLength:1});
   assert.equal(rows.length,1);assert.equal(rows[0].engines,1);assert.equal(rows[0].mode,'road');
 });
+
+test('multiple units haul maximum wagons with one through five units; locomotives remain capped at two',()=>{
+  const unit=v({capacities:{PASSENGERS:20},length:20,yearFrom:1995,yearTo:1998});
+  const coach=w();
+  const all=calculateOptions([unit,coach],cargo,{...DEFAULT_SETTINGS,trainLength:130});
+  const rows=all.filter(o=>o.wagon);
+  assert.deepEqual(all.filter(o=>!o.wagon).map(o=>o.engines),[6]);
+  assert.deepEqual(rows.map(o=>[o.engines,o.wagons]),[[1,11],[2,9],[3,7],[4,5],[5,3]]);
+  assert.equal(new Set(rows.map(o=>o.id)).size,rows.length);
+  for(const row of rows){
+    assert.equal(row.wagon,coach);assert.equal(row.length,130);
+    assert.equal(row.capacity,row.engines*20+row.wagons*20);
+    assert.equal(row.purchase,Math.round((row.engines*unit.purchase+row.wagons*coach.purchase)*1.25));
+    assert.equal(row.running,Math.round((row.engines*unit.running+row.wagons*coach.running)*1.25));
+    assert.equal(row.loadSpeed,(row.engines*unit.loadSpeed+row.wagons*coach.loadSpeed)*passenger.loadSpeedFactor);
+    assert.equal(row.noise,row.engines*unit.noise+row.wagons*coach.noise);
+    assert.equal(row.pollution,row.engines*unit.pollution+row.wagons*coach.pollution);
+    assert.equal(row.availableAtStart,false);assert.equal(row.availableAtEnd,false);
+    assert(row.averageSpeed>0&&row.throughput>0);
+  }
+  assert.deepEqual(calculateOptions([unit,coach],cargo,{...DEFAULT_SETTINGS,trainLength:100}).filter(o=>o.wagon).map(o=>o.engines),[1,2,3,4]);
+  assert.deepEqual(calculateOptions([v(),coach],cargo,{...DEFAULT_SETTINGS,trainLength:130}).map(o=>o.engines),[1,2]);
+  assert.deepEqual(calculateOptions([unit],cargo,{...DEFAULT_SETTINGS,trainLength:130}).map(o=>o.engines),[6]);
+  assert.equal(calculateOptions([unit,coach],cargo,{...DEFAULT_SETTINGS,minTopSpeed:101}).length,0);
+});
+
+test('authored passenger sets show only the maximum number of complete sets',()=>{
+  const unit=v({fixedFormation:true,capacities:{PASSENGERS:100},length:50});
+  const rows=calculateOptions([unit,w()],cargo,{...DEFAULT_SETTINGS,trainLength:400});
+  assert.deepEqual(rows.map(o=>[o.engines,o.wagons,o.length,o.capacity]),[[8,0,400,800]]);
+  assert(rows.every(o=>o.wagon===null));
+});
+
+test('real Roter Pfeil offers one through five units with coaches and freight wagons',()=>{
+  const unit=data.vehicles.find(v=>v.name==='CLe 2/4 Roter Pfeil');
+  for(const [name,cargoId] of [['Chinese Type YZ 22','PASSENGERS'],['Cargo Car 1960','LOGS']]){
+    const wagon=data.vehicles.find(v=>v.name===name);
+    const all=calculateOptions([unit,wagon],data.cargos,{...DEFAULT_SETTINGS,year:1960,extraYears:0,cargos:[cargoId]});
+    const rows=all.filter(o=>o.wagon);
+    assert.deepEqual(all.filter(o=>!o.wagon).map(o=>o.engines),cargoId==='PASSENGERS'?[6]:[]);
+    assert.deepEqual(rows.map(o=>o.engines),[1,2,3,4,5]);
+    assert(rows.every(o=>o.wagon===wagon&&o.wagons>=1&&o.length<=155));
+    assert(rows.every(o=>o.length+wagon.length>155));
+  }
+});
+
+test('multiple-unit-only formations fill the limit and sum emissions for every unit',()=>{
+  const unit=v({capacities:{PASSENGERS:20},length:20});
+  for(const [limit,count] of [[19,0],[20,1],[39.9,1],[40,2],[155,7],[400,20]]){
+    const rows=calculateOptions([unit],cargo,{...DEFAULT_SETTINGS,trainLength:limit});
+    assert.equal(rows.length,count?1:0);
+    if(!count) continue;
+    const [row]=rows;
+    assert.equal(row.engines,count);assert.equal(row.wagons,0);assert.equal(row.wagon,null);
+    assert.equal(row.noise,count*unit.noise);assert.equal(row.pollution,count*unit.pollution);
+    assert.equal(row.capacity,count*20);assert.equal(row.length,count*20);
+    assert(row.length<=limit&&row.length+unit.length>limit);
+  }
+});
+
 test('does not invent a cargo-carrying engine-only option or overlong formation',()=>{
   assert.equal(calculateOptions([v(),w()],cargo,{...DEFAULT_SETTINGS,trainLength:25}).length,0);
   assert.equal(calculateOptions([v({capacities:{PASSENGERS:20},length:30})],cargo,{...DEFAULT_SETTINGS,trainLength:25}).length,0);
@@ -87,7 +147,7 @@ test('trip distance changes throughput and cost per performance without changing
   assert(short.throughput>normal.throughput&&normal.throughput>long.throughput);
   assert(short.costPerformance<normal.costPerformance&&normal.costPerformance<long.costPerformance);
   for(const row of [short,normal,long]){
-    assert.equal(row.capacity,20);assert.equal(row.length,20);assert.equal(row.speed,100);
+    assert.equal(row.capacity,140);assert.equal(row.length,140);assert.equal(row.speed,100);
     assert(Number.isFinite(row.throughput)&&row.throughput>0);
   }
   assert.equal(long.distanceKm,100);

@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000. Production: `npm run build`, then `npm start`.
+Open http://localhost:3040. Production: `npm run build`, then `npm start`.
 
 ## Refresh the TF3 catalog
 
@@ -55,9 +55,13 @@ Vehicle rows and summary cards include tiny TF3 menu images beside the engine an
 
 `npm run data:extract-visuals` reruns the standard-library Python exporter in `scripts/extract_tf3_visuals.py` after refreshing the vehicle catalog. It converts the installed TF3 TGA menu icons to portable PNGs in `public/vehicles`, and writes paths, image sizes, source references, an icon fingerprint and approximate body colors to `src/data/tf3-vehicle-visuals.json`. The app reads only these included assets. The swatch algorithm samples opaque body pixels, excludes dark undercarriages and transparent backgrounds, and groups similar shaded colors; it estimates visual appearance rather than reading a paint specification.
 
+## Finance settings
+
+The **Finance** button opens independent vehicle-cost and maintenance sliders from 50–150% in 25% steps. Easy/Normal/Hard/Very hard set both to 50/100/125/150%; Hard is the default. Apply recalculates the current results and cost per performance, while retaining uncalculated parameter edits. Named configurations include both multipliers; older configs use Hard defaults. Purchase and running totals are scaled independently and rounded to whole dollars.
+
 ## Metrics
 
-Capacity follows TF3's raw-capacity `/ 4` convention. Maximum speed is the slowest component. Passenger comfort is capacity-weighted. Noise and pollution are sums of the extracted component scores, **not decibels or physical exposure**. Purchase and running costs reproduce the installed TF3 base cost model and per-vehicle scales, before difficulty, company, maintenance-condition or mod adjustments.
+Capacity follows TF3's raw-capacity `/ 4` convention. Maximum speed is the slowest component. Passenger comfort is capacity-weighted. Noise and pollution are sums of the extracted component scores, **not decibels or physical exposure**. Purchase and running costs reproduce the installed TF3 base cost model and per-vehicle scales, scaled by the selected finance sliders, before company, maintenance-condition or mod adjustments.
 
 Initial loaded acceleration is estimated as tractive effort in newtons divided by loaded mass in kilograms. Payload uses TF3's cargo weight factor. This estimate excludes drag, grades and adhesion.
 

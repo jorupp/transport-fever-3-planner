@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 3040",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port 3040",
     "lint": "eslint",
     "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test-isolation=none --test tests/*.test.mjs",
     "test:extractor": "python -m unittest discover -s tests -p test_*.py",

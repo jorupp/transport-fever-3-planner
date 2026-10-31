@@ -4,7 +4,7 @@ import { readSavedConfigs } from '../src/lib/saved-configs.ts';
 import { DEFAULT_SETTINGS } from '../src/lib/planner.ts';
 
 const cargoIds = ['PASSENGERS', 'COAL'];
-const config = { id: '1960-city', name: '1960s intra-city passenger', settings: { ...DEFAULT_SETTINGS, year: 1960, extraYears: 9, trainLength: 120, tramLength: 40, distanceKm: 2.5, minTopSpeed: 50, cargos: ['PASSENGERS'] } };
+const config = { id: '1960-city', name: '1960s intra-city passenger', settings: { ...DEFAULT_SETTINGS, year: 1960, extraYears: 9, trainLength: 120, tramLength: 40, distanceKm: 2.5, minTopSpeed: 50, cargos: ['PASSENGERS'], vehicleCostPercent: 125, maintenanceCostPercent: 125 } };
 const stored = configs => JSON.stringify({ version: 1, configs });
 
 test('saved configurations round-trip every planner setting and preserve multiple named entries', () => {
@@ -33,4 +33,14 @@ test('catalog changes remove unknown cargo IDs and configs with no supported car
 test('duplicate IDs or names cannot make a saved selection ambiguous', () => {
   const duplicateName = { ...config, id: 'other', name: ` ${config.name.toUpperCase()} ` };
   assert.deepEqual(readSavedConfigs(stored([config, duplicateName, { ...config, name: 'Other' }]), cargoIds), [config]);
+});
+
+test('legacy configurations default to Hard and independent custom finance values round-trip', () => {
+  const legacySettings = { ...config.settings };
+  delete legacySettings.vehicleCostPercent;
+  delete legacySettings.maintenanceCostPercent;
+  assert.deepEqual(readSavedConfigs(stored([{ ...config, settings: legacySettings }]), cargoIds), [config]);
+  const custom = { ...config, settings: { ...config.settings, vehicleCostPercent: 75, maintenanceCostPercent: 150 } };
+  assert.deepEqual(readSavedConfigs(stored([custom]), cargoIds), [custom]);
+  for (const invalid of [0, 60, 151, '125']) assert.deepEqual(readSavedConfigs(stored([{ ...config, settings: { ...config.settings, vehicleCostPercent: invalid } }]), cargoIds), []);
 });

@@ -4,10 +4,16 @@ import Image from "next/image";
 import { createPortal } from "react-dom";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import data from "@/data/tf3-vehicle-visuals.json";
-import type { Option, Vehicle } from "@/lib/planner";
+import { isMultipleUnitMenuVehicle, type Option, type Vehicle } from "@/lib/planner";
 
 type Visual = { image: string; width: number; height: number; thumbnailOffsetY: number; color: string; representativePart: string | null };
 const visuals: Record<string, Visual> = data.vehicles;
+
+export function VehicleMenuTag({ vehicle }: { vehicle: Vehicle }) {
+  return isMultipleUnitMenuVehicle(vehicle)
+    ? <span className="multiple-unit-badge" title="Find this vehicle in TF3’s Multiple units section.">Multiple unit</span>
+    : null;
+}
 
 export function VehicleThumbnail({ vehicle }: { vehicle: Vehicle }) {
   const visual = visuals[vehicle.id];
@@ -26,7 +32,7 @@ export function VehicleArtwork({ option }: { option: Option }) {
     {vehicles.map(({ vehicle, label }) => {
       const visual = visuals[vehicle.id];
       return visual ? <figure key={vehicle.id}>
-        <figcaption><span>{label}</span><strong><VehicleSwatch vehicle={vehicle} />{vehicle.name}</strong></figcaption>
+        <figcaption><span>{label}</span><strong><VehicleSwatch vehicle={vehicle} />{vehicle.name} <VehicleMenuTag vehicle={vehicle} /></strong></figcaption>
         <Image src={visual.image} width={visual.width} height={visual.height} alt={`${vehicle.name} — TF3 menu image`} unoptimized loading="eager" />
       </figure> : null;
     })}

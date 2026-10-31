@@ -9,18 +9,29 @@ export type Vehicle = {
 };
 export type Cargo = { id: string; name: string; classes: string[]; weightFactor: number; loadSpeedFactor: number };
 export type Mode = "train" | "tram" | "road";
-export type Settings = { year: number; extraYears: number; trainLength: number; tramLength: number; distanceKm: number; minTopSpeed: number; cargos: string[] };
+export type FinanceSettings = { vehicleCostPercent: number; maintenanceCostPercent: number };
+export const DEFAULT_FINANCE: FinanceSettings = { vehicleCostPercent: 125, maintenanceCostPercent: 125 };
+export const FINANCE_PRESETS = [{ id: "easy", name: "Easy", percent: 50 }, { id: "normal", name: "Normal", percent: 100 }, { id: "hard", name: "Hard", percent: 125 }, { id: "very-hard", name: "Very hard", percent: 150 }] as const;
+export type Settings = { year: number; extraYears: number; trainLength: number; tramLength: number; distanceKm: number; minTopSpeed: number; cargos: string[]; vehicleCostPercent?: number; maintenanceCostPercent?: number };
 export type Option = {
   id: string; mode: Mode; engine: Vehicle; wagon: Vehicle | null; engines: number; wagons: number;
   cargo: string; // The selected cargo with the lowest estimated throughput (the metrics benchmark).
   cargos: string[]; capacity: number; length: number; speed: number; acceleration: number;
   performanceAcceleration: number; timeToMaxSpeed: number; distanceToMaxSpeed: number; peakSpeed: number;
   noise: number; pollution: number; comfort: number | null; purchase: number; running: number;
+  vehicleCostPercent: number; maintenanceCostPercent: number;
   loadSpeed: number; throughput: number; costPerformance: number; distanceKm: number; yearFrom: number; yearTo: number | null;
   availableAtStart: boolean; availableAtEnd: boolean; fullRange: boolean; lightRail: boolean; loadedMass: number;
 };
 // Leave a 5 m buffer below the game's default 160 m station length.
 export const DEFAULT_SETTINGS: Settings = { year: 1990, extraYears: 10, trainLength: 155, tramLength: 60, distanceKm: 10, minTopSpeed: 0, cargos: ["PASSENGERS"] };
+
+export function isMultipleUnitMenuVehicle(vehicle: Vehicle) {
+  // TF3's train store groups powered vehicles with their own capacity under Multiple units.
+  // This also includes single railcars, independently of authored fixed formations.
+  return vehicle.carrier === "RAIL" && vehicle.power > 0 && vehicle.engineModes.length > 0
+    && Object.values(vehicle.capacities).some(capacity => capacity > 0);
+}
 
 export function belongsToMode(v: Vehicle, mode: Mode) {
   if (mode === "road") return v.carrier === "ROAD";
@@ -34,6 +45,9 @@ export function compatible(engine: Vehicle, wagon: Vehicle) {
 }
 
 export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings: Settings, progress?: (value: number) => void): Option[] {
+  for (const percent of [settings.vehicleCostPercent ?? DEFAULT_FINANCE.vehicleCostPercent, settings.maintenanceCostPercent ?? DEFAULT_FINANCE.maintenanceCostPercent]) {
+    if (![50, 75, 100, 125, 150].includes(percent)) throw new RangeError("Finance multipliers must be 50–150% in 25% increments.");
+  }
   if (!Number.isFinite(settings.distanceKm) || settings.distanceKm <= 0) {
     throw new RangeError("Trip distance must be a positive number of kilometers.");
   }
@@ -110,7 +124,9 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
   const brakingDistance = peak * peak / 2;
   const travelSeconds = peak / a + peak + Math.max(0, distanceMeters - acceleratingDistance - brakingDistance) / peak;
   const throughput = capacity * 3600 / (travelSeconds + 2 * capacity / Math.max(loadSpeed, 0.001));
-  const purchase = sum("purchase"), running = sum("running");
+  const vehicleCostPercent = settings.vehicleCostPercent ?? DEFAULT_FINANCE.vehicleCostPercent;
+  const maintenanceCostPercent = settings.maintenanceCostPercent ?? DEFAULT_FINANCE.maintenanceCostPercent;
+  const purchase = Math.round(sum("purchase") * vehicleCostPercent / 100), running = Math.round(sum("running") * maintenanceCostPercent / 100);
   const yearFrom = Math.max(engine.yearFrom, wagon?.yearFrom ?? 0);
   const until = Math.min(engine.yearTo ?? Infinity, wagon?.yearTo ?? Infinity);
   return {
@@ -119,6 +135,7 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
     performanceAcceleration: a, timeToMaxSpeed, distanceToMaxSpeed, peakSpeed: peak * 3.6,
     comfort: cargo.id === "PASSENGERS" ? ((engine.capacities.PASSENGERS ?? 0) * engines * engine.comfort + (wagon?.capacities.PASSENGERS ?? 0) * wagons * (wagon?.comfort ?? 0)) / capacity : null,
     purchase, running, loadSpeed, throughput, distanceKm: settings.distanceKm, costPerformance: throughput > 0 ? (running + purchase / 20) / throughput : Infinity,
+    vehicleCostPercent, maintenanceCostPercent,
     yearFrom, yearTo: Number.isFinite(until) ? until : null,
     availableAtStart: yearFrom <= settings.year && until >= settings.year,
     availableAtEnd: yearFrom <= settings.year + settings.extraYears && until >= settings.year + settings.extraYears,

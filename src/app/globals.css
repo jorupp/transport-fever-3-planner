@@ -905,6 +905,16 @@ td>small {
   margin-bottom:22px
 }
 
+.finance-form { display: grid; gap: 24px; }
+.finance-difficulty { display: flex; align-items: center; justify-content: space-between; gap: 20px; font-weight: 600; }
+.finance-difficulty select { min-width: 220px; padding: 9px 12px; background: #fff; border: 1px solid #bac7be; border-radius: 4px; }
+.finance-slider label { display: flex; align-items: center; justify-content: space-between; font-weight: 600; }
+.finance-slider output { color: var(--green); font-variant-numeric: tabular-nums; }
+.finance-slider input { display: block; width: 100%; margin: 14px 0 8px; accent-color: var(--green); cursor: pointer; }
+.finance-ticks { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; }
+.finance-note { color: var(--muted); font-size: 12px; line-height: 1.6; }
+.finance-actions { display: flex; justify-content: flex-end; gap: 10px; padding-top: 8px; border-top: 1px solid var(--line); }
+
 .formation-preview {
   display:flex;
   gap:4px;
@@ -1379,6 +1389,20 @@ thead .sticky-column button { padding-left: 12px; }
 .name-year-badge.introduction { background: #e7edf2; border-color: #bbcbd6; color: #334e63; }
 .name-year-badge.removal { background: #ffe39b; border-color: #d6ac44; color: #674400; }
 .light-rail-badge { padding: 2px 3px; border: 1px solid #b9cbbd; border-radius: 2px; color: #36573f; font-size: 8px; font-style: normal; font-weight: 600; line-height: 1.2; }
+.multiple-unit-badge {
+  display: inline-block;
+  flex-shrink: 0;
+  padding: 2px 4px;
+  border: 1px solid #9baecd;
+  border-radius: 2px;
+  background: #edf2fb;
+  color: #294773;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.2;
+  vertical-align: middle;
+  white-space: nowrap;
+}
 .future-option td { background: #f3f5f4; color: #637067; }
 .future-option .vehicle-cell strong, .future-option .vehicle-cell small, .future-option .capacity-cell strong, .future-option .value-cell strong { color: #637067; }
 .partial-option td { background: #fff5d4; }

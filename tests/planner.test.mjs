@@ -1,12 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { calculateOptions, compatible, DEFAULT_SETTINGS } from '../src/lib/planner.ts';
+import { calculateOptions, compatible, DEFAULT_SETTINGS, isMultipleUnitMenuVehicle } from '../src/lib/planner.ts';
 import data from '../src/data/tf3-vehicles.json' with { type: 'json' };
 
 const passenger = data.cargos.find(c=>c.id==='PASSENGERS');
 const cargo = [passenger];
 const v = (overrides={}) => ({id:'engine',name:'Engine',source:'test',category:'train',carrier:'RAIL',modes:['TRAIN'],engineModes:['TRAIN'],yearFrom:1950,yearTo:null,length:20,speed:100,power:1000,tractiveEffort:100,weightEmpty:50000,weightMaxPayload:0,friction:0.02,engineType:'DIESEL',capacities:{},loadSpeed:2,comfort:50,noise:20,pollution:10,purchase:600000,running:100000,fixedFormation:false,...overrides});
 const w = (overrides={}) => v({id:'wagon',name:'Wagon',length:10,power:0,tractiveEffort:0,engineModes:[],capacities:{PASSENGERS:20},weightEmpty:10000,weightMaxPayload:5000,...overrides});
+
+test('Multiple units menu tags follow powered rail capacity, including single railcars',()=>{
+  const find = name => { const vehicle = data.vehicles.find(v=>v.name===name); assert(vehicle); return vehicle; };
+  assert.equal(isMultipleUnitMenuVehicle(find('CLe 2/4 Roter Pfeil')),true);
+  assert.equal(isMultipleUnitMenuVehicle(find('Swiss Re 4/4 I')),false);
+  assert.equal(isMultipleUnitMenuVehicle(find('EMD F-Unit')),false,'a fixed locomotive formation has no carrying capacity');
+  assert.equal(isMultipleUnitMenuVehicle(find('Toyama 8000')),false,'tram capacity does not put a tram in the rail Multiple units section');
+  assert.equal(isMultipleUnitMenuVehicle(w()),false,'unpowered passenger cars are not multiple units');
+});
 
 test('one or two identical engines use exactly the maximum homogeneous wagon count',()=>{
   const rows=calculateOptions([v(),w()],cargo,{...DEFAULT_SETTINGS,trainLength:100});
@@ -57,7 +66,7 @@ test('a second engine improves estimated launch acceleration but doubles only it
   const rows=calculateOptions([v(),w()],cargo,DEFAULT_SETTINGS);
   assert(rows[1].acceleration>rows[0].acceleration);
   for(const o of rows){
-    assert.equal(o.purchase,o.engines*600000+o.wagons*600000);
+    assert.equal(o.purchase,(o.engines*600000+o.wagons*600000)*1.25);
     assert.equal(o.noise,o.engines*20+o.wagons*20);
     assert(o.throughput>0&&Number.isFinite(o.costPerformance));
     assert.equal(o.costPerformance,(o.running+o.purchase/20)/o.throughput);

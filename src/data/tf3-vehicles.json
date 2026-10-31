@@ -1,6 +1,6 @@
 {
   "game": "Transport Fever 3",
-  "extractedAt": "2026-10-30T23:35:06.686023+00:00",
+  "extractedAt": "2026-10-31T16:29:43.924725+00:00",
   "definitionHash": "f0b92e811d264cdd6f45fdb952686acb79c1760a75b65e1f94a4db6e828f0fb4",
   "source": "Installed TF3 base vehicle, cargo, localization and metadata definitions",
   "costModelHash": "4ad248c1dd46a6b2d825dfb7be513bd1c0d23a6fd6f5c43b81634003a56ac79e",
@@ -434,6 +434,7 @@
       "weightEmpty": 5000,
       "weightMaxPayload": 7200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 12.0
@@ -467,6 +468,7 @@
       "weightEmpty": 1000,
       "weightMaxPayload": 2880,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "HORSE",
       "capacities": {
         "PASSENGERS": 6.0
@@ -500,6 +502,7 @@
       "weightEmpty": 16000,
       "weightMaxPayload": 21600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 20.0
@@ -533,6 +536,7 @@
       "weightEmpty": 7500,
       "weightMaxPayload": 9072,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 15.0
@@ -566,6 +570,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 15200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 17.0
@@ -599,6 +604,7 @@
       "weightEmpty": 1000,
       "weightMaxPayload": 1694,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "HORSE",
       "capacities": {
         "PASSENGERS": 4.0
@@ -632,6 +638,7 @@
       "weightEmpty": 14000,
       "weightMaxPayload": 15429,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 20.0
@@ -665,6 +672,7 @@
       "weightEmpty": 4000,
       "weightMaxPayload": 4800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 8.0
@@ -698,6 +706,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 8.0
@@ -731,6 +740,7 @@
       "weightEmpty": 8000,
       "weightMaxPayload": 12000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 10.0
@@ -764,6 +774,7 @@
       "weightEmpty": 15000,
       "weightMaxPayload": 14580,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 20.0
@@ -797,6 +808,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 15.0
@@ -830,6 +842,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 26400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 22.0
@@ -863,6 +876,7 @@
       "weightEmpty": 15000,
       "weightMaxPayload": 19800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 28.0
@@ -896,6 +910,7 @@
       "weightEmpty": 15000,
       "weightMaxPayload": 17040,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 15.0
@@ -929,6 +944,7 @@
       "weightEmpty": 15000,
       "weightMaxPayload": 16560,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 24.0
@@ -962,6 +978,7 @@
       "weightEmpty": 2000,
       "weightMaxPayload": 4320,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {
         "PASSENGERS": 6.0
@@ -995,6 +1012,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 12.0
@@ -1028,6 +1046,7 @@
       "weightEmpty": 8000,
       "weightMaxPayload": 11520,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 10.0
@@ -1061,6 +1080,7 @@
       "weightEmpty": 11000,
       "weightMaxPayload": 15600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 13.0
@@ -1094,6 +1114,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 11077,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 15.0
@@ -1127,6 +1148,7 @@
       "weightEmpty": 22000,
       "weightMaxPayload": 22629,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 28.0
@@ -1160,6 +1182,7 @@
       "weightEmpty": 8000,
       "weightMaxPayload": 12000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 10.0
@@ -1193,6 +1216,7 @@
       "weightEmpty": 17000,
       "weightMaxPayload": 19200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 30.0
@@ -1228,6 +1252,7 @@
       "weightEmpty": 93000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
       "loadSpeed": 2.0,
@@ -1261,6 +1286,7 @@
       "weightEmpty": 130000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 1.5,
@@ -1293,6 +1319,7 @@
       "weightEmpty": 410000,
       "weightMaxPayload": 112800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 94.0
@@ -1374,6 +1401,7 @@
       "weightEmpty": 567000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 1.5,
@@ -1407,6 +1435,7 @@
       "weightEmpty": 76000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 1.5,
@@ -1440,6 +1469,7 @@
       "weightEmpty": 38000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 1,
@@ -1472,6 +1502,7 @@
       "weightEmpty": 84000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 3.0,
@@ -1505,6 +1536,7 @@
       "weightEmpty": 80000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
       "loadSpeed": 3.0,
@@ -1537,6 +1569,7 @@
       "weightEmpty": 119000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 1.5,
@@ -1569,6 +1602,7 @@
       "weightEmpty": 128000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 1.5,
@@ -1602,6 +1636,7 @@
       "weightEmpty": 138000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
       "loadSpeed": 3.0,
@@ -1635,6 +1670,7 @@
       "weightEmpty": 138000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
       "loadSpeed": 2.5,
@@ -1667,6 +1703,7 @@
       "weightEmpty": 150000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 3.5,
@@ -1700,6 +1737,7 @@
       "weightEmpty": 100000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 1.5,
@@ -1733,6 +1771,7 @@
       "weightEmpty": 80000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 2.5,
@@ -1765,6 +1804,7 @@
       "weightEmpty": 215000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 1.5,
@@ -1798,6 +1838,7 @@
       "weightEmpty": 62000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
       "loadSpeed": 2.5,
@@ -1830,6 +1871,7 @@
       "weightEmpty": 82000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 3.0,
@@ -1862,6 +1904,7 @@
       "weightEmpty": 133000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 3.0,
@@ -1895,6 +1938,7 @@
       "weightEmpty": 145200,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
       "loadSpeed": 0,
@@ -1938,6 +1982,7 @@
       "weightEmpty": 167000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
       "loadSpeed": 2.5,
@@ -1970,6 +2015,7 @@
       "weightEmpty": 265000,
       "weightMaxPayload": 138000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 115.0
@@ -2026,6 +2072,7 @@
       "weightEmpty": 91000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 3.5,
@@ -2058,6 +2105,7 @@
       "weightEmpty": 480000,
       "weightMaxPayload": 178200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 152.0
@@ -2138,6 +2186,7 @@
       "weightEmpty": 544000,
       "weightMaxPayload": 172800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 144.0
@@ -2207,6 +2256,7 @@
       "weightEmpty": 122000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
       "loadSpeed": 3.0,
@@ -2240,6 +2290,7 @@
       "weightEmpty": 428000,
       "weightMaxPayload": 144000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 120.0
@@ -2316,6 +2367,7 @@
       "weightEmpty": 623000,
       "weightMaxPayload": 204000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 170.0
@@ -2396,6 +2448,7 @@
       "weightEmpty": 100800,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 3.0,
@@ -2429,6 +2482,7 @@
       "weightEmpty": 105000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 2.0,
@@ -2462,6 +2516,7 @@
       "weightEmpty": 25000,
       "weightMaxPayload": 24000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 20.0
@@ -2496,6 +2551,7 @@
       "weightEmpty": 150000,
       "weightMaxPayload": 45600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 38.0
@@ -2541,6 +2597,7 @@
       "weightEmpty": 122000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 1,
@@ -2573,6 +2630,7 @@
       "weightEmpty": 83900,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 2.0,
@@ -2605,6 +2663,7 @@
       "weightEmpty": 57000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 2.0,
@@ -2637,6 +2696,7 @@
       "weightEmpty": 225000,
       "weightMaxPayload": 126000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 98.0
@@ -2689,6 +2749,7 @@
       "weightEmpty": 33000,
       "weightMaxPayload": 24000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 20.0
@@ -2724,6 +2785,7 @@
       "weightEmpty": 52000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 1,
@@ -2757,6 +2819,7 @@
       "weightEmpty": 85000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 2.0,
@@ -2790,6 +2853,7 @@
       "weightEmpty": 13000,
       "weightMaxPayload": 18000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 15.0
@@ -2824,6 +2888,7 @@
       "weightEmpty": 184000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 0,
@@ -2866,6 +2931,7 @@
       "weightEmpty": 440000,
       "weightMaxPayload": 192000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 160.0
@@ -2935,6 +3001,7 @@
       "weightEmpty": 72000,
       "weightMaxPayload": 48000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "PASSENGERS": 40.0
@@ -2969,6 +3036,7 @@
       "weightEmpty": 420000,
       "weightMaxPayload": 148800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 275.0
@@ -3045,6 +3113,7 @@
       "weightEmpty": 226000,
       "weightMaxPayload": 132000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 110.0
@@ -3097,6 +3166,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 11520,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 25.0
@@ -3131,6 +3201,7 @@
       "weightEmpty": 26000,
       "weightMaxPayload": 32400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 27.0
@@ -3168,6 +3239,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 42000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 35.0
@@ -3205,6 +3277,7 @@
       "weightEmpty": 35000,
       "weightMaxPayload": 51600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 43.0
@@ -3242,6 +3315,7 @@
       "weightEmpty": 90000,
       "weightMaxPayload": 72000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "BEVERAGES": 60.0,
@@ -3311,6 +3385,7 @@
       "weightEmpty": 3000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 8.0,
@@ -3358,6 +3433,7 @@
       "weightEmpty": 3000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CEMENT": 8.0,
@@ -3400,6 +3476,7 @@
       "weightEmpty": 3000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "LOGS": 8.0,
@@ -3439,6 +3516,7 @@
       "weightEmpty": 3000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CHEMICALS": 8.0,
@@ -3477,6 +3555,7 @@
       "weightEmpty": 3000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 8.0,
@@ -3546,6 +3625,7 @@
       "weightEmpty": 7000,
       "weightMaxPayload": 16800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 14.0,
@@ -3595,6 +3675,7 @@
       "weightEmpty": 7000,
       "weightMaxPayload": 16800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CEMENT": 14.0,
@@ -3637,6 +3718,7 @@
       "weightEmpty": 7000,
       "weightMaxPayload": 16800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "LOGS": 14.0,
@@ -3676,6 +3758,7 @@
       "weightEmpty": 7000,
       "weightMaxPayload": 16800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CHEMICALS": 14.0,
@@ -3712,6 +3795,7 @@
       "weightEmpty": 7000,
       "weightMaxPayload": 16800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 14.0,
@@ -3779,6 +3863,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 25200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 21.0,
@@ -3826,6 +3911,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 25200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CEMENT": 21.0,
@@ -3866,6 +3952,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 25200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "LOGS": 21.0,
@@ -3903,6 +3990,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 25200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CHEMICALS": 22.0,
@@ -3939,6 +4027,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 25200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 21.0,
@@ -4011,6 +4100,7 @@
       "weightEmpty": 132000,
       "weightMaxPayload": 72000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 60.0
@@ -4043,6 +4133,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 8.0
@@ -4078,6 +4169,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 2.5,
@@ -4108,6 +4200,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 12.0
@@ -4143,6 +4236,7 @@
       "weightEmpty": 1500,
       "weightMaxPayload": 2880,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "HORSE",
       "capacities": {
         "PASSENGERS": 6.0
@@ -4178,6 +4272,7 @@
       "weightEmpty": 2000,
       "weightMaxPayload": 2880,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "HORSE",
       "capacities": {
         "BEVERAGES": 7.0,
@@ -4245,6 +4340,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 19200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 16.0
@@ -4279,6 +4375,7 @@
       "weightEmpty": 16000,
       "weightMaxPayload": 19200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 16.0
@@ -4316,6 +4413,7 @@
       "weightEmpty": 38000,
       "weightMaxPayload": 30857,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 32.0
@@ -4353,6 +4451,7 @@
       "weightEmpty": 45000,
       "weightMaxPayload": 64800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "BEVERAGES": 80.0,
@@ -4422,6 +4521,7 @@
       "weightEmpty": 22000,
       "weightMaxPayload": 12000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "BEVERAGES": 10.0,
@@ -4492,6 +4592,7 @@
       "weightEmpty": 23000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
       "loadSpeed": 3.0,
@@ -4524,6 +4625,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 8640,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 11.0
@@ -4558,6 +4660,7 @@
       "weightEmpty": 35000,
       "weightMaxPayload": 30857,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 28.0
@@ -4592,6 +4695,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 10286,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 12.0
@@ -4624,6 +4728,7 @@
       "weightEmpty": 5000,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 12.0
@@ -4656,6 +4761,7 @@
       "weightEmpty": 2000,
       "weightMaxPayload": 7200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 6.0
@@ -4690,6 +4796,7 @@
       "weightEmpty": 16000,
       "weightMaxPayload": 16000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 21.0
@@ -4725,6 +4832,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
       "loadSpeed": 4.5,
@@ -4757,6 +4865,7 @@
       "weightEmpty": 13000,
       "weightMaxPayload": 12600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "BEVERAGES": 13.0,
@@ -4826,6 +4935,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 3.5,
@@ -4861,6 +4971,7 @@
       "weightEmpty": 29000,
       "weightMaxPayload": 30000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 25.0
@@ -4898,6 +5009,7 @@
       "weightEmpty": 68000,
       "weightMaxPayload": 46400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 50.0
@@ -4932,6 +5044,7 @@
       "weightEmpty": 62000,
       "weightMaxPayload": 54000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 60.0
@@ -4966,6 +5079,7 @@
       "weightEmpty": 30000,
       "weightMaxPayload": 18327,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 18.0
@@ -5000,6 +5114,7 @@
       "weightEmpty": 25000,
       "weightMaxPayload": 18327,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "BEVERAGES": 20.0,
@@ -5049,6 +5164,7 @@
       "weightEmpty": 26000,
       "weightMaxPayload": 18327,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "CEMENT": 20.0,
@@ -5091,6 +5207,7 @@
       "weightEmpty": 24000,
       "weightMaxPayload": 18327,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "LOGS": 20.0,
@@ -5130,6 +5247,7 @@
       "weightEmpty": 28000,
       "weightMaxPayload": 18327,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "CHEMICALS": 20.0,
@@ -5168,6 +5286,7 @@
       "weightEmpty": 22700,
       "weightMaxPayload": 24000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 20.0
@@ -5205,6 +5324,7 @@
       "weightEmpty": 17000,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 20.0
@@ -5239,6 +5359,7 @@
       "weightEmpty": 26000,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 14.0
@@ -5271,6 +5392,7 @@
       "weightEmpty": 6000,
       "weightMaxPayload": 16800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 14.0
@@ -5305,6 +5427,7 @@
       "weightEmpty": 22000,
       "weightMaxPayload": 0,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
       "loadSpeed": 5.0,
@@ -5337,6 +5460,7 @@
       "weightEmpty": 37000,
       "weightMaxPayload": 44400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "PASSENGERS": 37.0
@@ -5370,6 +5494,7 @@
       "weightEmpty": 1500,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CHEMICALS": 12.0,
@@ -5407,6 +5532,7 @@
       "weightEmpty": 1500,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 12.0,
@@ -5475,6 +5601,7 @@
       "weightEmpty": 1500,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 12.0,
@@ -5523,6 +5650,7 @@
       "weightEmpty": 1500,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CEMENT": 12.0,
@@ -5564,6 +5692,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 48000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 40.0,
@@ -5612,6 +5741,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 48000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CEMENT": 40.0,
@@ -5653,6 +5783,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 48000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "LOGS": 40.0,
@@ -5691,6 +5822,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 48000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CHEMICALS": 40.0,
@@ -5728,6 +5860,7 @@
       "weightEmpty": 12000,
       "weightMaxPayload": 48000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 40.0,
@@ -5796,6 +5929,7 @@
       "weightEmpty": 1500,
       "weightMaxPayload": 12000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CEMENT": 10.0,
@@ -5837,6 +5971,7 @@
       "weightEmpty": 1500,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 10.0,
@@ -5885,6 +6020,7 @@
       "weightEmpty": 16000,
       "weightMaxPayload": 45000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 37.5,
@@ -5933,6 +6069,7 @@
       "weightEmpty": 16000,
       "weightMaxPayload": 45000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "LOGS": 37.5,
@@ -5971,6 +6108,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 19200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 16.0,
@@ -6019,6 +6157,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 24000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CEMENT": 16.0,
@@ -6060,6 +6199,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 19200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CHEMICALS": 16.0,
@@ -6097,6 +6237,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 19200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 16.0,
@@ -6165,6 +6306,7 @@
       "weightEmpty": 2000,
       "weightMaxPayload": 18000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "LOGS": 15.0,
@@ -6203,6 +6345,7 @@
       "weightEmpty": 15000,
       "weightMaxPayload": 26400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 22.0,
@@ -6251,6 +6394,7 @@
       "weightEmpty": 15000,
       "weightMaxPayload": 26400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CEMENT": 22.0,
@@ -6292,6 +6436,7 @@
       "weightEmpty": 15000,
       "weightMaxPayload": 26400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "LOGS": 22.0,
@@ -6330,6 +6475,7 @@
       "weightEmpty": 15000,
       "weightMaxPayload": 26400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CHEMICALS": 22.0,
@@ -6367,6 +6513,7 @@
       "weightEmpty": 15000,
       "weightMaxPayload": 26400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 22.0,
@@ -6435,6 +6582,7 @@
       "weightEmpty": 1500,
       "weightMaxPayload": 12000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "HORSE",
       "capacities": {
         "CHEMICALS": 10.0,
@@ -6472,6 +6620,7 @@
       "weightEmpty": 1500,
       "weightMaxPayload": 7200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "HORSE",
       "capacities": {
         "BEVERAGES": 6.0,
@@ -6540,6 +6689,7 @@
       "weightEmpty": 1000,
       "weightMaxPayload": 4800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "HORSE",
       "capacities": {
         "BEVERAGES": 4.0,
@@ -6608,6 +6758,7 @@
       "weightEmpty": 1500,
       "weightMaxPayload": 12000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CHEMICALS": 10.0,
@@ -6645,6 +6796,7 @@
       "weightEmpty": 1500,
       "weightMaxPayload": 12000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 10.0,
@@ -6713,6 +6865,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 36000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 30.0,
@@ -6761,6 +6914,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 36000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CEMENT": 30.0,
@@ -6802,6 +6956,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 36000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "LOGS": 30.0,
@@ -6840,6 +6995,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 36000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CHEMICALS": 30.0,
@@ -6877,6 +7033,7 @@
       "weightEmpty": 3000,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "LOGS": 12.0,
@@ -6915,6 +7072,7 @@
       "weightEmpty": 8000,
       "weightMaxPayload": 21600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 18.0,
@@ -6963,6 +7121,7 @@
       "weightEmpty": 8000,
       "weightMaxPayload": 21600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CEMENT": 18.0,
@@ -7004,6 +7163,7 @@
       "weightEmpty": 8000,
       "weightMaxPayload": 21600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CHEMICALS": 18.0,
@@ -7041,6 +7201,7 @@
       "weightEmpty": 8000,
       "weightMaxPayload": 21600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 18.0,
@@ -7109,6 +7270,7 @@
       "weightEmpty": 5000,
       "weightMaxPayload": 9000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "BEVERAGES": 7.5,
@@ -7157,6 +7319,7 @@
       "weightEmpty": 5000,
       "weightMaxPayload": 18000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 15.0,
@@ -7205,6 +7368,7 @@
       "weightEmpty": 5000,
       "weightMaxPayload": 19200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CHEMICALS": 15.0,
@@ -7242,6 +7406,7 @@
       "weightEmpty": 5000,
       "weightMaxPayload": 19200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "BEVERAGES": 15.0,
@@ -7310,6 +7475,7 @@
       "weightEmpty": 1000,
       "weightMaxPayload": 12000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {
         "BEVERAGES": 10.0,
@@ -7378,6 +7544,7 @@
       "weightEmpty": 15000,
       "weightMaxPayload": 48000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "BEVERAGES": 40.0,
@@ -7446,6 +7613,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 24000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {
         "BEVERAGES": 18.0,
@@ -7514,6 +7682,7 @@
       "weightEmpty": 17000,
       "weightMaxPayload": 40800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CEMENT": 34.0,
@@ -7555,6 +7724,7 @@
       "weightEmpty": 17000,
       "weightMaxPayload": 40800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CHEMICALS": 34.0,
@@ -7592,6 +7762,7 @@
       "weightEmpty": 3900,
       "weightMaxPayload": 19200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "CEMENT": 15.0,
@@ -7633,6 +7804,7 @@
       "weightEmpty": 3900,
       "weightMaxPayload": 19200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {
         "LOGS": 15.0,
@@ -7670,6 +7842,7 @@
       "weightEmpty": 8000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 8.0
@@ -7702,6 +7875,7 @@
       "weightEmpty": 50000,
       "weightMaxPayload": 42000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 35.0
@@ -7734,6 +7908,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 8.0,
@@ -7781,6 +7956,7 @@
       "weightEmpty": 11000,
       "weightMaxPayload": 12000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 10.0,
@@ -7828,6 +8004,7 @@
       "weightEmpty": 30000,
       "weightMaxPayload": 19200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 16.0,
@@ -7875,6 +8052,7 @@
       "weightEmpty": 25000,
       "weightMaxPayload": 21600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 18.0,
@@ -7922,6 +8100,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 24000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 20.0,
@@ -7969,6 +8148,7 @@
       "weightEmpty": 25000,
       "weightMaxPayload": 30000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 25.0,
@@ -8016,6 +8196,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CEMENT": 8.0,
@@ -8056,6 +8237,7 @@
       "weightEmpty": 20000,
       "weightMaxPayload": 12000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CEMENT": 10.0,
@@ -8096,6 +8278,7 @@
       "weightEmpty": 30000,
       "weightMaxPayload": 16800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CEMENT": 14.0,
@@ -8136,6 +8319,7 @@
       "weightEmpty": 35000,
       "weightMaxPayload": 24000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CEMENT": 20.0,
@@ -8176,6 +8360,7 @@
       "weightEmpty": 40000,
       "weightMaxPayload": 21600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CEMENT": 18.0,
@@ -8216,6 +8401,7 @@
       "weightEmpty": 49000,
       "weightMaxPayload": 31200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 26.0
@@ -8248,6 +8434,7 @@
       "weightEmpty": 42000,
       "weightMaxPayload": 28800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 24.0
@@ -8280,6 +8467,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 12.0
@@ -8312,6 +8500,7 @@
       "weightEmpty": 20000,
       "weightMaxPayload": 18000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 15.0
@@ -8344,6 +8533,7 @@
       "weightEmpty": 42000,
       "weightMaxPayload": 24000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 20.0
@@ -8376,6 +8566,7 @@
       "weightEmpty": 30000,
       "weightMaxPayload": 30000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 25.0
@@ -8408,6 +8599,7 @@
       "weightEmpty": 42000,
       "weightMaxPayload": 31200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 26.0
@@ -8440,6 +8632,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "LOGS": 8.0,
@@ -8477,6 +8670,7 @@
       "weightEmpty": 13000,
       "weightMaxPayload": 16800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "LOGS": 14.0,
@@ -8514,6 +8708,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 24000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "LOGS": 20.0,
@@ -8551,6 +8746,7 @@
       "weightEmpty": 25000,
       "weightMaxPayload": 21600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "LOGS": 18.0,
@@ -8588,6 +8784,7 @@
       "weightEmpty": 25000,
       "weightMaxPayload": 26400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "LOGS": 22.0,
@@ -8625,6 +8822,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CHEMICALS": 8.0,
@@ -8661,6 +8859,7 @@
       "weightEmpty": 15000,
       "weightMaxPayload": 12000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CHEMICALS": 10.0,
@@ -8697,6 +8896,7 @@
       "weightEmpty": 20000,
       "weightMaxPayload": 14400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CHEMICALS": 12.0,
@@ -8733,6 +8933,7 @@
       "weightEmpty": 20000,
       "weightMaxPayload": 18000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CHEMICALS": 15.0,
@@ -8769,6 +8970,7 @@
       "weightEmpty": 25000,
       "weightMaxPayload": 21600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CHEMICALS": 18.0,
@@ -8805,6 +9007,7 @@
       "weightEmpty": 30000,
       "weightMaxPayload": 26400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "CHEMICALS": 22.0,
@@ -8841,6 +9044,7 @@
       "weightEmpty": 35000,
       "weightMaxPayload": 26400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 22.0
@@ -8873,6 +9077,7 @@
       "weightEmpty": 30000,
       "weightMaxPayload": 26400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 22.0
@@ -8905,6 +9110,7 @@
       "weightEmpty": 35000,
       "weightMaxPayload": 22800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 19.0
@@ -8937,6 +9143,7 @@
       "weightEmpty": 58000,
       "weightMaxPayload": 28800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 24.0
@@ -8969,6 +9176,7 @@
       "weightEmpty": 10000,
       "weightMaxPayload": 9600,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 8.0,
@@ -9036,6 +9244,7 @@
       "weightEmpty": 13000,
       "weightMaxPayload": 16800,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 14.0,
@@ -9103,6 +9312,7 @@
       "weightEmpty": 18000,
       "weightMaxPayload": 18000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 15.0,
@@ -9170,6 +9380,7 @@
       "weightEmpty": 20000,
       "weightMaxPayload": 18000,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 15.0,
@@ -9237,6 +9448,7 @@
       "weightEmpty": 25000,
       "weightMaxPayload": 26400,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "BEVERAGES": 22.0,
@@ -9304,6 +9516,7 @@
       "weightEmpty": 58000,
       "weightMaxPayload": 31200,
       "friction": 0.02,
+      "brakeDeceleration": 2.5,
       "engineType": null,
       "capacities": {
         "PASSENGERS": 26.0

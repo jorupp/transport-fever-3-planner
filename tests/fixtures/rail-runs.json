@@ -1,0 +1,46 @@
+{
+  "description": "User-recorded TF3 runs on a completely flat map at 1x simulation speed. Identical game settings. Times are video timestamps in seconds; subtract startTimestampSeconds. Both formations have one engine and nine Cargo Car 1960 wagons.",
+  "runs": [
+    {
+      "engine": "Swiss Re 4/4 I", "cargo": "LOGS", "cargoUnits": 135,
+      "startTimestampSeconds": 12,
+      "checkpoints": [
+        { "km": 1, "timestampSeconds": 67, "speedKmh": 101 },
+        { "km": 2, "timestampSeconds": 99, "speedKmh": 125 },
+        { "km": 3, "timestampSeconds": 127, "speedKmh": 125 },
+        { "km": 4, "timestampSeconds": 156, "speedKmh": 125 },
+        { "km": 5, "timestampSeconds": 185, "speedKmh": 125 }
+      ]
+    },
+    {
+      "engine": "Swiss Re 4/4 I", "cargo": "LOGS", "cargoUnits": 0,
+      "startTimestampSeconds": 6,
+      "checkpoints": [
+        { "km": 1, "timestampSeconds": 61, "speedKmh": 101 },
+        { "km": 2, "timestampSeconds": 92, "speedKmh": 125 }
+      ]
+    },
+    {
+      "engine": "CLe 2/4 Roter Pfeil", "cargo": "LOGS", "cargoUnits": 135,
+      "startTimestampSeconds": 4,
+      "checkpoints": [
+        { "km": 1, "timestampSeconds": 102, "speedKmh": 56 },
+        { "km": 2, "timestampSeconds": 160, "speedKmh": 69 },
+        { "km": 3, "timestampSeconds": 208, "speedKmh": 78 },
+        { "km": 4, "timestampSeconds": 252, "speedKmh": 85 },
+        { "km": 5, "timestampSeconds": 293, "speedKmh": 91 }
+      ]
+    },
+    {
+      "engine": "CLe 2/4 Roter Pfeil", "cargo": "LOGS", "cargoUnits": 0,
+      "startTimestampSeconds": 8,
+      "checkpoints": [
+        { "km": 1, "timestampSeconds": 105, "speedKmh": 56 },
+        { "km": 2, "timestampSeconds": 162, "speedKmh": 69 },
+        { "km": 3, "timestampSeconds": 211, "speedKmh": 78 },
+        { "km": 4, "timestampSeconds": 254, "speedKmh": 85 },
+        { "km": 5, "timestampSeconds": 295, "speedKmh": 91 }
+      ]
+    }
+  ]
+}

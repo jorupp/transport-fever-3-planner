@@ -3,6 +3,7 @@ export type Vehicle = {
   modes: string[]; engineModes: string[]; yearFrom: number; yearTo: number | null;
   length: number; speed: number; power: number; tractiveEffort: number;
   weightEmpty: number; weightMaxPayload: number; friction: number; engineType: string | null;
+  brakeDeceleration?: number;
   capacities: Record<string, number>; loadSpeed: number; comfort: number; noise: number;
   pollution: number; purchase: number; running: number; fixedFormation: boolean;
   parts?: { name: string; source: string }[];
@@ -17,7 +18,10 @@ export type Option = {
   id: string; mode: Mode; engine: Vehicle; wagon: Vehicle | null; engines: number; wagons: number;
   cargo: string; // The selected cargo with the lowest estimated throughput (the metrics benchmark).
   cargos: string[]; capacity: number; length: number; speed: number; acceleration: number;
-  performanceAcceleration: number; timeToMaxSpeed: number; distanceToMaxSpeed: number; peakSpeed: number;
+  performanceAcceleration: number | null; timeToMaxSpeed: number | null; distanceToMaxSpeed: number | null; peakSpeed: number;
+  motionModel: "calibrated-rail" | "constant-estimate"; motionMass: number;
+  brakingAcceleration: number; brakingTime: number; brakingDistance: number; arrivalDelaySeconds: number;
+  timeTo1Km: number; timeTo2Km: number; timeTo3Km: number; timeTo4Km: number; timeTo5Km: number;
   noise: number; pollution: number; comfort: number | null; purchase: number; running: number;
   vehicleCostPercent: number; maintenanceCostPercent: number;
   loadSpeed: number; throughput: number; costPerformance: number; distanceKm: number; yearFrom: number; yearTo: number | null;
@@ -25,6 +29,10 @@ export type Option = {
 };
 // Leave a 5 m buffer below the game's default 160 m station length.
 export const DEFAULT_SETTINGS: Settings = { year: 1990, extraYears: 10, trainLength: 155, tramLength: 60, distanceKm: 10, minTopSpeed: 0, cargos: ["PASSENGERS"] };
+export const DEFAULT_RAIL_BRAKING = 2.5;
+// Measured stop-to-loading interval. Count it once at the trip's destination;
+// origin loading starts ready. Departure/door-closing pauses remain unmeasured.
+export const RAIL_ARRIVAL_DELAY_SECONDS = 2;
 
 export function isMultipleUnitMenuVehicle(vehicle: Vehicle) {
   // TF3's train store groups powered vehicles with their own capacity under Multiple units.
@@ -110,20 +118,32 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
     + (wagon?.capacities[cargo.id] ? wagon.weightMaxPayload * wagons : 0);
   const loadedMass = sum("weightEmpty") + payload * cargo.weightFactor;
   const speed = Math.min(engine.speed, wagon?.speed ?? Infinity);
-  const acceleration = sum("tractiveEffort") * 1000 / loadedMass;
   const loadSpeed = ((engine.capacities[cargo.id] ? engine.loadSpeed * engines : 0) + (wagon?.loadSpeed ?? 0) * wagons) * cargo.loadSpeedFactor;
-  // A flat, fully loaded trip over the selected distance, including load/unload.
-  // Idealized power/traction-limited average acceleration; no grades, drag, traffic or curves.
+  // Rail calibration: loaded and empty runs have matching acceleration. Keep
+  // theoretical loadedMass for reference; use empty mass for rail movement.
+  // Tram/light-rail and road equipment retain their uncalibrated estimate.
+  const motionMass = engine.carrier === "RAIL" ? sum("weightEmpty") : loadedMass;
   const vmax = speed / 3.6;
-  const a = Math.min(acceleration, sum("power") * 1000 / (loadedMass * Math.max(vmax / 2, 1)));
-  const timeToMaxSpeed = vmax / a;
-  const distanceToMaxSpeed = vmax * vmax / (2 * a);
   const distanceMeters = settings.distanceKm * 1000;
-  const peak = Math.min(vmax, Math.sqrt(2 * distanceMeters / (1 / a + 1)));
-  const acceleratingDistance = peak * peak / (2 * a);
-  const brakingDistance = peak * peak / 2;
-  const travelSeconds = peak / a + peak + Math.max(0, distanceMeters - acceleratingDistance - brakingDistance) / peak;
-  const throughput = capacity * 3600 / (travelSeconds + 2 * capacity / Math.max(loadSpeed, 0.001));
+  const rail = engine.carrier === "RAIL" ? createRailMotion(motionMass, sum("power") * 1000, sum("tractiveEffort") * 1000, vmax,
+    (engine.friction * engine.weightEmpty * engines + (wagon ? wagon.friction * wagon.weightEmpty * wagons : 0)) / motionMass) : null;
+  const brakingAcceleration = rail ? Math.min(engine.brakeDeceleration ?? DEFAULT_RAIL_BRAKING,
+    wagon ? (wagon.brakeDeceleration ?? DEFAULT_RAIL_BRAKING) : Infinity) : 1;
+  const arrivalDelaySeconds = rail ? RAIL_ARRIVAL_DELAY_SECONDS : 0;
+  const railTrip = rail?.trip(distanceMeters, brakingAcceleration);
+  const acceleration = rail?.initialAcceleration ?? sum("tractiveEffort") * 1000 / motionMass;
+  const a = Math.min(acceleration, sum("power") * 1000 / (motionMass * Math.max(vmax / 2, 1)));
+  const constantTimeToMax = vmax / a, constantDistanceToMax = vmax * vmax / (2 * a);
+  const timeToMaxSpeed = rail ? rail.timeToMaxSpeed : constantTimeToMax;
+  const distanceToMaxSpeed = rail ? rail.distanceToMaxSpeed : constantDistanceToMax;
+  const [timeTo1Km, timeTo2Km, timeTo3Km, timeTo4Km, timeTo5Km] = [1000, 2000, 3000, 4000, 5000].map(distance => rail
+    ? rail.launchAtDistance(distance).time
+    : distance <= constantDistanceToMax ? Math.sqrt(2 * distance / a) : constantTimeToMax + (distance - constantDistanceToMax) / vmax);
+  const peak = railTrip ? railTrip.speed : Math.min(vmax, Math.sqrt(2 * distanceMeters / (1 / a + 1)));
+  const travelSeconds = railTrip ? railTrip.time
+    : peak / a + peak + Math.max(0, distanceMeters - peak * peak / (2 * a) - peak * peak / 2) / peak;
+  const brakingTime = peak / brakingAcceleration, brakingDistance = peak * peak / (2 * brakingAcceleration);
+  const throughput = capacity * 3600 / (travelSeconds + 2 * capacity / Math.max(loadSpeed, 0.001) + arrivalDelaySeconds);
   const vehicleCostPercent = settings.vehicleCostPercent ?? DEFAULT_FINANCE.vehicleCostPercent;
   const maintenanceCostPercent = settings.maintenanceCostPercent ?? DEFAULT_FINANCE.maintenanceCostPercent;
   const purchase = Math.round(sum("purchase") * vehicleCostPercent / 100), running = Math.round(sum("running") * maintenanceCostPercent / 100);
@@ -132,7 +152,11 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
   return {
     id: `${mode}:${engine.id}:${engines}:${wagon?.id ?? "self"}`, mode, engine, wagon, engines, wagons, cargo: cargo.id, cargos: [cargo.id],
     capacity, length: sum("length"), speed, acceleration, noise: sum("noise"), pollution: sum("pollution"),
-    performanceAcceleration: a, timeToMaxSpeed, distanceToMaxSpeed, peakSpeed: peak * 3.6,
+    performanceAcceleration: rail ? (timeToMaxSpeed === null ? null : vmax / timeToMaxSpeed) : a,
+    timeToMaxSpeed, distanceToMaxSpeed, peakSpeed: peak * 3.6,
+    motionModel: rail ? "calibrated-rail" : "constant-estimate", motionMass,
+    brakingAcceleration, brakingTime, brakingDistance, arrivalDelaySeconds,
+    timeTo1Km, timeTo2Km, timeTo3Km, timeTo4Km, timeTo5Km,
     comfort: cargo.id === "PASSENGERS" ? ((engine.capacities.PASSENGERS ?? 0) * engines * engine.comfort + (wagon?.capacities.PASSENGERS ?? 0) * wagons * (wagon?.comfort ?? 0)) / capacity : null,
     purchase, running, loadSpeed, throughput, distanceKm: settings.distanceKm, costPerformance: throughput > 0 ? (running + purchase / 20) / throughput : Infinity,
     vehicleCostPercent, maintenanceCostPercent,
@@ -141,5 +165,75 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
     availableAtEnd: yearFrom <= settings.year + settings.extraYears && until >= settings.year + settings.extraYears,
     fullRange: yearFrom <= settings.year && until >= settings.year + settings.extraYears,
     lightRail: engine.carrier === "TRAM" && mode === "train", loadedMass,
+  };
+}
+
+/** Flat-track rail movement calibrated against four loaded/empty TF3 recordings.
+ * SI units: kg, W, N, m/s; resistance is an acceleration in m/s².
+ * a(v) = min(2F / m, P / (mv)) - r. See tests/fixtures/rail-runs.json.
+ */
+export function createRailMotion(mass: number, power: number, effort: number, topSpeed: number, resistance: number) {
+  const k = power / mass, forceAcceleration = 2 * effort / mass;
+  const initialAcceleration = Math.max(0, forceAcceleration - resistance);
+  const transitionSpeed = k / forceAcceleration;
+  const ceiling = Math.min(topSpeed, resistance > 0 ? k / resistance : Infinity);
+  const reachesMax = initialAcceleration > 0 && (resistance === 0 || topSpeed < k / resistance);
+
+  // Closed-form integrals of dt/dv = v/(k-rv) and dx/dv = v²/(k-rv).
+  // A short series avoids cancellation when resistance is tiny or zero.
+  function primitive(v: number) {
+    const z = resistance * v / k;
+    let timeFactor: number, distanceFactor: number;
+    if (z < 0.01) {
+      let term = 1; timeFactor = 0; distanceFactor = 0;
+      for (let n = 0; n < 7; n++) {
+        timeFactor += term / (n + 2); distanceFactor += term / (n + 3); term *= z;
+      }
+    } else {
+      const log = -Math.log1p(-z);
+      timeFactor = (log - z) / (z * z);
+      distanceFactor = (log - z - z * z / 2) / (z * z * z);
+    }
+    return { time: v * v / k * timeFactor, distance: v * v * v / k * distanceFactor };
+  }
+  const transition = transitionSpeed < ceiling ? primitive(transitionSpeed) : { time: 0, distance: 0 };
+  function atSpeed(v: number) {
+    if (v === 0) return { time: 0, distance: 0, speed: 0 };
+    if (initialAcceleration === 0) return { time: Infinity, distance: Infinity, speed: 0 };
+    if (v <= transitionSpeed) return { time: v / initialAcceleration, distance: v * v / (2 * initialAcceleration), speed: v };
+    const integral = primitive(v);
+    return {
+      time: transitionSpeed / initialAcceleration + integral.time - transition.time,
+      distance: transitionSpeed * transitionSpeed / (2 * initialAcceleration) + integral.distance - transition.distance,
+      speed: v,
+    };
+  }
+  const maximum = reachesMax ? atSpeed(topSpeed) : null;
+  // Solve for the peak speed within the available acceleration + braking distance.
+  // Fixed bounded iterations keep worker calculations independent of trip duration.
+  function peakForDistance(distance: number, braking: number) {
+    if (initialAcceleration === 0) return { time: Infinity, distance: 0, speed: 0 };
+    if (maximum && maximum.distance + topSpeed * topSpeed / (2 * braking) <= distance) return maximum;
+    let low = 0, high = ceiling;
+    for (let i = 0; i < 32; i++) {
+      const mid = (low + high) / 2, sample = atSpeed(mid);
+      if (sample.distance + mid * mid / (2 * braking) > distance) high = mid;
+      else low = mid;
+    }
+    return atSpeed((low + high) / 2);
+  }
+  return {
+    initialAcceleration,
+    timeToMaxSpeed: maximum?.time ?? null,
+    distanceToMaxSpeed: maximum?.distance ?? null,
+    launchAtDistance(distance: number) {
+      const sample = peakForDistance(distance, Infinity);
+      return { time: sample.time + (sample.speed > 0 ? Math.max(0, distance - sample.distance) / sample.speed : 0), speed: sample.speed };
+    },
+    trip(distance: number, braking = DEFAULT_RAIL_BRAKING) {
+      const sample = peakForDistance(distance, braking);
+      const cruise = Math.max(0, distance - sample.distance - sample.speed * sample.speed / (2 * braking));
+      return { time: sample.time + sample.speed / braking + (sample.speed > 0 ? cruise / sample.speed : 0), speed: sample.speed };
+    },
   };
 }

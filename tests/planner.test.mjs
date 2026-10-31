@@ -112,8 +112,8 @@ test('minimum top speed applies to the slowest component and matches displayed k
     assert.throws(()=>options(minTopSpeed),/Minimum top speed/);
   }
 });
-test('time and distance to maximum speed use SI units and the performance acceleration', () => {
-  const engine = v({ speed: 72, weightEmpty: 10000, weightMaxPayload: 0, tractiveEffort: 10, power: 1000, capacities: { PASSENGERS: 20 } });
+test('uncalibrated tram time and distance retain the existing constant estimate', () => {
+  const engine = v({ carrier: 'TRAM', category: 'tram', modes: ['TRAM'], engineModes: ['TRAM'], speed: 72, weightEmpty: 10000, weightMaxPayload: 0, tractiveEffort: 10, power: 1000, capacities: { PASSENGERS: 20 } });
   const [tractionLimited] = calculateOptions([engine], cargo, DEFAULT_SETTINGS);
   assert.equal(tractionLimited.acceleration, 1);
   assert.equal(tractionLimited.performanceAcceleration, 1);
@@ -130,6 +130,20 @@ test('time and distance to maximum speed use SI units and the performance accele
   assert.equal(short.timeToMaxSpeed, 40, 'theoretical launch-to-max metrics do not depend on the trip length');
   assert.equal(short.distanceToMaxSpeed, 400);
   assert(short.peakSpeed < short.speed, 'braking on a short trip prevents reaching max speed');
+});
+
+test('distance checkpoint times accelerate from rest then cruise, independently of trip length',()=>{
+  const engine = v({ speed: 72, weightEmpty: 10000, weightMaxPayload: 0, tractiveEffort: 5, power: 1000, friction: 0, capacities: { PASSENGERS: 20 } });
+  const [cruising] = calculateOptions([engine],cargo,DEFAULT_SETTINGS);
+  // 20 seconds and 200 m accelerating to 20 m/s, then cruise the remaining distance.
+  assert.deepEqual([1,2,3,4,5].map(km=>cruising[`timeTo${km}Km`]),[60,110,160,210,260]);
+  const [slow] = calculateOptions([{...engine, tractiveEffort: .25}],cargo,DEFAULT_SETTINGS);
+  // At .05 m/s², top speed is reached at 4 km. Earlier markers are still accelerating.
+  for (const km of [1,2,3]) assert(Math.abs(slow[`timeTo${km}Km`]-Math.sqrt(2*km*1000/.05))<1e-6);
+  assert(Math.abs(slow.timeTo4Km-400)<1e-6);
+  assert(Math.abs(slow.timeTo5Km-450)<1e-6);
+  const [short] = calculateOptions([engine],cargo,{...DEFAULT_SETTINGS,distanceKm:.01});
+  for (const km of [1,2,3,4,5]) assert.equal(short[`timeTo${km}Km`],cruising[`timeTo${km}Km`]);
 });
 
 test('real TF3 catalog invariants across multiple eras and every cargo',()=>{
@@ -150,7 +164,8 @@ test('real TF3 catalog invariants across multiple eras and every cargo',()=>{
       assert(o.length<=limit+1e-6);assert(o.capacity>0);assert(o.yearFrom<=(o.yearTo??Infinity));
       assert(o.yearFrom<=year+20&&(o.yearTo??Infinity)>=year);
       assert(Number.isFinite(o.acceleration)&&o.acceleration>0);assert(Number.isFinite(o.costPerformance)&&o.costPerformance>0);
-      assert(Number.isFinite(o.timeToMaxSpeed)&&o.timeToMaxSpeed>0);assert(Number.isFinite(o.distanceToMaxSpeed)&&o.distanceToMaxSpeed>0);
+      assert(o.timeToMaxSpeed===null||(Number.isFinite(o.timeToMaxSpeed)&&o.timeToMaxSpeed>0));assert(o.distanceToMaxSpeed===null||(Number.isFinite(o.distanceToMaxSpeed)&&o.distanceToMaxSpeed>0));
+      for(const km of [1,2,3,4,5]) assert(Number.isFinite(o[`timeTo${km}Km`])&&o[`timeTo${km}Km`]>0);
       if(o.wagon){assert(compatible(o.engine,o.wagon));assert(o.length+o.wagon.length>limit-1e-6);}
     }
     console.log(`${year}: ${rows.length} options in ${(performance.now()-start).toFixed(1)} ms`);

@@ -167,6 +167,7 @@ def normalize(meta, source, cargos, translate, models):
         'length': round(dimensions[0], 5), 'speed': round(speed, 3), 'power': power,
         'tractiveEffort': effort, 'weightEmpty': lv.get('weightEmpty', 0),
         'weightMaxPayload': lv.get('weightMaxPayload', 0), 'friction': lv.get('friction', 0.02),
+        'brakeDeceleration': lv.get('brakeDeceleration', 2.5),
         'engineType': '+'.join(sorted(set(e['type'] for e in engines))) or None,
         'capacities': capacities, 'loadSpeed': load_speed, 'comfort': comfort*100,
         'noise': noise, 'pollution': pollution, 'purchase': purchase, 'running': yearly,
@@ -233,6 +234,7 @@ def main():
         for key in ['length','power','tractiveEffort','weightEmpty','weightMaxPayload','noise','pollution','purchase','running']:
             v[key] = sum(p[key] for p in parts)
         v['speed'] = min(p['speed'] for p in parts)
+        v['brakeDeceleration'] = min(p['brakeDeceleration'] for p in parts)
         v['yearFrom'] = max(p['yearFrom'] for p in parts)
         v['yearTo'] = min((p['yearTo'] for p in parts if p['yearTo']), default=None)
         v['capacities'] = {c['id']:sum(p['capacities'].get(c['id'],0) for p in parts) for c in cargos if any(c['id'] in p['capacities'] for p in parts)}

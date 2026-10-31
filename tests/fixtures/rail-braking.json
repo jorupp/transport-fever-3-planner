@@ -1,0 +1,25 @@
+{
+  "description": "User-recorded Roter Pfeil with empty cargo approaching a 160 m station, flat map, 1x simulation speed. Speeds and video timestamps are approximate one-second observations.",
+  "engine": "CLe 2/4 Roter Pfeil",
+  "brakeStartTimestampSeconds": 61,
+  "stationEntryTimestampSeconds": 62,
+  "stationLengthMeters": 160,
+  "stoppedTimestampSeconds": 73,
+  "loadingTimestampSeconds": 75,
+  "checkpoints": [
+    { "timestampSeconds": 60, "speedKmh": 112, "phase": "accelerating" },
+    { "timestampSeconds": 61, "speedKmh": 110 },
+    { "timestampSeconds": 62, "speedKmh": 102 },
+    { "timestampSeconds": 63, "speedKmh": 93 },
+    { "timestampSeconds": 64, "speedKmh": 86 },
+    { "timestampSeconds": 65, "speedKmh": 75 },
+    { "timestampSeconds": 66, "speedKmh": 65 },
+    { "timestampSeconds": 67, "speedKmh": 54 },
+    { "timestampSeconds": 68, "speedKmh": 47 },
+    { "timestampSeconds": 69, "speedKmh": 38 },
+    { "timestampSeconds": 70, "speedKmh": 27 },
+    { "timestampSeconds": 71, "speedKmh": 16 },
+    { "timestampSeconds": 72, "speedKmh": 8 },
+    { "timestampSeconds": 73, "speedKmh": 0 }
+  ]
+}

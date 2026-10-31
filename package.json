@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test-isolation=none --test tests/planner.test.mjs",
+    "test:extractor": "python -m unittest discover -s tests -p test_*.py",
+    "data:extract": "python scripts/extract_tf3.py"
   },
   "dependencies": {
     "next": "16.4.3",

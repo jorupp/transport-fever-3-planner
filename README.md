@@ -32,16 +32,28 @@ The extractor reads:
 
 It exports numerical metadata and names, not vehicle meshes, textures or audio. The catalog contains source paths, extraction time, counts and a SHA-256 fingerprint. It fails on unsupported literal syntax or missing formation parts, instead of silently omitting vehicles. A fingerprint guard detects changes to the ported cost functions; if a game update changes them, review and update `normalize()` and its expected hash before regenerating. Mods and save-specific overrides are outside this base catalog.
 
+## Saved configurations
+
+During `next dev`, the current parameter draft, applied plan, tab, search, sort, page and named-config selection survive Fast Refresh and component remounts. Worker restarts recalculate the applied plan without overwriting uncalculated edits. The browser Navigation API also preserves these values through script-triggered full reloads (including development-server restarts) using a one-time session snapshot. A manual browser refresh resets this temporary state; named configurations in localStorage remain saved. Browsers without the Navigation API still retain state through Fast Refresh, but cannot distinguish automatic full reloads from manual refreshes. Production does not enable temporary development persistence.
+
+Named configurations save the year window, train/tram lengths, trip distance, minimum top speed and selected cargo types in this browser's `localStorage` (`tf3-planner.configs.v1`). Use **Save new** to create one, select a saved config to restore and recalculate, or use **Update** to replace its name/settings and **Delete** to remove it. Configurations stay on this browser/device and survive page reloads. Saving captures the current parameter fields even before calculating them.
+
 ## Formation rules
 
 - The year window includes both endpoints. A missing retirement year is unlimited. A formation must have at least one purchase year shared by all its components within the selected window.
-- All options available at some point in the window are shown, with one- and two-engine options together. Rows unavailable at the start are greyed out; rows unavailable at the end are yellow. Both markings can apply to the same option.
+- All options available at some point in the window are shown, with one- and two-engine options together. Rows unavailable at the start are greyed out; rows unavailable at the end are yellow. Both markings can apply to the same option. Badges beside the vehicle name show the complete formation’s introduction year (with years to wait) and removal year when either falls inside the plan’s window; a limiting wagon’s dates count too.
 - One or two identical powered vehicles; one wagon type, repeated as many times as fits. The length includes all powered vehicles and wagons.
 - Compatibility uses TF3 carrier and engine/vehicle transport modes. Light rail appears in both eligible tabs, with the length limit of the active tab. Every component must support that tab's transport mode; railway wagons and tram engines never mix.
 - Authored multiple units are treated as complete fixed vehicles, with one or two identical sets. Loose formation parts are excluded. An engine-only fixed pair can pull wagons; a complete passenger set is kept intact. This is the explicit exception to custom homogeneous-wagon construction.
 - Minimum top speed is optional (0 = no minimum), applies to the complete formation, and uses the rounded km/h shown in the table. Click **Calculate options** to apply it across all tabs.
 - Self-propelled vehicles without a fitting compatible wagon remain valid if they carry the selected cargo. Road vehicles are single vehicles without a formation-length limit.
-- Selecting multiple cargo types produces **alternative loads**, one row per cargo. It does not assert simultaneous multi-cargo capacity.
+- Selecting multiple cargo types is an **AND filter**: every result must support all selected items, with one row per formation. Wagons must support every selected cargo; self-propelled/fixed vehicles must do so themselves. Each cargo is evaluated as an individual full load, and all cargo-dependent table metrics use the selected cargo with the lowest throughput. This checks cargo flexibility, not simultaneous mixed-cargo allocation. Vehicle details and CSV exports list the supported selection and the cargo used for the metrics.
+
+## Vehicle identification
+
+Vehicle rows include one body-color swatch beside the engine name and another beside its wagon. Hover or keyboard-focus a vehicle row or summary card to see the actual TF3 menu icons. These are the base artwork colors; company recoloring can change their in-game appearance. Fixed formations show their first authored component's icon. Images load only when a preview opens, and previews render outside the scrolling table so they are not clipped.
+
+`npm run data:extract-visuals` reruns the standard-library Python exporter in `scripts/extract_tf3_visuals.py` after refreshing the vehicle catalog. It converts the installed TF3 TGA menu icons to portable PNGs in `public/vehicles`, and writes paths, image sizes, source references, an icon fingerprint and approximate body colors to `src/data/tf3-vehicle-visuals.json`. The app reads only these included assets. The swatch algorithm samples opaque body pixels, excludes dark undercarriages and transparent backgrounds, and groups similar shaded colors; it estimates visual appearance rather than reading a paint specification.
 
 ## Metrics
 
@@ -60,7 +72,7 @@ Lower cost per performance is better. Compare like cargo units. This is a planni
 
 ## Responsiveness and verification
 
-Calculations run in a web worker after clicking **Calculate options**, with progress reporting and request IDs. Search uses React deferred values. The table sorts numerically before pagination and renders at most 40 rows; all filtered rows are included in CSV exports. Vehicle details retain full-precision money and source definitions.
+Calculations run in a web worker after clicking **Calculate options**, with progress reporting and request IDs. Search uses React deferred values. The table sorts numerically before pagination and renders at most 40 rows; all filtered rows are included in CSV exports. Engine/set counts appear beside vehicle names. Monetary table values are shown in thousands of dollars, with exact dollar amounts in hover tooltips and vehicle details; cost per performance retains two decimal places in thousands. Loading, noise and pollution are displayed as whole numbers. Numeric columns keep compact fixed widths while the vehicle column takes the remaining width. Sorting, calculations and CSV exports retain the underlying precision and dollar amounts.
 
 ```powershell
 npm test

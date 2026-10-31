@@ -113,9 +113,9 @@ test('real TF3 catalog invariants across multiple eras and every cargo',()=>{
   const parts=new Set(data.vehicles.flatMap(v=>v.parts?.map(p=>p.source)??[]));
   assert(data.vehicles.every(v=>!parts.has(v.id)),'MU parts must not leak into independently purchasable equipment');
   for(const year of [1850,1900,1950,1990,2020]){
-    const settings={...DEFAULT_SETTINGS,year,extraYears:20,cargos:data.cargos.map(c=>c.id)};
-    const start=performance.now();const rows=calculateOptions(data.vehicles,data.cargos,settings);
-    assert.equal(new Set(rows.map(o=>o.id)).size,rows.length);
+    const settings={...DEFAULT_SETTINGS,year,extraYears:20};
+    const start=performance.now();const rows=data.cargos.flatMap(c=>calculateOptions(data.vehicles,data.cargos,{...settings,cargos:[c.id]}));
+    assert.equal(new Set(rows.map(o=>`${o.id}:${o.cargo}`)).size,rows.length);
     for(const o of rows){
       const limit=o.mode==='train'?settings.trainLength:o.mode==='tram'?settings.tramLength:Infinity;
       assert(o.length<=limit+1e-6);assert(o.capacity>0);assert(o.yearFrom<=(o.yearTo??Infinity));

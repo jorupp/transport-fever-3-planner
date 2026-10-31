@@ -1,0 +1,1711 @@
+{
+  "game": "Transport Fever 3",
+  "source": "Installed TF3 base menu icons; unmodified base colors before company tinting",
+  "iconHash": "f9e146af1aed6ef91f0674321c71eb3b7723a9017bb1897d8e5c57d0da722351",
+  "vehicles": {
+    "vehicle/bus/aboag/aboag.mdl": {
+      "image": "/vehicles/bus/aboag/aboag.png",
+      "width": 128,
+      "height": 80,
+      "color": "#911c21",
+      "sourceIcon": "vehicle/bus/aboag/icons/aboag_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/american_post_coach/american_post_coach.mdl": {
+      "image": "/vehicles/bus/american_post_coach/american_post_coach.png",
+      "width": 112,
+      "height": 80,
+      "color": "#711d21",
+      "sourceIcon": "vehicle/bus/american_post_coach/icons/american_post_coach_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/bk_670/bk_670.mdl": {
+      "image": "/vehicles/bus/bk_670/bk_670.png",
+      "width": 224,
+      "height": 80,
+      "color": "#b5b68c",
+      "sourceIcon": "vehicle/bus/bk_670/icons/bk_670_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/citroen_cityrama/citroen_cityrama.mdl": {
+      "image": "/vehicles/bus/citroen_cityrama/citroen_cityrama.png",
+      "width": 164,
+      "height": 80,
+      "color": "#384c52",
+      "sourceIcon": "vehicle/bus/citroen_cityrama/icons/citroen_cityrama_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/d40/d40.mdl": {
+      "image": "/vehicles/bus/d40/d40.png",
+      "width": 196,
+      "height": 80,
+      "color": "#263643",
+      "sourceIcon": "vehicle/bus/d40/icons/d40_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/droshky/droshky.mdl": {
+      "image": "/vehicles/bus/droshky/droshky.png",
+      "width": 88,
+      "height": 80,
+      "color": "#914f28",
+      "sourceIcon": "vehicle/bus/droshky/icons/droshky_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/ecitaro/ecitaro.mdl": {
+      "image": "/vehicles/bus/ecitaro/ecitaro.png",
+      "width": 192,
+      "height": 80,
+      "color": "#243139",
+      "sourceIcon": "vehicle/bus/ecitaro/icons/ecitaro_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/et13/et13.mdl": {
+      "image": "/vehicles/bus/et13/et13.png",
+      "width": 104,
+      "height": 80,
+      "color": "#988535",
+      "sourceIcon": "vehicle/bus/et13/icons/et13_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/fuso_b46/fuso_b46.mdl": {
+      "image": "/vehicles/bus/fuso_b46/fuso_b46.png",
+      "width": 116,
+      "height": 80,
+      "color": "#b8ad6f",
+      "sourceIcon": "vehicle/bus/fuso_b46/icons/fuso_b46_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/gm_fishbowl/gm_fishbowl.mdl": {
+      "image": "/vehicles/bus/gm_fishbowl/gm_fishbowl.png",
+      "width": 172,
+      "height": 80,
+      "color": "#125358",
+      "sourceIcon": "vehicle/bus/gm_fishbowl/icons/gm_fishbowl_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/irisbus_crossway_le/irisbus_crossway_le.mdl": {
+      "image": "/vehicles/bus/irisbus_crossway_le/irisbus_crossway_le.png",
+      "width": 196,
+      "height": 80,
+      "color": "#2a3a44",
+      "sourceIcon": "vehicle/bus/irisbus_crossway_le/icons/irisbus_crossway_le_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/isuzu_bu10p/isuzu_bu10p.mdl": {
+      "image": "/vehicles/bus/isuzu_bu10p/isuzu_bu10p.png",
+      "width": 168,
+      "height": 80,
+      "color": "#96aeb4",
+      "sourceIcon": "vehicle/bus/isuzu_bu10p/icons/isuzu_bu10p_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/king_long/king_long.mdl": {
+      "image": "/vehicles/bus/king_long/king_long.png",
+      "width": 200,
+      "height": 80,
+      "color": "#2b7675",
+      "sourceIcon": "vehicle/bus/king_long/icons/king_long_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/mb_citaro_g1/mb_citaro_g1.mdl": {
+      "image": "/vehicles/bus/mb_citaro_g1/mb_citaro_g1.png",
+      "width": 292,
+      "height": 80,
+      "color": "#243339",
+      "sourceIcon": "vehicle/bus/mb_citaro_g1/icons/mb_citaro_g1_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/mb_o303/mb_o303.mdl": {
+      "image": "/vehicles/bus/mb_o303/mb_o303.png",
+      "width": 192,
+      "height": 80,
+      "color": "#702733",
+      "sourceIcon": "vehicle/bus/mb_o303/icons/mb_o303_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/mb_o405g/mb_o405g.mdl": {
+      "image": "/vehicles/bus/mb_o405g/mb_o405g.png",
+      "width": 284,
+      "height": 80,
+      "color": "#90a6b0",
+      "sourceIcon": "vehicle/bus/mb_o405g/icons/mb_o405g_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/obeissante/obeissante.mdl": {
+      "image": "/vehicles/bus/obeissante/obeissante.png",
+      "width": 84,
+      "height": 80,
+      "color": "#2c3038",
+      "sourceIcon": "vehicle/bus/obeissante/icons/obeissante_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/rampini_2025/rampini_2025.mdl": {
+      "image": "/vehicles/bus/rampini_2025/rampini_2025.png",
+      "width": 128,
+      "height": 80,
+      "color": "#2d3b48",
+      "sourceIcon": "vehicle/bus/rampini_2025/icons/rampini_2025_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/saurer_tuescher/saurer_tuescher.mdl": {
+      "image": "/vehicles/bus/saurer_tuescher/saurer_tuescher.png",
+      "width": 112,
+      "height": 80,
+      "color": "#135991",
+      "sourceIcon": "vehicle/bus/saurer_tuescher/icons/saurer_tuescher_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/scania_vabis_h15/scania_vabis_h15.mdl": {
+      "image": "/vehicles/bus/scania_vabis_h15/scania_vabis_h15.png",
+      "width": 160,
+      "height": 80,
+      "color": "#762829",
+      "sourceIcon": "vehicle/bus/scania_vabis_h15/icons/scania_vabis_h15_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/shinjin_micro_bus/shinjin_micro_bus.mdl": {
+      "image": "/vehicles/bus/shinjin_micro_bus/shinjin_micro_bus.png",
+      "width": 104,
+      "height": 80,
+      "color": "#aab7b8",
+      "sourceIcon": "vehicle/bus/shinjin_micro_bus/icons/shinjin_micro_bus_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/wright_streetcar/wright_streetcar.mdl": {
+      "image": "/vehicles/bus/wright_streetcar/wright_streetcar.png",
+      "width": 300,
+      "height": 80,
+      "color": "#1a292f",
+      "sourceIcon": "vehicle/bus/wright_streetcar/icons/wright_streetcar_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/yellow_w/yellow_w.mdl": {
+      "image": "/vehicles/bus/yellow_w/yellow_w.png",
+      "width": 128,
+      "height": 80,
+      "color": "#938d6c",
+      "sourceIcon": "vehicle/bus/yellow_w/icons/yellow_w_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/bus/zuhai_gtq_6186bevbt3/zuhai_gtq_6186bevbt3.mdl": {
+      "image": "/vehicles/bus/zuhai_gtq_6186bevbt3/zuhai_gtq_6186bevbt3.png",
+      "width": 300,
+      "height": 80,
+      "color": "#1a2731",
+      "sourceIcon": "vehicle/bus/zuhai_gtq_6186bevbt3/icons/zuhai_gtq_6186bevbt3_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/alco_hh600/alco_hh600.mdl": {
+      "image": "/vehicles/train/alco_hh600/alco_hh600.png",
+      "width": 208,
+      "height": 112,
+      "color": "#244f4f",
+      "sourceIcon": "vehicle/train/alco_hh600/icons/alco_hh600_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/atlantic_4_4_2/atlantic_4_4_2.mdl": {
+      "image": "/vehicles/train/atlantic_4_4_2/atlantic_4_4_2.png",
+      "width": 376,
+      "height": 112,
+      "color": "#333c47",
+      "sourceIcon": "vehicle/train/atlantic_4_4_2/icons/atlantic_4_4_2_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/avelia_liberty/avelia_liberty.mu.lua": {
+      "image": "/vehicles/train/avelia_liberty/avelia_liberty_front.png",
+      "width": 296,
+      "height": 112,
+      "color": "#99acbb",
+      "sourceIcon": "vehicle/train/avelia_liberty/icons/avelia_liberty_front_icon_small@2x.tga",
+      "representativePart": "vehicle/train/avelia_liberty/avelia_liberty_front.mdl"
+    },
+    "vehicle/train/bigboy/bigboy.mdl": {
+      "image": "/vehicles/train/bigboy/bigboy.png",
+      "width": 644,
+      "height": 112,
+      "color": "#333b45",
+      "sourceIcon": "vehicle/train/bigboy/icons/bigboy_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/br75_4/br75_4.mdl": {
+      "image": "/vehicles/train/br75_4/br75_4.png",
+      "width": 200,
+      "height": 112,
+      "color": "#2c3238",
+      "sourceIcon": "vehicle/train/br75_4/icons/br75_4_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/br89/br89.mdl": {
+      "image": "/vehicles/train/br89/br89.png",
+      "width": 136,
+      "height": 112,
+      "color": "#4d4e26",
+      "sourceIcon": "vehicle/train/br89/icons/br89_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/br_185_traxx/br_185_traxx.mdl": {
+      "image": "/vehicles/train/br_185_traxx/br_185_traxx.png",
+      "width": 300,
+      "height": 112,
+      "color": "#738793",
+      "sourceIcon": "vehicle/train/br_185_traxx/icons/br_185_traxx_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/br_246_traxx/br_246_traxx.mdl": {
+      "image": "/vehicles/train/br_246_traxx/br_246_traxx.png",
+      "width": 300,
+      "height": 112,
+      "color": "#8498a6",
+      "sourceIcon": "vehicle/train/br_246_traxx/icons/br_246_traxx_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/br_e94/br_e94.mdl": {
+      "image": "/vehicles/train/br_e94/br_e94.png",
+      "width": 296,
+      "height": 112,
+      "color": "#344a35",
+      "sourceIcon": "vehicle/train/br_e94/icons/br_e94_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/c6_8/c6_8.mdl": {
+      "image": "/vehicles/train/c6_8/c6_8.png",
+      "width": 320,
+      "height": 112,
+      "color": "#264745",
+      "sourceIcon": "vehicle/train/c6_8/icons/c6_8_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/china_df4b/china_df4b.mdl": {
+      "image": "/vehicles/train/china_df4b/china_df4b.png",
+      "width": 336,
+      "height": 112,
+      "color": "#ac2d27",
+      "sourceIcon": "vehicle/train/china_df4b/icons/china_df4b_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/china_df5/china_df5.mdl": {
+      "image": "/vehicles/train/china_df5/china_df5.png",
+      "width": 284,
+      "height": 112,
+      "color": "#1d4497",
+      "sourceIcon": "vehicle/train/china_df5/icons/china_df5_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/china_hxd3b/china_hxd3b.mdl": {
+      "image": "/vehicles/train/china_hxd3b/china_hxd3b.png",
+      "width": 356,
+      "height": 112,
+      "color": "#183a6f",
+      "sourceIcon": "vehicle/train/china_hxd3b/icons/china_hxd3b_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/china_jf1/china_jf1.mdl": {
+      "image": "/vehicles/train/china_jf1/china_jf1.png",
+      "width": 372,
+      "height": 112,
+      "color": "#333c44",
+      "sourceIcon": "vehicle/train/china_jf1/icons/china_jf1_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/china_rm/china_rm.mdl": {
+      "image": "/vehicles/train/china_rm/china_rm.png",
+      "width": 380,
+      "height": 112,
+      "color": "#283139",
+      "sourceIcon": "vehicle/train/china_rm/icons/china_rm_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/class_prr_gg1/class_prr_gg1.mdl": {
+      "image": "/vehicles/train/class_prr_gg1/class_prr_gg1.png",
+      "width": 380,
+      "height": 112,
+      "color": "#702b31",
+      "sourceIcon": "vehicle/train/class_prr_gg1/icons/class_prr_gg1_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/db_v100/db_v100.mdl": {
+      "image": "/vehicles/train/db_v100/db_v100.png",
+      "width": 200,
+      "height": 112,
+      "color": "#a9262d",
+      "sourceIcon": "vehicle/train/db_v100/icons/db_v100_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/el_18/el_18.mdl": {
+      "image": "/vehicles/train/el_18/el_18.png",
+      "width": 296,
+      "height": 112,
+      "color": "#8e2e2d",
+      "sourceIcon": "vehicle/train/el_18/icons/el_18_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/emd_aem_7/emd_aem_7.mdl": {
+      "image": "/vehicles/train/emd_aem_7/emd_aem_7.png",
+      "width": 248,
+      "height": 112,
+      "color": "#597388",
+      "sourceIcon": "vehicle/train/emd_aem_7/icons/emd_aem_7_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/emd_f/emd_f.mu.lua": {
+      "image": "/vehicles/train/emd_f/emd_fa.png",
+      "width": 252,
+      "height": 112,
+      "color": "#ca502b",
+      "sourceIcon": "vehicle/train/emd_f/icons/emd_fa_icon_small@2x.tga",
+      "representativePart": "vehicle/train/emd_f/emd_fa.mdl"
+    },
+    "vehicle/train/emd_sd40/emd_sd40.mdl": {
+      "image": "/vehicles/train/emd_sd40/emd_sd40.png",
+      "width": 320,
+      "height": 112,
+      "color": "#28486d",
+      "sourceIcon": "vehicle/train/emd_sd40/icons/emd_sd40_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/es1_lastochka/es1_lastochka.mu.lua": {
+      "image": "/vehicles/train/es1_lastochka/es1_lastochka_front.png",
+      "width": 416,
+      "height": 112,
+      "color": "#8b99a7",
+      "sourceIcon": "vehicle/train/es1_lastochka/icons/es1_lastochka_front_icon_small@2x.tga",
+      "representativePart": "vehicle/train/es1_lastochka/es1_lastochka_front.mdl"
+    },
+    "vehicle/train/eurodual/eurodual.mdl": {
+      "image": "/vehicles/train/eurodual/eurodual.png",
+      "width": 356,
+      "height": 112,
+      "color": "#7999b2",
+      "sourceIcon": "vehicle/train/eurodual/icons/eurodual_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/fs_etr_450/etr_450.mu.lua": {
+      "image": "/vehicles/train/fs_etr_450/etr_450_front.png",
+      "width": 436,
+      "height": 112,
+      "color": "#d0d7cf",
+      "sourceIcon": "vehicle/train/fs_etr_450/icons/etr_450_front_icon_small@2x.tga",
+      "representativePart": "vehicle/train/fs_etr_450/etr_450_front.mdl"
+    },
+    "vehicle/train/fuxing_hao/fuxing_hao.mu.lua": {
+      "image": "/vehicles/train/fuxing_hao/fuxing_hao_front.png",
+      "width": 448,
+      "height": 112,
+      "color": "#2a3642",
+      "sourceIcon": "vehicle/train/fuxing_hao/icons/fuxing_hao_front_icon_small@2x.tga",
+      "representativePart": "vehicle/train/fuxing_hao/fuxing_hao_front.mdl"
+    },
+    "vehicle/train/ge_p42_dc/ge_p42_dc.mdl": {
+      "image": "/vehicles/train/ge_p42_dc/ge_p42_dc.png",
+      "width": 344,
+      "height": 112,
+      "color": "#6f849b",
+      "sourceIcon": "vehicle/train/ge_p42_dc/icons/ge_p42_dc_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/hst_125/hst_125.mu.lua": {
+      "image": "/vehicles/train/hst_125/hst_125_front.png",
+      "width": 284,
+      "height": 112,
+      "color": "#114871",
+      "sourceIcon": "vehicle/train/hst_125/icons/hst_125_front_icon_small@2x.tga",
+      "representativePart": "vehicle/train/hst_125/hst_125_front.mdl"
+    },
+    "vehicle/train/ice1/ice1.mu.lua": {
+      "image": "/vehicles/train/ice1/ice1_front.png",
+      "width": 328,
+      "height": 112,
+      "color": "#b9c5cd",
+      "sourceIcon": "vehicle/train/ice1/icons/ice1_front_icon_small@2x.tga",
+      "representativePart": "vehicle/train/ice1/ice1_front.mdl"
+    },
+    "vehicle/train/jr_ef66_100/jr_ef66_100.mdl": {
+      "image": "/vehicles/train/jr_ef66_100/jr_ef66_100.png",
+      "width": 288,
+      "height": 112,
+      "color": "#2d6b97",
+      "sourceIcon": "vehicle/train/jr_ef66_100/icons/jr_ef66_100_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/lner_class_a4/lner_class_a4.mdl": {
+      "image": "/vehicles/train/lner_class_a4/lner_class_a4.png",
+      "width": 348,
+      "height": 112,
+      "color": "#1d3856",
+      "sourceIcon": "vehicle/train/lner_class_a4/icons/lner_class_a4_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/m_300/m_300.mdl": {
+      "image": "/vehicles/train/m_300/m_300.png",
+      "width": 288,
+      "height": 112,
+      "color": "#56191d",
+      "sourceIcon": "vehicle/train/m_300/icons/m_300_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/metroliner/metroliner.mu.lua": {
+      "image": "/vehicles/train/metroliner/metroliner.png",
+      "width": 412,
+      "height": 112,
+      "color": "#516578",
+      "sourceIcon": "vehicle/train/metroliner/icons/metroliner_icon_small@2x.tga",
+      "representativePart": "vehicle/train/metroliner/metroliner.mdl"
+    },
+    "vehicle/train/mogul_2_6_0/mogul_2_6_0.mdl": {
+      "image": "/vehicles/train/mogul_2_6_0/mogul_2_6_0.png",
+      "width": 296,
+      "height": 112,
+      "color": "#6f2829",
+      "sourceIcon": "vehicle/train/mogul_2_6_0/icons/mogul_2_6_0_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/obb_1042/obb_1042.mdl": {
+      "image": "/vehicles/train/obb_1042/obb_1042.png",
+      "width": 260,
+      "height": 112,
+      "color": "#af2f25",
+      "sourceIcon": "vehicle/train/obb_1042/icons/obb_1042_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/re_44i/re_44i.mdl": {
+      "image": "/vehicles/train/re_44i/re_44i.png",
+      "width": 236,
+      "height": 112,
+      "color": "#6d2128",
+      "sourceIcon": "vehicle/train/re_44i/icons/re_44i_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/re_450/re_450.mu.lua": {
+      "image": "/vehicles/train/re_450/re_450_front.png",
+      "width": 300,
+      "height": 112,
+      "color": "#1d3768",
+      "sourceIcon": "vehicle/train/re_450/icons/re_450_front_icon_small@2x.tga",
+      "representativePart": "vehicle/train/re_450/re_450_front.mdl"
+    },
+    "vehicle/train/roterpfeil/roterpfeil.mdl": {
+      "image": "/vehicles/train/roterpfeil/roterpfeil.png",
+      "width": 356,
+      "height": 112,
+      "color": "#961a1d",
+      "sourceIcon": "vehicle/train/roterpfeil/icons/roterpfeil_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/russian_class_ob/russian_class_ob.mdl": {
+      "image": "/vehicles/train/russian_class_ob/russian_class_ob.png",
+      "width": 272,
+      "height": 112,
+      "color": "#2c3137",
+      "sourceIcon": "vehicle/train/russian_class_ob/icons/russian_class_ob_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/russian_class_su/russian_class_su.mdl": {
+      "image": "/vehicles/train/russian_class_su/russian_class_su.png",
+      "width": 376,
+      "height": 112,
+      "color": "#477335",
+      "sourceIcon": "vehicle/train/russian_class_su/icons/russian_class_su_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/schienenbus/schienenbus.mdl": {
+      "image": "/vehicles/train/schienenbus/schienenbus.png",
+      "width": 224,
+      "height": 112,
+      "color": "#681e21",
+      "sourceIcon": "vehicle/train/schienenbus/icons/schienenbus_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/shaoshan_4g/shaoshan_4g.mu.lua": {
+      "image": "/vehicles/train/shaoshan_4g/shaoshan_4g.png",
+      "width": 260,
+      "height": 112,
+      "color": "#1c3176",
+      "sourceIcon": "vehicle/train/shaoshan_4g/icons/shaoshan_4g_icon_small@2x.tga",
+      "representativePart": "vehicle/train/shaoshan_4g/shaoshan_4g.mdl"
+    },
+    "vehicle/train/shinkansen_0s/shinkansen_0s.mu.lua": {
+      "image": "/vehicles/train/shinkansen_0s/shinkansen_0s_front.png",
+      "width": 404,
+      "height": 112,
+      "color": "#164679",
+      "sourceIcon": "vehicle/train/shinkansen_0s/icons/shinkansen_0s_front_icon_small@2x.tga",
+      "representativePart": "vehicle/train/shinkansen_0s/shinkansen_0s_front.mdl"
+    },
+    "vehicle/train/talent1/talent1.mdl": {
+      "image": "/vehicles/train/talent1/talent1.png",
+      "width": 764,
+      "height": 112,
+      "color": "#c83133",
+      "sourceIcon": "vehicle/train/talent1/icons/talent1_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/train/tgv_duplex/tgv_duplex.mu.lua": {
+      "image": "/vehicles/train/tgv_duplex/tgv_front.png",
+      "width": 352,
+      "height": 112,
+      "color": "#182f74",
+      "sourceIcon": "vehicle/train/tgv_duplex/icons/tgv_front_icon_small@2x.tga",
+      "representativePart": "vehicle/train/tgv_duplex/tgv_front.mdl"
+    },
+    "vehicle/train/twindexx/twindexx.mu.lua": {
+      "image": "/vehicles/train/twindexx/twindexx_front.png",
+      "width": 408,
+      "height": 112,
+      "color": "#afbccf",
+      "sourceIcon": "vehicle/train/twindexx/icons/twindexx_front_icon_small@2x.tga",
+      "representativePart": "vehicle/train/twindexx/twindexx_front.mdl"
+    },
+    "vehicle/tram/atm_4000/atm_4000.mdl": {
+      "image": "/vehicles/tram/atm_4000/atm_4000.png",
+      "width": 316,
+      "height": 96,
+      "color": "#2e4d4c",
+      "sourceIcon": "vehicle/tram/atm_4000/icons/atm_4000_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/be4_6mirage/be4_6mirage.mdl": {
+      "image": "/vehicles/tram/be4_6mirage/be4_6mirage.png",
+      "width": 328,
+      "height": 96,
+      "color": "#255797",
+      "sourceIcon": "vehicle/tram/be4_6mirage/icons/be4_6mirage_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/bombardier_k4000/bombardier_k4000.mdl": {
+      "image": "/vehicles/tram/bombardier_k4000/bombardier_k4000.png",
+      "width": 456,
+      "height": 96,
+      "color": "#465153",
+      "sourceIcon": "vehicle/tram/bombardier_k4000/icons/bombardier_k4000_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/caf_urbos3/caf_urbos3.mdl": {
+      "image": "/vehicles/tram/caf_urbos3/caf_urbos3.png",
+      "width": 548,
+      "height": 96,
+      "color": "#253038",
+      "sourceIcon": "vehicle/tram/caf_urbos3/icons/caf_urbos3_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/car_go_tram/car_go_tram.mdl": {
+      "image": "/vehicles/tram/car_go_tram/car_go_tram.png",
+      "width": 1024,
+      "height": 96,
+      "color": "#2562ad",
+      "sourceIcon": "vehicle/tram/car_go_tram/icons/car_go_tram_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_a/box_car_a.mdl": {
+      "image": "/vehicles/tram/cargo_a/box_car_a.png",
+      "width": 76,
+      "height": 96,
+      "color": "#277754",
+      "sourceIcon": "vehicle/tram/cargo_a/icons/box_car_a_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_a/bulk_car_a.mdl": {
+      "image": "/vehicles/tram/cargo_a/bulk_car_a.png",
+      "width": 84,
+      "height": 96,
+      "color": "#6d5b4c",
+      "sourceIcon": "vehicle/tram/cargo_a/icons/bulk_car_a_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_a/stake_car_a.mdl": {
+      "image": "/vehicles/tram/cargo_a/stake_car_a.png",
+      "width": 76,
+      "height": 96,
+      "color": "#59636b",
+      "sourceIcon": "vehicle/tram/cargo_a/icons/stake_car_a_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_a/tank_car_a.mdl": {
+      "image": "/vehicles/tram/cargo_a/tank_car_a.png",
+      "width": 108,
+      "height": 96,
+      "color": "#193352",
+      "sourceIcon": "vehicle/tram/cargo_a/icons/tank_car_a_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_a/univ_car_a.mdl": {
+      "image": "/vehicles/tram/cargo_a/univ_car_a.png",
+      "width": 76,
+      "height": 96,
+      "color": "#59636b",
+      "sourceIcon": "vehicle/tram/cargo_a/icons/univ_car_a_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_b/box_car_b.mdl": {
+      "image": "/vehicles/tram/cargo_b/box_car_b.png",
+      "width": 152,
+      "height": 96,
+      "color": "#30566f",
+      "sourceIcon": "vehicle/tram/cargo_b/icons/box_car_b_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_b/bulk_car_b.mdl": {
+      "image": "/vehicles/tram/cargo_b/bulk_car_b.png",
+      "width": 132,
+      "height": 96,
+      "color": "#784439",
+      "sourceIcon": "vehicle/tram/cargo_b/icons/bulk_car_b_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_b/stake_car_b.mdl": {
+      "image": "/vehicles/tram/cargo_b/stake_car_b.png",
+      "width": 152,
+      "height": 96,
+      "color": "#3c494e",
+      "sourceIcon": "vehicle/tram/cargo_b/icons/stake_car_b_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_b/tank_car_b.mdl": {
+      "image": "/vehicles/tram/cargo_b/tank_car_b.png",
+      "width": 156,
+      "height": 96,
+      "color": "#f3cf8c",
+      "sourceIcon": "vehicle/tram/cargo_b/icons/tank_car_b_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_b/univ_car_b.mdl": {
+      "image": "/vehicles/tram/cargo_b/univ_car_b.png",
+      "width": 152,
+      "height": 96,
+      "color": "#54493a",
+      "sourceIcon": "vehicle/tram/cargo_b/icons/univ_car_b_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_c/box_car_c.mdl": {
+      "image": "/vehicles/tram/cargo_c/box_car_c.png",
+      "width": 240,
+      "height": 96,
+      "color": "#2e7639",
+      "sourceIcon": "vehicle/tram/cargo_c/icons/box_car_c_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_c/bulk_car_c.mdl": {
+      "image": "/vehicles/tram/cargo_c/bulk_car_c.png",
+      "width": 240,
+      "height": 96,
+      "color": "#2b4e90",
+      "sourceIcon": "vehicle/tram/cargo_c/icons/bulk_car_c_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_c/stake_car_c.mdl": {
+      "image": "/vehicles/tram/cargo_c/stake_car_c.png",
+      "width": 240,
+      "height": 96,
+      "color": "#978328",
+      "sourceIcon": "vehicle/tram/cargo_c/icons/stake_car_c_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_c/tank_car_c.mdl": {
+      "image": "/vehicles/tram/cargo_c/tank_car_c.png",
+      "width": 240,
+      "height": 96,
+      "color": "#678b99",
+      "sourceIcon": "vehicle/tram/cargo_c/icons/tank_car_c_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/cargo_c/univ_car_c.mdl": {
+      "image": "/vehicles/tram/cargo_c/univ_car_c.png",
+      "width": 240,
+      "height": 96,
+      "color": "#798c90",
+      "sourceIcon": "vehicle/tram/cargo_c/icons/univ_car_c_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/changchun3000/changchun3000.mdl": {
+      "image": "/vehicles/tram/changchun3000/changchun3000.png",
+      "width": 940,
+      "height": 96,
+      "color": "#2a3946",
+      "sourceIcon": "vehicle/tram/changchun3000/icons/changchun3000_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/closed_pax_wagon/closed_pax_wagon.mdl": {
+      "image": "/vehicles/tram/closed_pax_wagon/closed_pax_wagon.png",
+      "width": 104,
+      "height": 96,
+      "color": "#adaa76",
+      "sourceIcon": "vehicle/tram/closed_pax_wagon/icons/closed_pax_wagon_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/dampftram/dampftram.mdl": {
+      "image": "/vehicles/tram/dampftram/dampftram.png",
+      "width": 80,
+      "height": 96,
+      "color": "#354e51",
+      "sourceIcon": "vehicle/tram/dampftram/icons/dampftram_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/double_deck_wagon/double_deck_wagon.mdl": {
+      "image": "/vehicles/tram/double_deck_wagon/double_deck_wagon.png",
+      "width": 136,
+      "height": 96,
+      "color": "#6d5237",
+      "sourceIcon": "vehicle/tram/double_deck_wagon/icons/double_deck_wagon_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/double_horse/double_horse.mdl": {
+      "image": "/vehicles/tram/double_horse/double_horse.png",
+      "width": 160,
+      "height": 96,
+      "color": "#ced4ce",
+      "sourceIcon": "vehicle/tram/double_horse/icons/double_horse_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/double_horse/double_horse_cargo.mdl": {
+      "image": "/vehicles/tram/double_horse/double_horse_cargo.png",
+      "width": 116,
+      "height": 96,
+      "color": "#8f4c2a",
+      "sourceIcon": "vehicle/tram/double_horse/icons/double_horse_cargo_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/duewag_grossraum/duewag_bw.mdl": {
+      "image": "/vehicles/tram/duewag_grossraum/duewag_bw.png",
+      "width": 240,
+      "height": 96,
+      "color": "#c6b358",
+      "sourceIcon": "vehicle/tram/duewag_grossraum/icons/duewag_bw_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/duewag_grossraum/duewag_tw.mdl": {
+      "image": "/vehicles/tram/duewag_grossraum/duewag_tw.png",
+      "width": 240,
+      "height": 96,
+      "color": "#c6b257",
+      "sourceIcon": "vehicle/tram/duewag_grossraum/icons/duewag_tw_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/duewag_n8c/duewag_n8c.mdl": {
+      "image": "/vehicles/tram/duewag_n8c/duewag_n8c.png",
+      "width": 420,
+      "height": 96,
+      "color": "#2b4f39",
+      "sourceIcon": "vehicle/tram/duewag_n8c/icons/duewag_n8c_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/f_tram_univ/f_tram_univ.mdl": {
+      "image": "/vehicles/tram/f_tram_univ/f_tram_univ.png",
+      "width": 572,
+      "height": 96,
+      "color": "#364953",
+      "sourceIcon": "vehicle/tram/f_tram_univ/icons/f_tram_univ_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/freightcar_24s/freightcar_24s.mdl": {
+      "image": "/vehicles/tram/freightcar_24s/freightcar_24s.png",
+      "width": 152,
+      "height": 96,
+      "color": "#c39a63",
+      "sourceIcon": "vehicle/tram/freightcar_24s/icons/freightcar_24s_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/ge_25_ton_sw/ge_25_ton_sw.mdl": {
+      "image": "/vehicles/tram/ge_25_ton_sw/ge_25_ton_sw.png",
+      "width": 80,
+      "height": 96,
+      "color": "#224f8d",
+      "sourceIcon": "vehicle/tram/ge_25_ton_sw/icons/ge_25_ton_sw_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/halle/halle.mdl": {
+      "image": "/vehicles/tram/halle/halle.png",
+      "width": 116,
+      "height": 96,
+      "color": "#145133",
+      "sourceIcon": "vehicle/tram/halle/icons/halle_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/lvs_86/lvs_86.mdl": {
+      "image": "/vehicles/tram/lvs_86/lvs_86.png",
+      "width": 360,
+      "height": 96,
+      "color": "#89282a",
+      "sourceIcon": "vehicle/tram/lvs_86/icons/lvs_86_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/moscow_f/moscow_f.mdl": {
+      "image": "/vehicles/tram/moscow_f/moscow_f.png",
+      "width": 156,
+      "height": 96,
+      "color": "#8c724c",
+      "sourceIcon": "vehicle/tram/moscow_f/icons/moscow_f_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/moscow_f/moscow_nuremberg.mdl": {
+      "image": "/vehicles/tram/moscow_f/moscow_nuremberg.png",
+      "width": 156,
+      "height": 96,
+      "color": "#6b1a1c",
+      "sourceIcon": "vehicle/tram/moscow_f/icons/moscow_nuremberg_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/odessa/odessa.mdl": {
+      "image": "/vehicles/tram/odessa/odessa.png",
+      "width": 104,
+      "height": 96,
+      "color": "#d3d2b9",
+      "sourceIcon": "vehicle/tram/odessa/icons/odessa_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/pcc_1643_pittsburgh/pcc_1643_pittsburgh.mdl": {
+      "image": "/vehicles/tram/pcc_1643_pittsburgh/pcc_1643_pittsburgh.png",
+      "width": 240,
+      "height": 96,
+      "color": "#8e2a25",
+      "sourceIcon": "vehicle/tram/pcc_1643_pittsburgh/icons/pcc_1643_pittsburgh_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/schoema_gm_2_2/schoema_gm_2_2.mdl": {
+      "image": "/vehicles/tram/schoema_gm_2_2/schoema_gm_2_2.png",
+      "width": 104,
+      "height": 96,
+      "color": "#b93622",
+      "sourceIcon": "vehicle/tram/schoema_gm_2_2/icons/schoema_gm_2_2_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/series_x/series_x.mdl": {
+      "image": "/vehicles/tram/series_x/series_x.png",
+      "width": 164,
+      "height": 96,
+      "color": "#927131",
+      "sourceIcon": "vehicle/tram/series_x/icons/series_x_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/sig_ge_2_2/sig_ge_2_2.mdl": {
+      "image": "/vehicles/tram/sig_ge_2_2/sig_ge_2_2.png",
+      "width": 108,
+      "height": 96,
+      "color": "#2a4847",
+      "sourceIcon": "vehicle/tram/sig_ge_2_2/icons/sig_ge_2_2_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/skoda_10t/skoda_10t.mdl": {
+      "image": "/vehicles/tram/skoda_10t/skoda_10t.png",
+      "width": 320,
+      "height": 96,
+      "color": "#ab2f32",
+      "sourceIcon": "vehicle/tram/skoda_10t/icons/skoda_10t_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/stadler_citylink/stadler_citylink.mdl": {
+      "image": "/vehicles/tram/stadler_citylink/stadler_citylink.png",
+      "width": 596,
+      "height": 96,
+      "color": "#24333b",
+      "sourceIcon": "vehicle/tram/stadler_citylink/icons/stadler_citylink_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/stadler_tina/stadler_tina.mdl": {
+      "image": "/vehicles/tram/stadler_tina/stadler_tina.png",
+      "width": 732,
+      "height": 96,
+      "color": "#2b3c45",
+      "sourceIcon": "vehicle/tram/stadler_tina/icons/stadler_tina_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/tatra_t4/tatra_t4.mdl": {
+      "image": "/vehicles/tram/tatra_t4/tatra_t4.png",
+      "width": 232,
+      "height": 96,
+      "color": "#8b2f2d",
+      "sourceIcon": "vehicle/tram/tatra_t4/icons/tatra_t4_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/tatra_t4/tatra_t4_box.mdl": {
+      "image": "/vehicles/tram/tatra_t4/tatra_t4_box.png",
+      "width": 232,
+      "height": 96,
+      "color": "#891b19",
+      "sourceIcon": "vehicle/tram/tatra_t4/icons/tatra_t4_box_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/tatra_t4/tatra_t4_bulk.mdl": {
+      "image": "/vehicles/tram/tatra_t4/tatra_t4_bulk.png",
+      "width": 232,
+      "height": 96,
+      "color": "#232d38",
+      "sourceIcon": "vehicle/tram/tatra_t4/icons/tatra_t4_bulk_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/tatra_t4/tatra_t4_stake.mdl": {
+      "image": "/vehicles/tram/tatra_t4/tatra_t4_stake.png",
+      "width": 232,
+      "height": 96,
+      "color": "#8f2e25",
+      "sourceIcon": "vehicle/tram/tatra_t4/icons/tatra_t4_stake_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/tatra_t4/tatra_t4_tank.mdl": {
+      "image": "/vehicles/tram/tatra_t4/tatra_t4_tank.png",
+      "width": 232,
+      "height": 96,
+      "color": "#f5d38f",
+      "sourceIcon": "vehicle/tram/tatra_t4/icons/tatra_t4_tank_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/toronto_clrv/toronto_clrv.mdl": {
+      "image": "/vehicles/tram/toronto_clrv/toronto_clrv.png",
+      "width": 252,
+      "height": 96,
+      "color": "#2c3b47",
+      "sourceIcon": "vehicle/tram/toronto_clrv/icons/toronto_clrv_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/toyama_8000/toyama_8000.mdl": {
+      "image": "/vehicles/tram/toyama_8000/toyama_8000.png",
+      "width": 208,
+      "height": 96,
+      "color": "#d2d0aa",
+      "sourceIcon": "vehicle/tram/toyama_8000/icons/toyama_8000_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/typ1/typ1.mdl": {
+      "image": "/vehicles/tram/typ1/typ1.png",
+      "width": 168,
+      "height": 96,
+      "color": "#b0821d",
+      "sourceIcon": "vehicle/tram/typ1/icons/typ1_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/typ1/typ1_wagon.mdl": {
+      "image": "/vehicles/tram/typ1/typ1_wagon.png",
+      "width": 168,
+      "height": 96,
+      "color": "#a77c1c",
+      "sourceIcon": "vehicle/tram/typ1/icons/typ1_wagon_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/type_lh/type_lh.mdl": {
+      "image": "/vehicles/tram/type_lh/type_lh.png",
+      "width": 116,
+      "height": 96,
+      "color": "#ba711d",
+      "sourceIcon": "vehicle/tram/type_lh/icons/type_lh_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/tram/vityaz_m/vityaz_m.mdl": {
+      "image": "/vehicles/tram/vityaz_m/vityaz_m.png",
+      "width": 436,
+      "height": 96,
+      "color": "#28343a",
+      "sourceIcon": "vehicle/tram/vityaz_m/icons/vityaz_m_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/amo_f15/amo_f15_tank.mdl": {
+      "image": "/vehicles/truck/amo_f15/amo_f15_tank.png",
+      "width": 84,
+      "height": 80,
+      "color": "#6e2633",
+      "sourceIcon": "vehicle/truck/amo_f15/icons/amo_f15_tank_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/amo_f15/amo_f15_univ.mdl": {
+      "image": "/vehicles/truck/amo_f15/amo_f15_univ.png",
+      "width": 80,
+      "height": 80,
+      "color": "#56242d",
+      "sourceIcon": "vehicle/truck/amo_f15/icons/amo_f15_univ_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/benz1912/benz1912_box.mdl": {
+      "image": "/vehicles/truck/benz1912/benz1912_box.png",
+      "width": 108,
+      "height": 80,
+      "color": "#aca675",
+      "sourceIcon": "vehicle/truck/benz1912/icons/benz1912_box_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/benz1912/benz1912_bulk.mdl": {
+      "image": "/vehicles/truck/benz1912/benz1912_bulk.png",
+      "width": 108,
+      "height": 80,
+      "color": "#29684f",
+      "sourceIcon": "vehicle/truck/benz1912/icons/benz1912_bulk_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/faw_jiefang_j6p/faw_jiefang_j6p_box.mdl": {
+      "image": "/vehicles/truck/faw_jiefang_j6p/faw_jiefang_j6p_box.png",
+      "width": 264,
+      "height": 80,
+      "color": "#97acb5",
+      "sourceIcon": "vehicle/truck/faw_jiefang_j6p/icons/faw_jiefang_j6p_box_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/faw_jiefang_j6p/faw_jiefang_j6p_bulk.mdl": {
+      "image": "/vehicles/truck/faw_jiefang_j6p/faw_jiefang_j6p_bulk.png",
+      "width": 156,
+      "height": 80,
+      "color": "#a61c25",
+      "sourceIcon": "vehicle/truck/faw_jiefang_j6p/icons/faw_jiefang_j6p_bulk_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/faw_jiefang_j6p/faw_jiefang_j6p_stake.mdl": {
+      "image": "/vehicles/truck/faw_jiefang_j6p/faw_jiefang_j6p_stake.png",
+      "width": 248,
+      "height": 80,
+      "color": "#a9242c",
+      "sourceIcon": "vehicle/truck/faw_jiefang_j6p/icons/faw_jiefang_j6p_stake_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/faw_jiefang_j6p/faw_jiefang_j6p_tank.mdl": {
+      "image": "/vehicles/truck/faw_jiefang_j6p/faw_jiefang_j6p_tank.png",
+      "width": 244,
+      "height": 80,
+      "color": "#6c8ea8",
+      "sourceIcon": "vehicle/truck/faw_jiefang_j6p/icons/faw_jiefang_j6p_tank_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/faw_jiefang_j6p/faw_jiefang_j6p_univ.mdl": {
+      "image": "/vehicles/truck/faw_jiefang_j6p/faw_jiefang_j6p_univ.png",
+      "width": 260,
+      "height": 80,
+      "color": "#93282a",
+      "sourceIcon": "vehicle/truck/faw_jiefang_j6p/icons/faw_jiefang_j6p_univ_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/ford_77/ford_77_bulk.mdl": {
+      "image": "/vehicles/truck/ford_77/ford_77_bulk.png",
+      "width": 84,
+      "height": 80,
+      "color": "#344a6b",
+      "sourceIcon": "vehicle/truck/ford_77/icons/ford_77_bulk_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/ford_aa/ford_aa_box.mdl": {
+      "image": "/vehicles/truck/ford_aa/ford_aa_box.png",
+      "width": 80,
+      "height": 80,
+      "color": "#23445b",
+      "sourceIcon": "vehicle/truck/ford_aa/icons/ford_aa_box_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/freightliner_fld_112/freightliner_fld_112_box.mdl": {
+      "image": "/vehicles/truck/freightliner_fld_112/freightliner_fld_112_box.png",
+      "width": 284,
+      "height": 80,
+      "color": "#b14429",
+      "sourceIcon": "vehicle/truck/freightliner_fld_112/icons/freightliner_fld_112_box_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/freightliner_fld_112/freightliner_fld_112_stake.mdl": {
+      "image": "/vehicles/truck/freightliner_fld_112/freightliner_fld_112_stake.png",
+      "width": 284,
+      "height": 80,
+      "color": "#2b3946",
+      "sourceIcon": "vehicle/truck/freightliner_fld_112/icons/freightliner_fld_112_stake_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/gaz_3307/gaz_3307_box.mdl": {
+      "image": "/vehicles/truck/gaz_3307/gaz_3307_box.png",
+      "width": 112,
+      "height": 80,
+      "color": "#7c93a3",
+      "sourceIcon": "vehicle/truck/gaz_3307/icons/gaz_3307_box_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/gaz_3307/gaz_3307_bulk.mdl": {
+      "image": "/vehicles/truck/gaz_3307/gaz_3307_bulk.png",
+      "width": 96,
+      "height": 80,
+      "color": "#39596e",
+      "sourceIcon": "vehicle/truck/gaz_3307/icons/gaz_3307_bulk_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/gaz_3307/gaz_3307_tank.mdl": {
+      "image": "/vehicles/truck/gaz_3307/gaz_3307_tank.png",
+      "width": 100,
+      "height": 80,
+      "color": "#19658b",
+      "sourceIcon": "vehicle/truck/gaz_3307/icons/gaz_3307_tank_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/gaz_3307/gaz_3307_univ.mdl": {
+      "image": "/vehicles/truck/gaz_3307/gaz_3307_univ.png",
+      "width": 100,
+      "height": 80,
+      "color": "#3187b4",
+      "sourceIcon": "vehicle/truck/gaz_3307/icons/gaz_3307_univ_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/gaz_mm/gaz_mm_stake.mdl": {
+      "image": "/vehicles/truck/gaz_mm/gaz_mm_stake.png",
+      "width": 84,
+      "height": 80,
+      "color": "#6a5446",
+      "sourceIcon": "vehicle/truck/gaz_mm/icons/gaz_mm_stake_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/gmc_660_dfm/gmc_660_dfm_box.mdl": {
+      "image": "/vehicles/truck/gmc_660_dfm/gmc_660_dfm_box.png",
+      "width": 196,
+      "height": 80,
+      "color": "#c72425",
+      "sourceIcon": "vehicle/truck/gmc_660_dfm/icons/gmc_660_dfm_box_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/gmc_660_dfm/gmc_660_dfm_bulk.mdl": {
+      "image": "/vehicles/truck/gmc_660_dfm/gmc_660_dfm_bulk.png",
+      "width": 180,
+      "height": 80,
+      "color": "#b72325",
+      "sourceIcon": "vehicle/truck/gmc_660_dfm/icons/gmc_660_dfm_bulk_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/gmc_660_dfm/gmc_660_dfm_stake.mdl": {
+      "image": "/vehicles/truck/gmc_660_dfm/gmc_660_dfm_stake.png",
+      "width": 204,
+      "height": 80,
+      "color": "#283031",
+      "sourceIcon": "vehicle/truck/gmc_660_dfm/icons/gmc_660_dfm_stake_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/gmc_660_dfm/gmc_660_dfm_tank.mdl": {
+      "image": "/vehicles/truck/gmc_660_dfm/gmc_660_dfm_tank.png",
+      "width": 188,
+      "height": 80,
+      "color": "#b4972c",
+      "sourceIcon": "vehicle/truck/gmc_660_dfm/icons/gmc_660_dfm_tank_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/gmc_660_dfm/gmc_660_dfm_univ.mdl": {
+      "image": "/vehicles/truck/gmc_660_dfm/gmc_660_dfm_univ.png",
+      "width": 204,
+      "height": 80,
+      "color": "#2a3232",
+      "sourceIcon": "vehicle/truck/gmc_660_dfm/icons/gmc_660_dfm_univ_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/horse_cart_barrels/horse_cart_barrels.mdl": {
+      "image": "/vehicles/truck/horse_cart_barrels/horse_cart_barrels.png",
+      "width": 108,
+      "height": 80,
+      "color": "#574b37",
+      "sourceIcon": "vehicle/truck/horse_cart_barrels/icons/horse_cart_barrels_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/horse_cart_medium/horse_cart_medium.mdl": {
+      "image": "/vehicles/truck/horse_cart_medium/horse_cart_medium.png",
+      "width": 112,
+      "height": 80,
+      "color": "#495251",
+      "sourceIcon": "vehicle/truck/horse_cart_medium/icons/horse_cart_medium_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/horse_cart_small/horse_cart_small.mdl": {
+      "image": "/vehicles/truck/horse_cart_small/horse_cart_small.png",
+      "width": 104,
+      "height": 80,
+      "color": "#332d26",
+      "sourceIcon": "vehicle/truck/horse_cart_small/icons/horse_cart_small_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/isuzu_elf_tld20/isuzu_elf_tld20_tank.mdl": {
+      "image": "/vehicles/truck/isuzu_elf_tld20/isuzu_elf_tld20_tank.png",
+      "width": 72,
+      "height": 80,
+      "color": "#96a8a7",
+      "sourceIcon": "vehicle/truck/isuzu_elf_tld20/icons/isuzu_elf_tld20_tank_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/isuzu_elf_tld20/isuzu_elf_tld20_univ.mdl": {
+      "image": "/vehicles/truck/isuzu_elf_tld20/isuzu_elf_tld20_univ.png",
+      "width": 68,
+      "height": 80,
+      "color": "#264b6f",
+      "sourceIcon": "vehicle/truck/isuzu_elf_tld20/icons/isuzu_elf_tld20_univ_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/kenworth_k100e/kenworth_k100e_box.mdl": {
+      "image": "/vehicles/truck/kenworth_k100e/kenworth_k100e_box.png",
+      "width": 248,
+      "height": 80,
+      "color": "#55748c",
+      "sourceIcon": "vehicle/truck/kenworth_k100e/icons/kenworth_k100e_box_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/kenworth_k100e/kenworth_k100e_bulk.mdl": {
+      "image": "/vehicles/truck/kenworth_k100e/kenworth_k100e_bulk.png",
+      "width": 244,
+      "height": 80,
+      "color": "#7a98a5",
+      "sourceIcon": "vehicle/truck/kenworth_k100e/icons/kenworth_k100e_bulk_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/kenworth_k100e/kenworth_k100e_stake.mdl": {
+      "image": "/vehicles/truck/kenworth_k100e/kenworth_k100e_stake.png",
+      "width": 284,
+      "height": 80,
+      "color": "#144792",
+      "sourceIcon": "vehicle/truck/kenworth_k100e/icons/kenworth_k100e_stake_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/kenworth_k100e/kenworth_k100e_tank.mdl": {
+      "image": "/vehicles/truck/kenworth_k100e/kenworth_k100e_tank.png",
+      "width": 248,
+      "height": 80,
+      "color": "#718a96",
+      "sourceIcon": "vehicle/truck/kenworth_k100e/icons/kenworth_k100e_tank_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/mack_ac/mack_ac_stake.mdl": {
+      "image": "/vehicles/truck/mack_ac/mack_ac_stake.png",
+      "width": 100,
+      "height": 80,
+      "color": "#92542a",
+      "sourceIcon": "vehicle/truck/mack_ac/icons/mack_ac_stake_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/man_19_304/man_19_304_box.mdl": {
+      "image": "/vehicles/truck/man_19_304/man_19_304_box.png",
+      "width": 148,
+      "height": 80,
+      "color": "#8c6c2d",
+      "sourceIcon": "vehicle/truck/man_19_304/icons/man_19_304_box_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/man_19_304/man_19_304_bulk.mdl": {
+      "image": "/vehicles/truck/man_19_304/man_19_304_bulk.png",
+      "width": 124,
+      "height": 80,
+      "color": "#586e6c",
+      "sourceIcon": "vehicle/truck/man_19_304/icons/man_19_304_bulk_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/man_19_304/man_19_304_tank.mdl": {
+      "image": "/vehicles/truck/man_19_304/man_19_304_tank.png",
+      "width": 120,
+      "height": 80,
+      "color": "#728691",
+      "sourceIcon": "vehicle/truck/man_19_304/icons/man_19_304_tank_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/man_19_304/man_19_304_univ.mdl": {
+      "image": "/vehicles/truck/man_19_304/man_19_304_univ.png",
+      "width": 148,
+      "height": 80,
+      "color": "#385548",
+      "sourceIcon": "vehicle/truck/man_19_304/icons/man_19_304_univ_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/rivian_edv/rivian_edv.mdl": {
+      "image": "/vehicles/truck/rivian_edv/rivian_edv.png",
+      "width": 112,
+      "height": 80,
+      "color": "#234466",
+      "sourceIcon": "vehicle/truck/rivian_edv/icons/rivian_edv_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/saurer_c_typ/saurer_c_typ_box.mdl": {
+      "image": "/vehicles/truck/saurer_c_typ/saurer_c_typ_box.png",
+      "width": 92,
+      "height": 80,
+      "color": "#744b31",
+      "sourceIcon": "vehicle/truck/saurer_c_typ/icons/saurer_c_typ_box_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/saurer_c_typ/saurer_c_typ_tank.mdl": {
+      "image": "/vehicles/truck/saurer_c_typ/saurer_c_typ_tank.png",
+      "width": 88,
+      "height": 80,
+      "color": "#ae1a1d",
+      "sourceIcon": "vehicle/truck/saurer_c_typ/icons/saurer_c_typ_tank_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/saurer_c_typ/saurer_c_typ_univ.mdl": {
+      "image": "/vehicles/truck/saurer_c_typ/saurer_c_typ_univ.png",
+      "width": 92,
+      "height": 80,
+      "color": "#774830",
+      "sourceIcon": "vehicle/truck/saurer_c_typ/icons/saurer_c_typ_univ_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/steam_lorry_univ/steam_lorry_univ.mdl": {
+      "image": "/vehicles/truck/steam_lorry_univ/steam_lorry_univ.png",
+      "width": 112,
+      "height": 80,
+      "color": "#252f37",
+      "sourceIcon": "vehicle/truck/steam_lorry_univ/icons/steam_lorry_univ_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/tesla_semi/tesla_semi.mdl": {
+      "image": "/vehicles/truck/tesla_semi/tesla_semi.png",
+      "width": 276,
+      "height": 80,
+      "color": "#647b89",
+      "sourceIcon": "vehicle/truck/tesla_semi/icons/tesla_semi_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/urban_etruck/urban_etruck.mdl": {
+      "image": "/vehicles/truck/urban_etruck/urban_etruck.png",
+      "width": 168,
+      "height": 80,
+      "color": "#89a3ac",
+      "sourceIcon": "vehicle/truck/urban_etruck/icons/urban_etruck_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/volvo_fh12/volvo_fh12_bulk.mdl": {
+      "image": "/vehicles/truck/volvo_fh12/volvo_fh12_bulk.png",
+      "width": 168,
+      "height": 80,
+      "color": "#546676",
+      "sourceIcon": "vehicle/truck/volvo_fh12/icons/volvo_fh12_bulk_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/volvo_fh12/volvo_fh12_tank.mdl": {
+      "image": "/vehicles/truck/volvo_fh12/volvo_fh12_tank.png",
+      "width": 164,
+      "height": 80,
+      "color": "#90acb3",
+      "sourceIcon": "vehicle/truck/volvo_fh12/icons/volvo_fh12_tank_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/zis_150/zis_150_bulk.mdl": {
+      "image": "/vehicles/truck/zis_150/zis_150_bulk.png",
+      "width": 96,
+      "height": 80,
+      "color": "#b16e17",
+      "sourceIcon": "vehicle/truck/zis_150/icons/zis_150_bulk_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/truck/zis_150/zis_150_stake.mdl": {
+      "image": "/vehicles/truck/zis_150/zis_150_stake.png",
+      "width": 108,
+      "height": 80,
+      "color": "#47576f",
+      "sourceIcon": "vehicle/truck/zis_150/icons/zis_150_stake_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/bay_05/bay_05.mdl": {
+      "image": "/vehicles/waggon/bay_05/bay_05.png",
+      "width": 140,
+      "height": 112,
+      "color": "#465a4d",
+      "sourceIcon": "vehicle/waggon/bay_05/icons/bay_05_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/bilevel/bilevel.mdl": {
+      "image": "/vehicles/waggon/bilevel/bilevel.png",
+      "width": 416,
+      "height": 112,
+      "color": "#1d6b54",
+      "sourceIcon": "vehicle/waggon/bilevel/icons/bilevel_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/boxcar_1_20/boxcar_1_20.mdl": {
+      "image": "/vehicles/waggon/boxcar_1_20/boxcar_1_20.png",
+      "width": 116,
+      "height": 112,
+      "color": "#4a8d4b",
+      "sourceIcon": "vehicle/waggon/boxcar_1_20/icons/boxcar_1_20_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/boxcar_2_verb/boxcar_2_verb.mdl": {
+      "image": "/vehicles/waggon/boxcar_2_verb/boxcar_2_verb.png",
+      "width": 156,
+      "height": 112,
+      "color": "#582c26",
+      "sourceIcon": "vehicle/waggon/boxcar_2_verb/icons/boxcar_2_verb_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/boxcar_3_223/boxcar_3_223.mdl": {
+      "image": "/vehicles/waggon/boxcar_3_223/boxcar_3_223.png",
+      "width": 240,
+      "height": 112,
+      "color": "#563535",
+      "sourceIcon": "vehicle/waggon/boxcar_3_223/icons/boxcar_3_223_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/boxcar_4_alu/boxcar_4_alu.mdl": {
+      "image": "/vehicles/waggon/boxcar_4_alu/boxcar_4_alu.png",
+      "width": 220,
+      "height": 112,
+      "color": "#502f24",
+      "sourceIcon": "vehicle/waggon/boxcar_4_alu/icons/boxcar_4_alu_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/boxcar_5_hbi/boxcar_5_hbi.mdl": {
+      "image": "/vehicles/waggon/boxcar_5_hbi/boxcar_5_hbi.png",
+      "width": 224,
+      "height": 112,
+      "color": "#433d38",
+      "sourceIcon": "vehicle/waggon/boxcar_5_hbi/icons/boxcar_5_hbi_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/boxcar_6_256/boxcar_6_256.mdl": {
+      "image": "/vehicles/waggon/boxcar_6_256/boxcar_6_256.png",
+      "width": 372,
+      "height": 112,
+      "color": "#748f97",
+      "sourceIcon": "vehicle/waggon/boxcar_6_256/icons/boxcar_6_256_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/bulk_1_1794/bulk_1_1794.mdl": {
+      "image": "/vehicles/waggon/bulk_1_1794/bulk_1_1794.png",
+      "width": 116,
+      "height": 112,
+      "color": "#4f362a",
+      "sourceIcon": "vehicle/waggon/bulk_1_1794/icons/bulk_1_1794_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/bulk_2_ok/bulk_2_ok.mdl": {
+      "image": "/vehicles/waggon/bulk_2_ok/bulk_2_ok.png",
+      "width": 128,
+      "height": 112,
+      "color": "#8e4431",
+      "sourceIcon": "vehicle/waggon/bulk_2_ok/icons/bulk_2_ok_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/bulk_3_steel/bulk_3_steel.mdl": {
+      "image": "/vehicles/waggon/bulk_3_steel/bulk_3_steel.png",
+      "width": 212,
+      "height": 112,
+      "color": "#3a4655",
+      "sourceIcon": "vehicle/waggon/bulk_3_steel/icons/bulk_3_steel_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/bulk_4_002/bulk_4_002.mdl": {
+      "image": "/vehicles/waggon/bulk_4_002/bulk_4_002.png",
+      "width": 260,
+      "height": 112,
+      "color": "#733936",
+      "sourceIcon": "vehicle/waggon/bulk_4_002/icons/bulk_4_002_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/bulk_5_falns/bulk_5_falns.mdl": {
+      "image": "/vehicles/waggon/bulk_5_falns/bulk_5_falns.png",
+      "width": 196,
+      "height": 112,
+      "color": "#972525",
+      "sourceIcon": "vehicle/waggon/bulk_5_falns/icons/bulk_5_falns_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/china_type_25c/china_type_25c.mdl": {
+      "image": "/vehicles/waggon/china_type_25c/china_type_25c.png",
+      "width": 420,
+      "height": 112,
+      "color": "#496b77",
+      "sourceIcon": "vehicle/waggon/china_type_25c/icons/china_type_25c_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/china_type_yz_22/china_type_yz_22.mdl": {
+      "image": "/vehicles/waggon/china_type_yz_22/china_type_yz_22.png",
+      "width": 388,
+      "height": 112,
+      "color": "#1c5248",
+      "sourceIcon": "vehicle/waggon/china_type_yz_22/icons/china_type_yz_22_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/compartment_car/compartment_car.mdl": {
+      "image": "/vehicles/waggon/compartment_car/compartment_car.png",
+      "width": 180,
+      "height": 112,
+      "color": "#6c332a",
+      "sourceIcon": "vehicle/waggon/compartment_car/icons/compartment_car_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/donnerbuechse/donnerbuechse.mdl": {
+      "image": "/vehicles/waggon/donnerbuechse/donnerbuechse.png",
+      "width": 220,
+      "height": 112,
+      "color": "#244231",
+      "sourceIcon": "vehicle/waggon/donnerbuechse/icons/donnerbuechse_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/egorov_20_2/egorov_20_2.mdl": {
+      "image": "/vehicles/waggon/egorov_20_2/egorov_20_2.png",
+      "width": 340,
+      "height": 112,
+      "color": "#4f6553",
+      "sourceIcon": "vehicle/waggon/egorov_20_2/icons/egorov_20_2_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/ew_ii/ew_ii.mdl": {
+      "image": "/vehicles/waggon/ew_ii/ew_ii.png",
+      "width": 396,
+      "height": 112,
+      "color": "#264243",
+      "sourceIcon": "vehicle/waggon/ew_ii/icons/ew_ii_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/ew_iv/ew_iv.mdl": {
+      "image": "/vehicles/waggon/ew_iv/ew_iv.png",
+      "width": 420,
+      "height": 112,
+      "color": "#aabdb3",
+      "sourceIcon": "vehicle/waggon/ew_iv/icons/ew_iv_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/flatbed_1_1794/flatbed_1_1794.mdl": {
+      "image": "/vehicles/waggon/flatbed_1_1794/flatbed_1_1794.png",
+      "width": 116,
+      "height": 112,
+      "color": "#465a54",
+      "sourceIcon": "vehicle/waggon/flatbed_1_1794/icons/flatbed_1_1794_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/flatbed_2_r/flatbed_2_r.mdl": {
+      "image": "/vehicles/waggon/flatbed_2_r/flatbed_2_r.png",
+      "width": 204,
+      "height": 112,
+      "color": "#532d2c",
+      "sourceIcon": "vehicle/waggon/flatbed_2_r/icons/flatbed_2_r_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/flatbed_3_sslmas/flatbed_3_sslmas.mdl": {
+      "image": "/vehicles/waggon/flatbed_3_sslmas/flatbed_3_sslmas.png",
+      "width": 320,
+      "height": 112,
+      "color": "#46382b",
+      "sourceIcon": "vehicle/waggon/flatbed_3_sslmas/icons/flatbed_3_sslmas_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/flatbed_4_464/flatbed_4_464.mdl": {
+      "image": "/vehicles/waggon/flatbed_4_464/flatbed_4_464.png",
+      "width": 240,
+      "height": 112,
+      "color": "#266955",
+      "sourceIcon": "vehicle/waggon/flatbed_4_464/icons/flatbed_4_464_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/flatbed_5_rnoos644/flatbed_5_rnoos644.mdl": {
+      "image": "/vehicles/waggon/flatbed_5_rnoos644/flatbed_5_rnoos644.png",
+      "width": 360,
+      "height": 112,
+      "color": "#6b252b",
+      "sourceIcon": "vehicle/waggon/flatbed_5_rnoos644/icons/flatbed_5_rnoos644_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/liquid_1_n55/liquid_1_n55.mdl": {
+      "image": "/vehicles/waggon/liquid_1_n55/liquid_1_n55.png",
+      "width": 116,
+      "height": 112,
+      "color": "#e7ebd7",
+      "sourceIcon": "vehicle/waggon/liquid_1_n55/icons/liquid_1_n55_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/liquid_2_zh/liquid_2_zh.mdl": {
+      "image": "/vehicles/waggon/liquid_2_zh/liquid_2_zh.png",
+      "width": 140,
+      "height": 112,
+      "color": "#252f35",
+      "sourceIcon": "vehicle/waggon/liquid_2_zh/icons/liquid_2_zh_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/liquid_3_uglx/liquid_3_uglx.mdl": {
+      "image": "/vehicles/waggon/liquid_3_uglx/liquid_3_uglx.png",
+      "width": 160,
+      "height": 112,
+      "color": "#2c3132",
+      "sourceIcon": "vehicle/waggon/liquid_3_uglx/icons/liquid_3_uglx_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/liquid_4_ekw/liquid_4_ekw.mdl": {
+      "image": "/vehicles/waggon/liquid_4_ekw/liquid_4_ekw.png",
+      "width": 184,
+      "height": 112,
+      "color": "#6e91b8",
+      "sourceIcon": "vehicle/waggon/liquid_4_ekw/icons/liquid_4_ekw_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/liquid_5_3752/liquid_5_3752.mdl": {
+      "image": "/vehicles/waggon/liquid_5_3752/liquid_5_3752.png",
+      "width": 196,
+      "height": 112,
+      "color": "#f3e9cf",
+      "sourceIcon": "vehicle/waggon/liquid_5_3752/icons/liquid_5_3752_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/liquid_6_zacns/liquid_6_zacns.mdl": {
+      "image": "/vehicles/waggon/liquid_6_zacns/liquid_6_zacns.png",
+      "width": 264,
+      "height": 112,
+      "color": "#354754",
+      "sourceIcon": "vehicle/waggon/liquid_6_zacns/icons/liquid_6_zacns_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/parlor/parlor.mdl": {
+      "image": "/vehicles/waggon/parlor/parlor.png",
+      "width": 400,
+      "height": 112,
+      "color": "#73292d",
+      "sourceIcon": "vehicle/waggon/parlor/icons/parlor_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/streamlined_nyc/streamlined_nyc.mdl": {
+      "image": "/vehicles/waggon/streamlined_nyc/streamlined_nyc.png",
+      "width": 416,
+      "height": 112,
+      "color": "#4f768f",
+      "sourceIcon": "vehicle/waggon/streamlined_nyc/icons/streamlined_nyc_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/suburban_2nd/suburban_2nd.mdl": {
+      "image": "/vehicles/waggon/suburban_2nd/suburban_2nd.png",
+      "width": 376,
+      "height": 112,
+      "color": "#b25825",
+      "sourceIcon": "vehicle/waggon/suburban_2nd/icons/suburban_2nd_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/tvz_61_4447/tvz_61_4447.mdl": {
+      "image": "/vehicles/waggon/tvz_61_4447/tvz_61_4447.png",
+      "width": 408,
+      "height": 112,
+      "color": "#7590a8",
+      "sourceIcon": "vehicle/waggon/tvz_61_4447/icons/tvz_61_4447_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/univ_1_szap/univ_1_szap.mdl": {
+      "image": "/vehicles/waggon/univ_1_szap/univ_1_szap.png",
+      "width": 116,
+      "height": 112,
+      "color": "#59362e",
+      "sourceIcon": "vehicle/waggon/univ_1_szap/icons/univ_1_szap_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/univ_2_r/univ_2_r.mdl": {
+      "image": "/vehicles/waggon/univ_2_r/univ_2_r.png",
+      "width": 204,
+      "height": 112,
+      "color": "#572d2d",
+      "sourceIcon": "vehicle/waggon/univ_2_r/icons/univ_2_r_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/univ_3_acl/univ_3_acl.mdl": {
+      "image": "/vehicles/waggon/univ_3_acl/univ_3_acl.png",
+      "width": 204,
+      "height": 112,
+      "color": "#3a6b4b",
+      "sourceIcon": "vehicle/waggon/univ_3_acl/icons/univ_3_acl_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/univ_4_rlmmso58/univ_4_rlmmso58.mdl": {
+      "image": "/vehicles/waggon/univ_4_rlmmso58/univ_4_rlmmso58.png",
+      "width": 224,
+      "height": 112,
+      "color": "#6f332e",
+      "sourceIcon": "vehicle/waggon/univ_4_rlmmso58/icons/univ_4_rlmmso58_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/univ_5_rns/univ_5_rns.mdl": {
+      "image": "/vehicles/waggon/univ_5_rns/univ_5_rns.png",
+      "width": 316,
+      "height": 112,
+      "color": "#4e6673",
+      "sourceIcon": "vehicle/waggon/univ_5_rns/icons/univ_5_rns_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/waggon/viaggio/viaggio.mdl": {
+      "image": "/vehicles/waggon/viaggio/viaggio.png",
+      "width": 424,
+      "height": 112,
+      "color": "#1855b0",
+      "sourceIcon": "vehicle/waggon/viaggio/icons/viaggio_icon_small@2x.tga",
+      "representativePart": null
+    }
+  }
+}

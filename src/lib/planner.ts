@@ -12,7 +12,8 @@ export type Mode = "train" | "tram" | "road";
 export type Settings = { year: number; extraYears: number; trainLength: number; tramLength: number; distanceKm: number; minTopSpeed: number; cargos: string[] };
 export type Option = {
   id: string; mode: Mode; engine: Vehicle; wagon: Vehicle | null; engines: number; wagons: number;
-  cargo: string; capacity: number; length: number; speed: number; acceleration: number;
+  cargo: string; // The selected cargo with the lowest estimated throughput (the metrics benchmark).
+  cargos: string[]; capacity: number; length: number; speed: number; acceleration: number;
   noise: number; pollution: number; comfort: number | null; purchase: number; running: number;
   loadSpeed: number; throughput: number; costPerformance: number; distanceKm: number; yearFrom: number; yearTo: number | null;
   availableAtStart: boolean; availableAtEnd: boolean; fullRange: boolean; lightRail: boolean; loadedMass: number;
@@ -40,6 +41,7 @@ export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings:
   }
   const endYear = settings.year + settings.extraYears;
   const selectedCargos = cargos.filter(c => settings.cargos.includes(c.id));
+  if (!selectedCargos.length || selectedCargos.length !== new Set(settings.cargos).size) return [];
   const available = vehicles.filter(v => v.yearFrom <= endYear && (v.yearTo === null || v.yearTo >= settings.year));
   const result: Option[] = [];
   const powered = available.filter(v => v.power > 0 && v.engineModes.length > 0);
@@ -51,25 +53,23 @@ export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings:
       const limit = mode === "train" ? settings.trainLength : mode === "tram" ? settings.tramLength : Infinity;
       for (const engines of mode === "road" ? [1] : [1, 2]) {
         if (engine.length * engines > limit + 1e-7) continue;
-        for (const cargo of selectedCargos) {
-          let hasWagonOption = false;
-          // An authored passenger multiple unit is one complete vehicle. Its loose parts never enter the catalog.
-          const selfContained = engine.fixedFormation && Object.keys(engine.capacities).length > 0;
-          if (mode !== "road" && !selfContained) {
-            for (const wagon of wagons) {
-              if (!wagon.capacities[cargo.id] || !belongsToMode(wagon, mode) || !compatible(engine, wagon)) continue;
-              const count = Math.floor((limit - engine.length * engines + 1e-7) / wagon.length);
-              if (count < 1) continue;
-              const from = Math.max(engine.yearFrom, wagon.yearFrom, settings.year);
-              const to = Math.min(engine.yearTo ?? Infinity, wagon.yearTo ?? Infinity, endYear);
-              if (from > to) continue; // Components must be purchasable together, not just individually in the interval.
-              result.push(makeOption(engine, wagon, engines, count, mode, cargo, settings));
-              hasWagonOption = true;
-            }
+        let hasWagonOption = false;
+        // An authored passenger multiple unit is one complete vehicle. Its loose parts never enter the catalog.
+        const selfContained = engine.fixedFormation && Object.keys(engine.capacities).length > 0;
+        if (mode !== "road" && !selfContained) {
+          for (const wagon of wagons) {
+            if (!selectedCargos.every(c => wagon.capacities[c.id] > 0) || !belongsToMode(wagon, mode) || !compatible(engine, wagon)) continue;
+            const count = Math.floor((limit - engine.length * engines + 1e-7) / wagon.length);
+            if (count < 1) continue;
+            const from = Math.max(engine.yearFrom, wagon.yearFrom, settings.year);
+            const to = Math.min(engine.yearTo ?? Infinity, wagon.yearTo ?? Infinity, endYear);
+            if (from > to) continue; // Components must be purchasable together, not just individually in the interval.
+            result.push(makeMultiCargoOption(engine, wagon, engines, count, mode, selectedCargos, settings));
+            hasWagonOption = true;
           }
-          if (!hasWagonOption && engine.capacities[cargo.id]) {
-            result.push(makeOption(engine, null, engines, 0, mode, cargo, settings));
-          }
+        }
+        if (!hasWagonOption && selectedCargos.every(c => engine.capacities[c.id] > 0)) {
+          result.push(makeMultiCargoOption(engine, null, engines, 0, mode, selectedCargos, settings));
         }
       }
     }
@@ -78,6 +78,14 @@ export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings:
   // Match the whole-km/h speeds displayed in the game/table, avoiding conversion
   // artifacts such as 79.999 km/h excluding a nominal 80 km/h vehicle.
   return result.filter(option => Math.round(option.speed) >= settings.minTopSpeed);
+}
+
+function makeMultiCargoOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wagons: number, mode: Mode, cargos: Cargo[], settings: Settings): Option {
+  // One row for the formation. Keep every cargo-dependent metric from the same
+  // lowest-throughput load, rather than combining incompatible best-case stats.
+  const loads = cargos.map(cargo => makeOption(engine, wagon, engines, wagons, mode, cargo, settings));
+  const worst = loads.reduce((a, b) => b.throughput < a.throughput ? b : a);
+  return { ...worst, cargos: cargos.map(c => c.id) };
 }
 
 function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wagons: number, mode: Mode, cargo: Cargo, settings: Settings): Option {
@@ -103,7 +111,7 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
   const yearFrom = Math.max(engine.yearFrom, wagon?.yearFrom ?? 0);
   const until = Math.min(engine.yearTo ?? Infinity, wagon?.yearTo ?? Infinity);
   return {
-    id: `${mode}:${engine.id}:${engines}:${wagon?.id ?? "self"}:${cargo.id}`, mode, engine, wagon, engines, wagons, cargo: cargo.id,
+    id: `${mode}:${engine.id}:${engines}:${wagon?.id ?? "self"}`, mode, engine, wagon, engines, wagons, cargo: cargo.id, cargos: [cargo.id],
     capacity, length: sum("length"), speed, acceleration, noise: sum("noise"), pollution: sum("pollution"),
     comfort: cargo.id === "PASSENGERS" ? ((engine.capacities.PASSENGERS ?? 0) * engines * engine.comfort + (wagon?.capacities.PASSENGERS ?? 0) * wagons * (wagon?.comfort ?? 0)) / capacity : null,
     purchase, running, loadSpeed, throughput, distanceKm: settings.distanceKm, costPerformance: throughput > 0 ? (running + purchase / 20) / throughput : Infinity,

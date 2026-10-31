@@ -112,12 +112,8 @@ export default function Planner() {
   const modeOptions = useMemo(() => options.filter(o => o.mode === mode), [options, mode]);
   const checked = useMemo(() => new Set(checkedIds), [checkedIds]);
   const checkedModeCount = modeOptions.filter(o => checked.has(o.id)).length;
-  const filtered = useMemo(() => {
-    const query = deferredSearch.toLowerCase().trim();
-    // Comparison brings together choices collected under different searches.
-    const rows = modeOptions.filter(o => showOnlyChecked ? checked.has(o.id)
-      : !query || `${o.engine.name} ${o.wagon?.name ?? ""} ${optionCargoNames(o)}`.toLowerCase().includes(query));
-    return rows.sort((a, b) => {
+  const sortedOptions = useMemo(() => {
+    return [...modeOptions].sort((a, b) => {
       const av = sort.key === "name" ? `${a.engine.name} ${a.wagon?.name ?? ""}` : a[sort.key];
       const bv = sort.key === "name" ? `${b.engine.name} ${b.wagon?.name ?? ""}` : b[sort.key];
       if (av === null) return bv === null ? a.id.localeCompare(b.id) : 1;
@@ -125,7 +121,14 @@ export default function Planner() {
       const cmp = typeof av === "string" && typeof bv === "string" ? av.localeCompare(bv) : Number(av) - Number(bv);
       return (sort.asc ? cmp : -cmp) || a.id.localeCompare(b.id);
     });
-  }, [modeOptions, deferredSearch, sort, showOnlyChecked, checked]);
+  }, [modeOptions, sort]);
+  const searchMatches = useMemo(() => {
+    const query = deferredSearch.toLowerCase().trim();
+    return sortedOptions.filter(o => !query || `${o.engine.name} ${o.wagon?.name ?? ""} ${optionCargoNames(o)}`.toLowerCase().includes(query));
+  }, [sortedOptions, deferredSearch]);
+  // Comparison brings together choices collected under different searches.
+  const filtered = useMemo(() => showOnlyChecked ? sortedOptions.filter(o => checked.has(o.id)) : searchMatches,
+    [sortedOptions, searchMatches, showOnlyChecked, checked]);
   const pageCount = Math.max(1, Math.ceil(filtered.length / 40)), currentPage = Math.min(page, pageCount - 1);
   const visible = filtered.slice(currentPage * 40, currentPage * 40 + 40);
   const best = filtered.reduce<Option | null>((a, b) => !a || b.costPerformance < a.costPerformance ? b : a, null);
@@ -173,6 +176,17 @@ export default function Planner() {
   function toggleChecked(id: string) {
     setCheckedIds(ids => ids.includes(id) ? ids.filter(value => value !== id) : [...ids, id]);
   }
+  function checkCheapestByCurrentMetric() {
+    let cheapest = Infinity;
+    const ids: string[] = [];
+    for (const option of searchMatches) {
+      if (option.costPerformance < cheapest) {
+        ids.push(option.id);
+        cheapest = option.costPerformance;
+      }
+    }
+    setCheckedIds(ids); setShowOnlyChecked(true); setPage(0);
+  }
 
   return <div className="app-shell">
     <div className="main-shell">
@@ -207,7 +221,7 @@ export default function Planner() {
             <div className="tabs" role="tablist" aria-label="Vehicle types">{(["train", "tram", "road"] as Mode[]).map(m => <button key={m} id={`tab-${m}`} type="button" role="tab" aria-selected={mode === m} aria-controls="vehicle-panel" tabIndex={mode === m ? 0 : -1} onKeyDown={e => { const modes: Mode[] = ["train", "tram", "road"]; const i = modes.indexOf(m); if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); const next = modes[(i + (e.key === "ArrowRight" ? 1 : 2)) % 3]; changeMode(next); document.getElementById(`tab-${next}`)?.focus(); } }} className={mode === m ? "tab active" : "tab"} onClick={() => changeMode(m)}><Icon name={m} />{m === "train" ? "Trains" : m === "tram" ? "Trams" : "Road vehicles"}<span>{options.filter(o => o.mode === m).length}</span></button>)}</div>
             <div id="vehicle-panel" role="tabpanel" aria-labelledby={`tab-${mode}`}>
               <div className="highlights"><Highlight option={best} label="BEST COST / PERFORMANCE" value={best ? thousands(best.costPerformance, 2) : "—"} unit="$000s / unit/h, annually" title={best ? exactPerformanceCost(best.costPerformance) : undefined} onClick={() => best && setSelected(best)} icon="↘" /><Highlight option={largest} label="LARGEST CAPACITY" value={largest ? number(largest.capacity, largest.capacity % 1 ? 1 : 0) : "—"} unit={largest && (largest.cargos?.length ?? 1) === 1 ? cargoName(largest.cargo).toLowerCase() : "units"} onClick={() => largest && setSelected(largest)} icon="▥" /><Highlight option={fastest} label="FASTEST OPTION" value={fastest ? number(fastest.speed) : "—"} unit="km/h" onClick={() => fastest && setSelected(fastest)} icon="↗" /></div>
-              <div className="table-toolbar"><label className="search-field"><Icon name="search" size={17} /><input type="search" aria-label="Search vehicle options" disabled={showOnlyChecked} title={showOnlyChecked ? "Search is paused while comparing checked options." : undefined} placeholder="Search engines, wagons, cargo…" value={search} onChange={e => { setSearch(e.target.value); setPage(0); }} /></label><div className="comparison-controls"><button type="button" className="secondary-button compare-toggle" aria-pressed={showOnlyChecked} disabled={busy || (!checkedModeCount && !showOnlyChecked)} title="Show checked options in this tab, including those hidden by your search. Checks reset when you calculate again." onClick={() => { setShowOnlyChecked(value => !value); setPage(0); }}><Icon name="check" size={14} /> Show only checked ({checkedModeCount})</button><button type="button" className="clear-checks" disabled={busy || !checkedIds.length} title="Clear checked options in all tabs" onClick={() => { setCheckedIds([]); setShowOnlyChecked(false); setPage(0); }}>Clear checks</button></div><span className="engine-options-note">{mode === "road" ? "Single road vehicles" : mode === "train" ? "1–2 engines · 1–5 MUs + wagons · max-length MUs only" : "1 & 2 engines shown together"}</span></div>
+              <div className="table-toolbar"><label className="search-field"><Icon name="search" size={17} /><input type="search" aria-label="Search vehicle options" disabled={showOnlyChecked} title={showOnlyChecked ? "Search is paused while comparing checked options." : undefined} placeholder="Search engines, wagons, cargo…" value={search} onChange={e => { setSearch(e.target.value); setPage(0); }} /></label><div className="comparison-controls"><button type="button" className="secondary-button check-cheapest" disabled={busy || deferredSearch !== search || !searchMatches.length} title="Replace all checks using search-matching options in this tab, across every page. In the current sort order, check only a strictly better cost/performance than every earlier row. Ignores the checked-only filter; equal costs are skipped." onClick={checkCheapestByCurrentMetric}>Check cheapest by current metric</button><button type="button" className="secondary-button compare-toggle" aria-pressed={showOnlyChecked} disabled={busy || (!checkedModeCount && !showOnlyChecked)} title="Show checked options in this tab, including those hidden by your search. Checks reset when you calculate again." onClick={() => { setShowOnlyChecked(value => !value); setPage(0); }}><Icon name="check" size={14} /> Show only checked ({checkedModeCount})</button><button type="button" className="clear-checks" disabled={busy || !checkedIds.length} title="Clear checked options in all tabs" onClick={() => { setCheckedIds([]); setShowOnlyChecked(false); setPage(0); }}>Clear checks</button></div><span className="engine-options-note">{mode === "road" ? "Single road vehicles" : mode === "train" ? "1–2 engines · 1–5 MUs + wagons · max-length MUs only" : "1 & 2 engines shown together"}</span></div>
               <div className="table-caption"><span><strong>{filtered.length}</strong> {showOnlyChecked ? "checked options · search paused" : "matching options"} <span className="caption-separator">/</span> {number(applied.distanceKm, 2)} km trip{applied.minTopSpeed > 0 && <> · ≥ {number(applied.minTopSpeed)} km/h</>} <span className="caption-separator">/</span> {applied.cargos.map(cargoName).join(", ")}</span><div className="availability-legend"><span><i className="legend-dot full" />Full range</span><span><i className="legend-dot partial" />Unavailable at end</span><span><i className="legend-dot future" />Unavailable at start</span></div></div>
               <div className="table-scroll"><table className="vehicle-table" style={{ minWidth: tableMinimumWidth }}><colgroup><col style={{ width: 32 }} />{columns.map(col => <col key={col.key} style={col.key === "name" ? undefined : { width: columnWidths[col.key] }} />)}</colgroup><thead><tr><th className="sticky-column compare-cell" aria-label="Compare options" title="Check rows to compare; selections reset when you calculate again"><Icon name="check" size={14} /></th>{columns.map(col => <th key={col.key} aria-sort={sort.key === col.key ? (sort.asc ? "ascending" : "descending") : "none"} className={col.key === "name" ? "sticky-column" : ""}><button title={col.title} onClick={() => { setSort({ key: col.key, asc: sort.key === col.key ? !sort.asc : !["speed", "averageSpeed", "capacity", "acceleration", "comfort", "throughput", "loadSpeed"].includes(col.key) }); setPage(0); }}><span>{col.label}<small>{col.unit ?? "click to inspect"}</small></span><span className={sort.key === col.key ? "sort-arrow selected" : "sort-arrow"}>{sort.key === col.key ? (sort.asc ? "↑" : "↓") : "↕"}</span></button></th>)}</tr></thead><tbody>{visible.map(o => <tr key={o.id} className={`${!o.availableAtStart ? "future-option" : ""} ${!o.availableAtEnd ? "partial-option" : ""} ${checked.has(o.id) ? "checked-option" : ""}`}>
                 <td className="sticky-column compare-cell"><input type="checkbox" aria-label={`Compare ${o.engines}× ${o.engine.name}${o.wagon ? ` + ${o.wagons}× ${o.wagon.name}` : ""}`} checked={checked.has(o.id)} onChange={() => toggleChecked(o.id)} /></td>

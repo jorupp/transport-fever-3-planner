@@ -6,8 +6,13 @@ import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import data from "@/data/tf3-vehicle-visuals.json";
 import type { Option, Vehicle } from "@/lib/planner";
 
-type Visual = { image: string; width: number; height: number; color: string; representativePart: string | null };
+type Visual = { image: string; width: number; height: number; thumbnailOffsetY: number; color: string; representativePart: string | null };
 const visuals: Record<string, Visual> = data.vehicles;
+
+export function VehicleThumbnail({ vehicle }: { vehicle: Vehicle }) {
+  const visual = visuals[vehicle.id];
+  return visual ? <Image className="vehicle-thumbnail" src={visual.image} width={visual.width} height={visual.height} style={{ transform: `translateY(${(visual.thumbnailOffsetY ?? 0) * 100}%)` }} alt="" aria-hidden="true" unoptimized loading="lazy" /> : null;
+}
 
 export function VehicleSwatch({ vehicle }: { vehicle: Vehicle }) {
   const visual = visuals[vehicle.id];

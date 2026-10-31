@@ -28,6 +28,16 @@ class VisualTests(unittest.TestCase):
         pixels = bytes([255, 0, 0, 0]) * 10 + blue * 10 + bytes([5, 5, 5, 255]) * 10
         self.assertEqual(visuals.body_color(10, 3, pixels), '#285a8c')
 
+    def test_thumbnail_centers_visible_artwork_without_resizing_or_changing_pixels(self):
+        clear = bytes([255, 0, 0, 0])
+        solid = bytes([20, 60, 90, 255])
+        # A four-row canvas with the artwork only in its bottom two rows.
+        rgba = clear * 4 + solid * 4
+        self.assertEqual(visuals.thumbnail_offset_y(2, 4, rgba), -.25)
+        self.assertEqual(visuals.thumbnail_offset_y(2, 4, solid * 8), 0)
+        self.assertEqual(visuals.thumbnail_offset_y(2, 4, clear * 8), 0)
+        self.assertEqual(rgba, clear * 4 + solid * 4)
+
     def test_fixed_sets_use_the_first_authored_part_and_paths_stay_relative(self):
         vehicle = {'source': 'vehicle/train/set/set.mu.lua', 'fixedFormation': True,
                    'parts': [{'source': 'vehicle/train/set/front.mdl'}]}

@@ -70,6 +70,15 @@ def body_color(width, height, rgba):
     return '#%02x%02x%02x' % (round(r / count), round(g / count), round(b / count))
 
 
+def thumbnail_offset_y(width, height, rgba):
+    """Fraction of image height to shift so visible artwork, not padding, is centered."""
+    visible_rows = [y for y in range(height) if any(rgba[(y * width + x) * 4 + 3] >= 32 for x in range(width))]
+    if not visible_rows:
+        return 0
+    center = (visible_rows[0] + visible_rows[-1] + 1) / 2
+    return round((height / 2 - center) / height, 6)
+
+
 def icon_location(vehicle):
     # TF3's authored multiple units have icons for their component models. Use
     # the first listed part (the leading vehicle), never an arbitrary filename.
@@ -100,6 +109,7 @@ def extract(game_dir, catalog, output, image_dir):
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(png); total_bytes += len(png)
         visuals[vehicle['id']] = {'image': '/vehicles/' + image, 'width': width, 'height': height,
+                                  'thumbnailOffsetY': thumbnail_offset_y(width, height, rgba),
                                   'color': body_color(width, height, rgba), 'sourceIcon': f'vehicle/{category}/{member}',
                                   'representativePart': source if source != vehicle['source'] else None}
     result = {'game': 'Transport Fever 3', 'source': 'Installed TF3 base menu icons; unmodified base colors before company tinting',

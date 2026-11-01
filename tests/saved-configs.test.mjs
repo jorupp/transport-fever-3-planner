@@ -39,13 +39,15 @@ test('duplicate IDs or names cannot make a saved selection ambiguous', () => {
 
 test('legacy configurations default to Hard and independent custom finance values round-trip', () => {
   const legacySettings = { ...config.settings };
+  delete legacySettings.includeObsolete;
   delete legacySettings.additionalStops;
   delete legacySettings.paybackYears;
   delete legacySettings.vehicleCostPercent;
   delete legacySettings.maintenanceCostPercent;
   assert.deepEqual(readSavedConfigs(stored([{ ...config, settings: legacySettings }]), cargoIds), [config]);
-  const custom = { ...config, settings: { ...config.settings, vehicleCostPercent: 75, maintenanceCostPercent: 150 } };
+  const custom = { ...config, settings: { ...config.settings, vehicleCostPercent: 75, maintenanceCostPercent: 150, includeObsolete: true } };
   assert.deepEqual(readSavedConfigs(stored([custom]), cargoIds), [custom]);
+  assert.deepEqual(readSavedConfigs(stored([{ ...config, settings: { ...config.settings, includeObsolete: "true" } }]), cargoIds), []);
   for (const invalid of [0, 60, 151, '125']) assert.deepEqual(readSavedConfigs(stored([{ ...config, settings: { ...config.settings, vehicleCostPercent: invalid } }]), cargoIds), []);
 });
 

@@ -227,7 +227,7 @@ h2 {
 
 .cargo-picker {
   position:relative;
-  padding-top:26px
+  padding-top:0
 }
 
 .cargo-trigger {
@@ -1344,7 +1344,17 @@ main { max-width: none; padding: 26px 24px 0; margin: 0 auto; }
 .config-message { color: #166534; }
 .config-message:empty { display: none; }
 .config-error { color: #9b2222; }
-.parameter-grid { display: grid; grid-template-columns: 1.1fr 1.15fr 1.1fr 1fr; gap: 26px; padding: 20px; }
+/* Desktop planner: construction, filters, and performance targets. */
+.parameter-grid { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 24px; padding: 20px; }
+.parameter-grid > .parameter-group { border-right: 1px solid var(--line); padding-right: 24px; }
+.parameter-grid > .parameter-group:last-child { border-right: 0; padding-right: 0; }
+.parameter-grid > .parameter-group > legend { font-size: 13px; font-weight: 700; margin-bottom: 14px; }
+.parameter-group fieldset legend, .parameter-group .field-legend { margin-bottom: 8px; }
+.parameter-group .cargo-field { margin-top: 14px; }
+.parameter-group .construction-note { margin-top: 10px; }
+.obsolete-toggle { display: flex; align-items: center; gap: 7px; margin-top: 10px; font-size: 12px; }
+.obsolete-toggle input { margin: 0; accent-color: #185b35; }
+.filter-speed { margin-top: 12px; max-width: 150px; }
 .performance-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .performance-fields label > span { font-size: 10px; white-space: nowrap; }
 .highlight { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 17px 20px; border: 0; border-right: 1px solid var(--line); background: transparent; text-align: left; }

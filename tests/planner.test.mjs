@@ -26,6 +26,38 @@ test('both parts must be simultaneously available, with inclusive boundary years
   assert.equal(calculateOptions([v({yearTo:1992}),w({yearFrom:1993})],cargo,DEFAULT_SETTINGS).length,0);
   assert.equal(calculateOptions([v({yearTo:1992}),w({yearFrom:1992})],cargo,DEFAULT_SETTINGS).length,2);
 });
+
+test('include obsolete allows earlier stock without a shared purchase window, but excludes future introductions',()=>{
+  const old=v({yearFrom:1900,yearTo:1930}),newCar=w({yearFrom:1960});
+  const settings={...DEFAULT_SETTINGS,year:1960,extraYears:0,includeObsolete:true};
+  assert.equal(calculateOptions([old,newCar],cargo,{...settings,includeObsolete:false}).length,0);
+  const rows=calculateOptions([old,newCar],cargo,settings);
+  assert.equal(rows.length,2);
+  assert(rows.every(o=>o.yearFrom===1960&&o.yearTo===1930&&!o.availableAtStart&&!o.availableAtEnd&&!o.fullRange));
+  assert.equal(calculateOptions([old,{...newCar,yearFrom:1961}],cargo,settings).length,0);
+  assert.equal(calculateOptions([{...old,yearFrom:1961,yearTo:null},newCar],cargo,settings).length,0);
+  const windowRows=calculateOptions([old,{...newCar,yearFrom:1961}],cargo,{...settings,extraYears:1});
+  assert.equal(windowRows.length,2,'end-year introductions remain included');
+  const bus=v({id:'old-bus',carrier:'ROAD',engineModes:['ROAD'],yearFrom:1900,yearTo:1930,capacities:{PASSENGERS:10}});
+  assert.equal(calculateOptions([bus],cargo,settings).length,1);
+  assert.equal(calculateOptions([bus],cargo,{...settings,includeObsolete:false}).length,0);
+});
+
+test('Atlantic with Cargo Car 1960 survives filter round trips with the same checked identity',async()=>{
+  const {stableFormationId}=await import('../src/lib/formation-identity.ts');
+  const engine=data.vehicles.find(v=>v.name==='4-4-2 Atlantic');
+  const car=data.vehicles.find(v=>v.name==='Cargo Car 1960');
+  assert(engine);assert(car);
+  const settings={...DEFAULT_SETTINGS,year:1960,extraYears:0,cargos:['LOGS'],includeObsolete:true};
+  const initial=calculateOptions([engine,car],data.cargos,settings);
+  assert.equal(initial.length,2);
+  const checked=new Set(initial.map(stableFormationId));
+  for(const filters of [{includeObsolete:false},{year:1959},{minTopSpeed:999}]) {
+    assert.equal(calculateOptions([engine,car],data.cargos,{...settings,...filters}).filter(o=>checked.has(stableFormationId(o))).length,0);
+  }
+  const restored=calculateOptions([engine,car],data.cargos,{...settings,distanceKm:3,additionalStops:2,paybackYears:5});
+  assert.equal(restored.filter(o=>checked.has(stableFormationId(o))).length,2);
+});
 test('future arrivals are dim candidates and partial intervals never count as full coverage',()=>{
   const [later]=calculateOptions([v({yearFrom:1995}),w()],cargo,DEFAULT_SETTINGS);
   assert.equal(later.availableAtStart,false);assert.equal(later.availableAtEnd,true);assert.equal(later.fullRange,false);

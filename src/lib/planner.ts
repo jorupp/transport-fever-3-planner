@@ -14,7 +14,7 @@ export type Mode = "train" | "tram" | "road";
 export type FinanceSettings = { vehicleCostPercent: number; maintenanceCostPercent: number };
 export const DEFAULT_FINANCE: FinanceSettings = { vehicleCostPercent: 125, maintenanceCostPercent: 125 };
 export const FINANCE_PRESETS = [{ id: "easy", name: "Easy", percent: 50 }, { id: "normal", name: "Normal", percent: 100 }, { id: "hard", name: "Hard", percent: 125 }, { id: "very-hard", name: "Very hard", percent: 150 }] as const;
-export type Settings = { year: number; extraYears: number; trainLength: number; tramLength: number; distanceKm: number; additionalStops?: number; minTopSpeed: number; cargos: string[]; vehicleCostPercent?: number; maintenanceCostPercent?: number; paybackYears?: number };
+export type Settings = { year: number; extraYears: number; includeObsolete?: boolean; trainLength: number; tramLength: number; distanceKm: number; additionalStops?: number; minTopSpeed: number; cargos: string[]; vehicleCostPercent?: number; maintenanceCostPercent?: number; paybackYears?: number };
 export type Option = {
   id: string; mode: Mode; engine: Vehicle; wagon: Vehicle | null; engines: number; wagons: number;
   cargo: string; // The selected cargo with the lowest estimated throughput (the metrics benchmark).
@@ -29,7 +29,7 @@ export type Option = {
   availableAtStart: boolean; availableAtEnd: boolean; fullRange: boolean; lightRail: boolean; loadedMass: number;
 };
 // Leave a 5 m buffer below the game's default 160 m station length.
-export const DEFAULT_SETTINGS: Settings = { year: 1990, extraYears: 10, trainLength: 155, tramLength: 60, distanceKm: 10, minTopSpeed: 0, cargos: ["PASSENGERS"] };
+export const DEFAULT_SETTINGS: Settings = { year: 1990, extraYears: 10, includeObsolete: false, trainLength: 155, tramLength: 60, distanceKm: 10, minTopSpeed: 0, cargos: ["PASSENGERS"] };
 export const DEFAULT_PAYBACK_YEARS = 20;
 export const DEFAULT_RAIL_BRAKING = 2.5;
 // Measured stop-to-loading interval. Count it once at the trip's destination;
@@ -55,7 +55,7 @@ export function compatible(engine: Vehicle, wagon: Vehicle) {
 }
 
 export function sameFormationSettings(a: Settings, b: Settings) {
-  return a.year === b.year && a.extraYears === b.extraYears && a.trainLength === b.trainLength && a.tramLength === b.tramLength
+  return a.trainLength === b.trainLength && a.tramLength === b.tramLength
     && [...new Set(a.cargos)].sort().join(",") === [...new Set(b.cargos)].sort().join(",");
 }
 
@@ -91,7 +91,7 @@ export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings:
   const endYear = settings.year + settings.extraYears;
   const selectedCargos = cargos.filter(c => settings.cargos.includes(c.id));
   if (!selectedCargos.length || selectedCargos.length !== new Set(settings.cargos).size) return [];
-  const available = vehicles.filter(v => v.yearFrom <= endYear && (v.yearTo === null || v.yearTo >= settings.year));
+  const available = vehicles.filter(v => v.yearFrom <= endYear && (settings.includeObsolete || v.yearTo === null || v.yearTo >= settings.year));
   const result: Option[] = [];
   const powered = available.filter(v => v.power > 0 && v.engineModes.length > 0);
   const wagons = available.filter(v => v.power === 0 && Object.keys(v.capacities).length > 0);
@@ -120,7 +120,7 @@ export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings:
             if (count < 1) continue;
             const from = Math.max(engine.yearFrom, wagon.yearFrom, settings.year);
             const to = Math.min(engine.yearTo ?? Infinity, wagon.yearTo ?? Infinity, endYear);
-            if (from > to) continue; // Components must be purchasable together, not just individually in the interval.
+            if (!settings.includeObsolete && from > to) continue; // Obsolete stock may be combined with newer purchases.
             result.push(makeMultiCargoOption(engine, wagon, engines, count, mode, selectedCargos, settings));
             hasWagonOption = true;
           }

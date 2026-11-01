@@ -83,11 +83,11 @@ test('payback changes annualized cost without changing the formation or performa
   for(const paybackYears of [0,-1,NaN,Infinity,'5']) assert.throws(()=>option({paybackYears}),/payback period/);
 });
 
-test('metric settings preserve formation identity; year, lengths and cargo reset selections',()=>{
-  for(const update of [{distanceKm:3},{additionalStops:5},{minTopSpeed:150},{paybackYears:5},{vehicleCostPercent:75},{maintenanceCostPercent:150}]) {
+test('filters and performance preserve formation identity; only lengths and cargo reset selections',()=>{
+  for(const update of [{year:1950},{extraYears:10},{includeObsolete:true},{distanceKm:3},{additionalStops:5},{minTopSpeed:150},{paybackYears:5},{vehicleCostPercent:75},{maintenanceCostPercent:150}]) {
     assert(sameFormationSettings(settings,{...settings,...update}));
   }
-  for(const update of [{year:1950},{extraYears:10},{trainLength:200},{tramLength:80},{cargos:['COAL']}]) {
+  for(const update of [{trainLength:200},{tramLength:80},{cargos:['COAL']}]) {
     assert(!sameFormationSettings(settings,{...settings,...update}));
   }
   assert(sameFormationSettings({...settings,cargos:['LOGS','COAL']},{...settings,cargos:['COAL','LOGS','COAL']}));

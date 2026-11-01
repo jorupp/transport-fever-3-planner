@@ -1345,7 +1345,7 @@ main { max-width: none; padding: 26px 24px 0; margin: 0 auto; }
 .config-message:empty { display: none; }
 .config-error { color: #9b2222; }
 .parameter-grid { display: grid; grid-template-columns: 1.1fr 1.15fr 1.1fr 1fr; gap: 26px; padding: 20px; }
-.performance-fields { gap: 8px; }
+.performance-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .performance-fields label > span { font-size: 10px; white-space: nowrap; }
 .highlight { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 17px 20px; border: 0; border-right: 1px solid var(--line); background: transparent; text-align: left; }
 .highlights { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); background: #f8faf8; }
@@ -1417,6 +1417,12 @@ thead .sticky-column button { padding-left: 12px; }
 .calculation-breakdown table { width: 100%; table-layout: fixed; font-size: 11px; white-space: normal; margin: 14px 0; border: 1px solid #c4cec7; }
 .calculation-breakdown table th, .calculation-breakdown table td { padding: 9px 8px; height: auto; text-align: right; vertical-align: middle; border-bottom: 1px solid #dde4df; color: #213b2c; }
 .calculation-breakdown table thead th { position: static; background: #eef3f0; font-weight: 600; line-height: 1.5; }
+.loading-breakdown table th { position: static; padding: 7px; white-space: normal; }
+.loading-breakdown thead { position: static; z-index: auto; }
+.loading-breakdown table td { height: auto; padding: 7px; font-size: 11px; white-space: normal; }
+.loading-breakdown table th:first-child { width: 25%; text-align: left; }
+.loading-breakdown table th:last-child { width: 28%; text-align: left; }
+.loading-breakdown table td:last-child { text-align: left; }
 .calculation-breakdown table th:first-child { text-align: left; }
 .calculation-inputs th:first-child { width: 220px; }
 .calculation-inputs th small { display: block; margin-top: 3px; font-weight: 400; color: #4e6256; }

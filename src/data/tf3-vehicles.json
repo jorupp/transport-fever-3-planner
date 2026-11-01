@@ -1,6 +1,6 @@
 {
   "game": "Transport Fever 3",
-  "extractedAt": "2026-10-31T16:29:43.924725+00:00",
+  "extractedAt": "2026-10-31T20:24:11.763158+00:00",
   "definitionHash": "f0b92e811d264cdd6f45fdb952686acb79c1760a75b65e1f94a4db6e828f0fb4",
   "source": "Installed TF3 base vehicle, cargo, localization and metadata definitions",
   "costModelHash": "4ad248c1dd46a6b2d825dfb7be513bd1c0d23a6fd6f5c43b81634003a56ac79e",
@@ -440,6 +440,7 @@
         "PASSENGERS": 12.0
       },
       "loadSpeed": 1.5,
+      "loadSpeedSource": "explicit",
       "comfort": 33.0,
       "noise": 10,
       "pollution": 14,
@@ -474,6 +475,7 @@
         "PASSENGERS": 6.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 70.0,
       "noise": 8.25,
       "pollution": 4,
@@ -508,6 +510,7 @@
         "PASSENGERS": 20.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 17.0,
       "noise": 33.14,
       "pollution": 55,
@@ -542,6 +545,7 @@
         "PASSENGERS": 15.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 85.0,
       "noise": 37.49,
       "pollution": 20,
@@ -576,6 +580,7 @@
         "PASSENGERS": 17.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 70.0,
       "noise": 48.52,
       "pollution": 70,
@@ -610,6 +615,7 @@
         "PASSENGERS": 4.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 20.0,
       "noise": 8.13,
       "pollution": 2,
@@ -644,6 +650,7 @@
         "PASSENGERS": 20.0
       },
       "loadSpeed": 5,
+      "loadSpeedSource": "explicit",
       "comfort": 65.0,
       "noise": 15,
       "pollution": 15,
@@ -678,6 +685,7 @@
         "PASSENGERS": 8.0
       },
       "loadSpeed": 2.5,
+      "loadSpeedSource": "explicit",
       "comfort": 65.0,
       "noise": 25,
       "pollution": 12,
@@ -712,6 +720,7 @@
         "PASSENGERS": 8.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 85.0,
       "noise": 30,
       "pollution": 25,
@@ -746,6 +755,7 @@
         "PASSENGERS": 10.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 75.0,
       "noise": 40,
       "pollution": 55,
@@ -780,6 +790,7 @@
         "PASSENGERS": 20.0
       },
       "loadSpeed": 5,
+      "loadSpeedSource": "explicit",
       "comfort": 85.0,
       "noise": 60,
       "pollution": 75,
@@ -814,6 +825,7 @@
         "PASSENGERS": 15.0
       },
       "loadSpeed": 1.5,
+      "loadSpeedSource": "explicit",
       "comfort": 33.0,
       "noise": 25,
       "pollution": 40,
@@ -848,6 +860,7 @@
         "PASSENGERS": 22.0
       },
       "loadSpeed": 2.5,
+      "loadSpeedSource": "explicit",
       "comfort": 75.0,
       "noise": 20,
       "pollution": 20,
@@ -882,6 +895,7 @@
         "PASSENGERS": 28.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 30.0,
       "noise": 40,
       "pollution": 65,
@@ -916,6 +930,7 @@
         "PASSENGERS": 15.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 80.0,
       "noise": 45,
       "pollution": 60,
@@ -950,6 +965,7 @@
         "PASSENGERS": 24.0
       },
       "loadSpeed": 2.5,
+      "loadSpeedSource": "explicit",
       "comfort": 40.0,
       "noise": 55,
       "pollution": 40,
@@ -984,6 +1000,7 @@
         "PASSENGERS": 6.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 25.0,
       "noise": 20,
       "pollution": 20,
@@ -1018,6 +1035,7 @@
         "PASSENGERS": 12.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 68.69510023073506,
       "noise": 10,
       "pollution": 12,
@@ -1052,6 +1070,7 @@
         "PASSENGERS": 10.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 30.0,
       "noise": 14,
       "pollution": 25,
@@ -1086,6 +1105,7 @@
         "PASSENGERS": 13.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 35.096694007256005,
       "noise": 28.69,
       "pollution": 35,
@@ -1120,6 +1140,7 @@
         "PASSENGERS": 15.0
       },
       "loadSpeed": 2.5,
+      "loadSpeedSource": "explicit",
       "comfort": 40.0,
       "noise": 22,
       "pollution": 45,
@@ -1154,6 +1175,7 @@
         "PASSENGERS": 28.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 14.913855801960063,
       "noise": 50,
       "pollution": 60,
@@ -1188,6 +1210,7 @@
         "PASSENGERS": 10.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 40.0,
       "noise": 20,
       "pollution": 22,
@@ -1222,6 +1245,7 @@
         "PASSENGERS": 30.0
       },
       "loadSpeed": 4.5,
+      "loadSpeedSource": "explicit",
       "comfort": 33.0,
       "noise": 25,
       "pollution": 25,
@@ -1255,7 +1279,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
-      "loadSpeed": 2.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 30,
       "pollution": 25,
@@ -1289,7 +1314,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
-      "loadSpeed": 1.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 40,
       "pollution": 50,
@@ -1324,7 +1350,8 @@
       "capacities": {
         "PASSENGERS": 94.0
       },
-      "loadSpeed": 45,
+      "loadSpeed": 5,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 80.0,
       "noise": 380,
       "pollution": 75,
@@ -1404,7 +1431,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
-      "loadSpeed": 1.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 90,
       "pollution": 70,
@@ -1438,7 +1466,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
-      "loadSpeed": 1.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 15,
       "pollution": 30,
@@ -1473,6 +1502,7 @@
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 5,
       "pollution": 20,
@@ -1505,7 +1535,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 3.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 40,
       "pollution": 25,
@@ -1539,7 +1570,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
-      "loadSpeed": 3.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 45,
       "pollution": 40,
@@ -1572,7 +1604,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 1.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 45,
       "pollution": 30,
@@ -1605,7 +1638,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 1.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 50,
       "pollution": 30,
@@ -1639,7 +1673,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
-      "loadSpeed": 3.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 60,
       "pollution": 60,
@@ -1673,7 +1708,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
-      "loadSpeed": 2.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 40,
       "pollution": 50,
@@ -1706,7 +1742,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 3.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 50,
       "pollution": 25,
@@ -1740,7 +1777,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
-      "loadSpeed": 1.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 30,
       "pollution": 55,
@@ -1774,7 +1812,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
-      "loadSpeed": 2.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 45,
       "pollution": 55,
@@ -1807,7 +1846,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 1.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 60,
       "pollution": 35,
@@ -1841,7 +1881,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
-      "loadSpeed": 2.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 40,
       "pollution": 30,
@@ -1874,7 +1915,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 3.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 60,
       "pollution": 25,
@@ -1907,7 +1949,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 3.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 50,
       "pollution": 30,
@@ -1941,7 +1984,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
-      "loadSpeed": 0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 0,
       "noise": 80,
       "pollution": 100,
@@ -1985,7 +2029,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
-      "loadSpeed": 2.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 60,
       "pollution": 65,
@@ -2020,7 +2065,8 @@
       "capacities": {
         "PASSENGERS": 115.0
       },
-      "loadSpeed": 10,
+      "loadSpeed": 2,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 33.0,
       "noise": 200,
       "pollution": 60,
@@ -2075,7 +2121,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 3.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 55,
       "pollution": 40,
@@ -2110,7 +2157,8 @@
       "capacities": {
         "PASSENGERS": 152.0
       },
-      "loadSpeed": 44,
+      "loadSpeed": 4,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 80.0,
       "noise": 570,
       "pollution": 75,
@@ -2191,7 +2239,8 @@
       "capacities": {
         "PASSENGERS": 144.0
       },
-      "loadSpeed": 28.0,
+      "loadSpeed": 3.5,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 86.44398868096017,
       "noise": 360,
       "pollution": 130,
@@ -2259,7 +2308,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
-      "loadSpeed": 3.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 50,
       "pollution": 70,
@@ -2295,7 +2345,8 @@
       "capacities": {
         "PASSENGERS": 120.0
       },
-      "loadSpeed": 24,
+      "loadSpeed": 3,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 65.0,
       "noise": 440,
       "pollution": 140,
@@ -2372,7 +2423,8 @@
       "capacities": {
         "PASSENGERS": 170.0
       },
-      "loadSpeed": 36,
+      "loadSpeed": 4,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 70.0,
       "noise": 470,
       "pollution": 95,
@@ -2451,7 +2503,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 3.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 40,
       "pollution": 30,
@@ -2485,7 +2538,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
-      "loadSpeed": 2.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 40,
       "pollution": 45,
@@ -2522,6 +2576,7 @@
         "PASSENGERS": 20.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 33.0,
       "noise": 40,
       "pollution": 25,
@@ -2556,7 +2611,8 @@
       "capacities": {
         "PASSENGERS": 38.0
       },
-      "loadSpeed": 3.0,
+      "loadSpeed": 1.5,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 33.0,
       "noise": 80,
       "pollution": 40,
@@ -2601,6 +2657,7 @@
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 20,
       "pollution": 40,
@@ -2633,7 +2690,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 2.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 50,
       "pollution": 20,
@@ -2666,7 +2724,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 2.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 50,
       "pollution": 20,
@@ -2701,7 +2760,8 @@
       "capacities": {
         "PASSENGERS": 98.0
       },
-      "loadSpeed": 9,
+      "loadSpeed": 3,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 56.58163265306123,
       "noise": 155,
       "pollution": 35,
@@ -2755,6 +2815,7 @@
         "PASSENGERS": 20.0
       },
       "loadSpeed": 5,
+      "loadSpeedSource": "explicit",
       "comfort": 100,
       "noise": 50,
       "pollution": 35,
@@ -2789,6 +2850,7 @@
       "engineType": "STEAM",
       "capacities": {},
       "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 25,
       "pollution": 25,
@@ -2822,7 +2884,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
-      "loadSpeed": 2.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 45,
       "pollution": 55,
@@ -2859,6 +2922,7 @@
         "PASSENGERS": 15.0
       },
       "loadSpeed": 2.5,
+      "loadSpeedSource": "explicit",
       "comfort": 33.0,
       "noise": 30,
       "pollution": 20,
@@ -2891,7 +2955,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 0,
       "noise": 90,
       "pollution": 50,
@@ -2936,7 +3001,8 @@
       "capacities": {
         "PASSENGERS": 160.0
       },
-      "loadSpeed": 16,
+      "loadSpeed": 2,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 56.000000000000014,
       "noise": 360,
       "pollution": 120,
@@ -3007,6 +3073,7 @@
         "PASSENGERS": 40.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 37.91573570904694,
       "noise": 65,
       "pollution": 50,
@@ -3041,7 +3108,8 @@
       "capacities": {
         "PASSENGERS": 275.0
       },
-      "loadSpeed": 30,
+      "loadSpeed": 3,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 55.00000000000001,
       "noise": 460,
       "pollution": 80,
@@ -3118,7 +3186,8 @@
       "capacities": {
         "PASSENGERS": 110.0
       },
-      "loadSpeed": 12,
+      "loadSpeed": 3,
+      "loadSpeedSource": "formation-minimum",
       "comfort": 40.0,
       "noise": 120,
       "pollution": 100,
@@ -3172,6 +3241,7 @@
         "PASSENGERS": 25.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 42.5,
       "noise": 25,
       "pollution": 20,
@@ -3207,6 +3277,7 @@
         "PASSENGERS": 27.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 40.0,
       "noise": 20,
       "pollution": 30,
@@ -3245,6 +3316,7 @@
         "PASSENGERS": 35.0
       },
       "loadSpeed": 3.5,
+      "loadSpeedSource": "explicit",
       "comfort": 30.0,
       "noise": 75,
       "pollution": 20,
@@ -3283,6 +3355,7 @@
         "PASSENGERS": 43.0
       },
       "loadSpeed": 5,
+      "loadSpeedSource": "explicit",
       "comfort": 55.00000000000001,
       "noise": 95,
       "pollution": 40,
@@ -3356,6 +3429,7 @@
         "WOOL": 60.0
       },
       "loadSpeed": 16,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 60,
       "pollution": 50,
@@ -3406,6 +3480,7 @@
         "WOOL": 8.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 11,
       "pollution": 16,
@@ -3447,6 +3522,7 @@
         "STONE": 8.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 11,
       "pollution": 16,
@@ -3487,6 +3563,7 @@
         "VEHICLES": 8.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 9,
       "pollution": 15,
@@ -3526,6 +3603,7 @@
         "RUBBER": 8.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 8,
       "pollution": 13,
@@ -3596,6 +3674,7 @@
         "WOOL": 8.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 10,
       "pollution": 13,
@@ -3646,6 +3725,7 @@
         "WOOL": 14.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 25,
       "pollution": 22,
@@ -3689,6 +3769,7 @@
         "STONE": 14.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 22,
       "pollution": 25,
@@ -3729,6 +3810,7 @@
         "VEHICLES": 14.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 24,
       "pollution": 23,
@@ -3768,6 +3850,7 @@
         "RUBBER": 14.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 26,
       "pollution": 21,
@@ -3836,6 +3919,7 @@
         "WOOL": 14.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 22,
       "pollution": 25,
@@ -3884,6 +3968,7 @@
         "WOOL": 21.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 47,
       "pollution": 28,
@@ -3925,6 +4010,7 @@
         "STONE": 21.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 48,
       "pollution": 25,
@@ -3963,6 +4049,7 @@
         "VEHICLES": 21.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 46,
       "pollution": 26,
@@ -4000,6 +4087,7 @@
         "RUBBER": 22.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 47,
       "pollution": 27,
@@ -4068,6 +4156,7 @@
         "WOOL": 21.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 45,
       "pollution": 24,
@@ -4106,6 +4195,7 @@
         "PASSENGERS": 60.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 30.0,
       "noise": 35,
       "pollution": 55,
@@ -4139,6 +4229,7 @@
         "PASSENGERS": 8.0
       },
       "loadSpeed": 3.5,
+      "loadSpeedSource": "explicit",
       "comfort": 42.5,
       "noise": 8,
       "pollution": 5,
@@ -4172,7 +4263,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "STEAM",
       "capacities": {},
-      "loadSpeed": 2.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 16,
       "pollution": 30,
@@ -4206,6 +4298,7 @@
         "PASSENGERS": 12.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 20.0,
       "noise": 12,
       "pollution": 5,
@@ -4242,6 +4335,7 @@
         "PASSENGERS": 6.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 30.0,
       "noise": 5,
       "pollution": 20,
@@ -4312,7 +4406,8 @@
         "VEHICLES": 7.0,
         "WOOL": 7.0
       },
-      "loadSpeed": 1.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 5,
       "pollution": 20,
@@ -4346,6 +4441,7 @@
         "PASSENGERS": 16.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 85.0,
       "noise": 35,
       "pollution": 8,
@@ -4381,6 +4477,7 @@
         "PASSENGERS": 16.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 85.0,
       "noise": 40,
       "pollution": 50,
@@ -4419,6 +4516,7 @@
         "PASSENGERS": 32.0
       },
       "loadSpeed": 4.5,
+      "loadSpeedSource": "explicit",
       "comfort": 67.5,
       "noise": 35,
       "pollution": 70,
@@ -4492,6 +4590,7 @@
         "WOOL": 80.0
       },
       "loadSpeed": 12,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 75,
       "pollution": 60,
@@ -4562,6 +4661,7 @@
         "WOOL": 10.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 10,
       "pollution": 20,
@@ -4595,7 +4695,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
-      "loadSpeed": 3.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 20,
       "pollution": 50,
@@ -4631,6 +4732,7 @@
         "PASSENGERS": 11.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 75.0,
       "noise": 25,
       "pollution": 12,
@@ -4666,6 +4768,7 @@
         "PASSENGERS": 28.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 42.5,
       "noise": 55,
       "pollution": 50,
@@ -4701,6 +4804,7 @@
         "PASSENGERS": 12.0
       },
       "loadSpeed": 2.5,
+      "loadSpeedSource": "explicit",
       "comfort": 42.5,
       "noise": 12,
       "pollution": 10,
@@ -4734,6 +4838,7 @@
         "PASSENGERS": 12.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 42.5,
       "noise": 15,
       "pollution": 7,
@@ -4767,6 +4872,7 @@
         "PASSENGERS": 6.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 55.00000000000001,
       "noise": 10,
       "pollution": 4,
@@ -4802,6 +4908,7 @@
         "PASSENGERS": 21.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 55.00000000000001,
       "noise": 30,
       "pollution": 15,
@@ -4835,7 +4942,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "DIESEL",
       "capacities": {},
-      "loadSpeed": 4.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 25,
       "pollution": 70,
@@ -4906,6 +5014,7 @@
         "WOOL": 13.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 20,
       "pollution": 15,
@@ -4938,7 +5047,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 3.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 14,
       "pollution": 20,
@@ -4977,6 +5087,7 @@
         "PASSENGERS": 25.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 70.0,
       "noise": 65,
       "pollution": 30,
@@ -5015,6 +5126,7 @@
         "PASSENGERS": 50.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 80.0,
       "noise": 35,
       "pollution": 90,
@@ -5050,6 +5162,7 @@
         "PASSENGERS": 60.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 55.00000000000001,
       "noise": 100,
       "pollution": 15,
@@ -5085,6 +5198,7 @@
         "PASSENGERS": 18.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 20.0,
       "noise": 50,
       "pollution": 35,
@@ -5135,6 +5249,7 @@
         "WOOL": 20.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 50,
       "pollution": 30,
@@ -5178,6 +5293,7 @@
         "STONE": 20.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 50,
       "pollution": 30,
@@ -5218,6 +5334,7 @@
         "VEHICLES": 20.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 50,
       "pollution": 30,
@@ -5257,6 +5374,7 @@
         "RUBBER": 20.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 50,
       "pollution": 30,
@@ -5292,6 +5410,7 @@
         "PASSENGERS": 20.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 55.00000000000001,
       "noise": 50,
       "pollution": 25,
@@ -5330,6 +5449,7 @@
         "PASSENGERS": 20.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 30.0,
       "noise": 30,
       "pollution": 18,
@@ -5365,6 +5485,7 @@
         "PASSENGERS": 14.0
       },
       "loadSpeed": 5,
+      "loadSpeedSource": "explicit",
       "comfort": 55.00000000000001,
       "noise": 30,
       "pollution": 21,
@@ -5398,6 +5519,7 @@
         "PASSENGERS": 14.0
       },
       "loadSpeed": 5,
+      "loadSpeedSource": "explicit",
       "comfort": 70.0,
       "noise": 20,
       "pollution": 6,
@@ -5430,7 +5552,8 @@
       "brakeDeceleration": 2.5,
       "engineType": "ELECTRIC",
       "capacities": {},
-      "loadSpeed": 5.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 45,
       "pollution": 25,
@@ -5466,6 +5589,7 @@
         "PASSENGERS": 37.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 55.00000000000001,
       "noise": 80,
       "pollution": 45,
@@ -5504,6 +5628,7 @@
         "RUBBER": 12.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 72.0567356790388,
       "noise": 6,
       "pollution": 23,
@@ -5573,6 +5698,7 @@
         "WOOL": 12.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 72.0567356790388,
       "noise": 5,
       "pollution": 24,
@@ -5622,6 +5748,7 @@
         "WOOL": 12.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 60.16071004407188,
       "noise": 10,
       "pollution": 19,
@@ -5664,6 +5791,7 @@
         "STONE": 12.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 60.25120083296357,
       "noise": 10,
       "pollution": 19,
@@ -5713,6 +5841,7 @@
         "WOOL": 40.0
       },
       "loadSpeed": 10,
+      "loadSpeedSource": "explicit",
       "comfort": 89.7698953832146,
       "noise": 99,
       "pollution": 70,
@@ -5755,6 +5884,7 @@
         "STONE": 40.0
       },
       "loadSpeed": 10,
+      "loadSpeedSource": "explicit",
       "comfort": 89.7698953832146,
       "noise": 94,
       "pollution": 72,
@@ -5794,6 +5924,7 @@
         "VEHICLES": 40.0
       },
       "loadSpeed": 10,
+      "loadSpeedSource": "explicit",
       "comfort": 89.7698953832146,
       "noise": 96,
       "pollution": 71,
@@ -5832,6 +5963,7 @@
         "RUBBER": 40.0
       },
       "loadSpeed": 10,
+      "loadSpeedSource": "explicit",
       "comfort": 89.7698953832146,
       "noise": 92,
       "pollution": 76,
@@ -5901,6 +6033,7 @@
         "WOOL": 40.0
       },
       "loadSpeed": 5,
+      "loadSpeedSource": "explicit",
       "comfort": 89.7698953832146,
       "noise": 55,
       "pollution": 65,
@@ -5943,6 +6076,7 @@
         "STONE": 10.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 73.21298663227861,
       "noise": 19.41,
       "pollution": 18,
@@ -5992,6 +6126,7 @@
         "WOOL": 10.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 73.41262850363435,
       "noise": 17.81,
       "pollution": 20,
@@ -6041,6 +6176,7 @@
         "WOOL": 37.5
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 66.92581618615009,
       "noise": 60,
       "pollution": 55,
@@ -6080,6 +6216,7 @@
         "VEHICLES": 37.5
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 66.92581618615009,
       "noise": 60,
       "pollution": 55,
@@ -6129,6 +6266,7 @@
         "WOOL": 16.0
       },
       "loadSpeed": 10,
+      "loadSpeedSource": "explicit",
       "comfort": 81.97676360180904,
       "noise": 31,
       "pollution": 40,
@@ -6171,6 +6309,7 @@
         "STONE": 16.0
       },
       "loadSpeed": 10,
+      "loadSpeedSource": "explicit",
       "comfort": 81.97676360180904,
       "noise": 33,
       "pollution": 38,
@@ -6209,6 +6348,7 @@
         "RUBBER": 16.0
       },
       "loadSpeed": 10,
+      "loadSpeedSource": "explicit",
       "comfort": 81.97676360180904,
       "noise": 32,
       "pollution": 42,
@@ -6278,6 +6418,7 @@
         "WOOL": 16.0
       },
       "loadSpeed": 5,
+      "loadSpeedSource": "explicit",
       "comfort": 81.97676360180904,
       "noise": 30,
       "pollution": 43,
@@ -6317,6 +6458,7 @@
         "VEHICLES": 15.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 80.17222460753733,
       "noise": 19.28,
       "pollution": 26,
@@ -6366,6 +6508,7 @@
         "WOOL": 22.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 42.84444704475007,
       "noise": 41,
       "pollution": 50,
@@ -6408,6 +6551,7 @@
         "STONE": 22.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 42.84444704475007,
       "noise": 38,
       "pollution": 53,
@@ -6447,6 +6591,7 @@
         "VEHICLES": 22.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 42.84444704475007,
       "noise": 44,
       "pollution": 48,
@@ -6485,6 +6630,7 @@
         "RUBBER": 22.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 42.84444704475007,
       "noise": 41,
       "pollution": 51,
@@ -6554,6 +6700,7 @@
         "WOOL": 22.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 42.84444704475007,
       "noise": 43,
       "pollution": 49,
@@ -6592,6 +6739,7 @@
         "RUBBER": 10.0
       },
       "loadSpeed": 5,
+      "loadSpeedSource": "explicit",
       "comfort": 49.90098772942161,
       "noise": 6,
       "pollution": 15,
@@ -6660,7 +6808,8 @@
         "VEHICLES": 6.0,
         "WOOL": 6.0
       },
-      "loadSpeed": 3.5,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 48.11617972815175,
       "noise": 3.85,
       "pollution": 3,
@@ -6730,6 +6879,7 @@
         "WOOL": 4.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 44.94612987320778,
       "noise": 0.94,
       "pollution": 2,
@@ -6768,6 +6918,7 @@
         "RUBBER": 10.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 95.60989111285669,
       "noise": 25,
       "pollution": 20,
@@ -6837,6 +6988,7 @@
         "WOOL": 10.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 95.60989111285669,
       "noise": 25,
       "pollution": 20,
@@ -6886,6 +7038,7 @@
         "WOOL": 30.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 47.70653231710785,
       "noise": 60,
       "pollution": 88,
@@ -6928,6 +7081,7 @@
         "STONE": 30.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 47.70653231710785,
       "noise": 58,
       "pollution": 90,
@@ -6967,6 +7121,7 @@
         "VEHICLES": 30.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 47.70653231710785,
       "noise": 59,
       "pollution": 89,
@@ -7005,6 +7160,7 @@
         "RUBBER": 30.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 47.70653231710785,
       "noise": 62,
       "pollution": 87,
@@ -7044,6 +7200,7 @@
         "VEHICLES": 12.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 53.73927720642134,
       "noise": 13,
       "pollution": 16,
@@ -7093,6 +7250,7 @@
         "WOOL": 18.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 76.95927791711536,
       "noise": 31,
       "pollution": 65,
@@ -7135,6 +7293,7 @@
         "STONE": 18.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 76.95927791711536,
       "noise": 35,
       "pollution": 62,
@@ -7173,6 +7332,7 @@
         "RUBBER": 18.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 76.95927791711536,
       "noise": 32,
       "pollution": 66,
@@ -7242,6 +7402,7 @@
         "WOOL": 18.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 76.95927791711536,
       "noise": 30,
       "pollution": 67,
@@ -7291,6 +7452,7 @@
         "WOOL": 7.5
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 88.49840182577772,
       "noise": 22,
       "pollution": 8,
@@ -7340,6 +7502,7 @@
         "WOOL": 15.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 77.99733587431459,
       "noise": 23.63,
       "pollution": 26,
@@ -7378,6 +7541,7 @@
         "RUBBER": 15.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 77.99733587431459,
       "noise": 23.63,
       "pollution": 26,
@@ -7447,6 +7611,7 @@
         "WOOL": 15.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 77.99733587431459,
       "noise": 21.05,
       "pollution": 26,
@@ -7515,7 +7680,8 @@
         "VEHICLES": 10.0,
         "WOOL": 10.0
       },
-      "loadSpeed": 3.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 28.834378100726482,
       "noise": 15,
       "pollution": 18,
@@ -7585,6 +7751,7 @@
         "WOOL": 40.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 88.67782706897376,
       "noise": 32,
       "pollution": 10,
@@ -7654,6 +7821,7 @@
         "WOOL": 18.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 76.49771549190463,
       "noise": 10,
       "pollution": 32,
@@ -7696,6 +7864,7 @@
         "STONE": 34.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 60.334128211741366,
       "noise": 50,
       "pollution": 60,
@@ -7734,6 +7903,7 @@
         "RUBBER": 34.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 60.334128211741366,
       "noise": 50,
       "pollution": 60,
@@ -7776,6 +7946,7 @@
         "STONE": 15.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 81.14675301322696,
       "noise": 21.05,
       "pollution": 35,
@@ -7815,6 +7986,7 @@
         "VEHICLES": 15.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 81.14675301322696,
       "noise": 21.05,
       "pollution": 35,
@@ -7848,6 +8020,7 @@
         "PASSENGERS": 8.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 31.25,
       "noise": 15,
       "pollution": 5,
@@ -7881,6 +8054,7 @@
         "PASSENGERS": 35.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 37.5,
       "noise": 25,
       "pollution": 5,
@@ -7929,6 +8103,7 @@
         "WOOL": 8.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 5,
       "pollution": 5,
@@ -7977,6 +8152,7 @@
         "WOOL": 10.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 15,
       "pollution": 5,
@@ -8025,6 +8201,7 @@
         "WOOL": 16.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 30,
       "pollution": 5,
@@ -8073,6 +8250,7 @@
         "WOOL": 18.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 35,
       "pollution": 5,
@@ -8121,6 +8299,7 @@
         "WOOL": 20.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 40,
       "pollution": 5,
@@ -8169,6 +8348,7 @@
         "WOOL": 25.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 30,
       "pollution": 5,
@@ -8210,6 +8390,7 @@
         "STONE": 8.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 5,
       "pollution": 5,
@@ -8251,6 +8432,7 @@
         "STONE": 10.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 15,
       "pollution": 5,
@@ -8292,6 +8474,7 @@
         "STONE": 14.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 25,
       "pollution": 5,
@@ -8333,6 +8516,7 @@
         "STONE": 20.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 45,
       "pollution": 5,
@@ -8374,6 +8558,7 @@
         "STONE": 18.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 35,
       "pollution": 5,
@@ -8407,6 +8592,7 @@
         "PASSENGERS": 26.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 56.25,
       "noise": 35,
       "pollution": 5,
@@ -8440,6 +8626,7 @@
         "PASSENGERS": 24.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 75.0,
       "noise": 50,
       "pollution": 5,
@@ -8473,6 +8660,7 @@
         "PASSENGERS": 12.0
       },
       "loadSpeed": 3.5,
+      "loadSpeedSource": "explicit",
       "comfort": 70.0,
       "noise": 10,
       "pollution": 5,
@@ -8506,6 +8694,7 @@
         "PASSENGERS": 15.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 31.25,
       "noise": 50,
       "pollution": 5,
@@ -8539,6 +8728,7 @@
         "PASSENGERS": 20.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 43.75,
       "noise": 30,
       "pollution": 5,
@@ -8572,6 +8762,7 @@
         "PASSENGERS": 25.0
       },
       "loadSpeed": 2.5,
+      "loadSpeedSource": "explicit",
       "comfort": 22.166024560389864,
       "noise": 45,
       "pollution": 5,
@@ -8605,6 +8796,7 @@
         "PASSENGERS": 26.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 38.51781569312837,
       "noise": 40,
       "pollution": 5,
@@ -8643,6 +8835,7 @@
         "VEHICLES": 8.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 5,
       "pollution": 5,
@@ -8681,6 +8874,7 @@
         "VEHICLES": 14.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 20,
       "pollution": 5,
@@ -8719,6 +8913,7 @@
         "VEHICLES": 20.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 30,
       "pollution": 5,
@@ -8757,6 +8952,7 @@
         "VEHICLES": 18.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 40,
       "pollution": 5,
@@ -8795,6 +8991,7 @@
         "VEHICLES": 22.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 35,
       "pollution": 5,
@@ -8832,6 +9029,7 @@
         "RUBBER": 8.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 5,
       "pollution": 5,
@@ -8869,6 +9067,7 @@
         "RUBBER": 10.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 15,
       "pollution": 5,
@@ -8906,6 +9105,7 @@
         "RUBBER": 12.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 20,
       "pollution": 5,
@@ -8943,6 +9143,7 @@
         "RUBBER": 15.0
       },
       "loadSpeed": 6,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 40,
       "pollution": 5,
@@ -8980,6 +9181,7 @@
         "RUBBER": 18.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 50,
       "pollution": 5,
@@ -9017,6 +9219,7 @@
         "RUBBER": 22.0
       },
       "loadSpeed": 8,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 35,
       "pollution": 5,
@@ -9050,6 +9253,7 @@
         "PASSENGERS": 22.0
       },
       "loadSpeed": 3.5,
+      "loadSpeedSource": "explicit",
       "comfort": 100,
       "noise": 55,
       "pollution": 5,
@@ -9083,6 +9287,7 @@
         "PASSENGERS": 22.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 65.0,
       "noise": 40,
       "pollution": 5,
@@ -9116,6 +9321,7 @@
         "PASSENGERS": 19.0
       },
       "loadSpeed": 3,
+      "loadSpeedSource": "explicit",
       "comfort": 32.19354457146977,
       "noise": 15,
       "pollution": 5,
@@ -9149,6 +9355,7 @@
         "PASSENGERS": 24.0
       },
       "loadSpeed": 3.5,
+      "loadSpeedSource": "explicit",
       "comfort": 87.5,
       "noise": 55,
       "pollution": 5,
@@ -9216,7 +9423,8 @@
         "VEHICLES": 8.0,
         "WOOL": 8.0
       },
-      "loadSpeed": 3.0,
+      "loadSpeed": 1,
+      "loadSpeedSource": "default",
       "comfort": 0,
       "noise": 5,
       "pollution": 5,
@@ -9285,6 +9493,7 @@
         "WOOL": 14.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 20,
       "pollution": 5,
@@ -9353,6 +9562,7 @@
         "WOOL": 15.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 30,
       "pollution": 5,
@@ -9421,6 +9631,7 @@
         "WOOL": 15.0
       },
       "loadSpeed": 2,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 40,
       "pollution": 5,
@@ -9489,6 +9700,7 @@
         "WOOL": 22.0
       },
       "loadSpeed": 4,
+      "loadSpeedSource": "explicit",
       "comfort": 0,
       "noise": 35,
       "pollution": 5,
@@ -9522,6 +9734,7 @@
         "PASSENGERS": 26.0
       },
       "loadSpeed": 3.5,
+      "loadSpeedSource": "explicit",
       "comfort": 62.5,
       "noise": 30,
       "pollution": 5,

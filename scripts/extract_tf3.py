@@ -129,8 +129,13 @@ def normalize(meta, source, cargos, translate, models):
         return (1 if key == 'comfort_factor' else 100) / (1+math.exp(-prediction))
     comfort = tv.get('comfortFactor', -1)
     if comfort < 0: comfort = inferred('comfort_factor')
-    load_speed = tv.get('loadSpeed', -1)
-    if load_speed < 0: load_speed = inferred('load_speed')
+    # TF3 only asks addMissingVehicleStats for regression at an explicit -1.
+    # An omitted loadSpeed keeps the engine's 1x default (e.g. Cargo Car 1899).
+    load_speed = tv.get('loadSpeed', 1)
+    load_source = 'explicit' if 'loadSpeed' in tv else 'default'
+    if load_speed == -1:
+        load_speed = inferred('load_speed')
+        load_source = 'regression'
     noise = obj(emissions.get('noise')).get('score', -1)
     pollution = obj(emissions.get('pollution')).get('score', -1)
     if noise < 0: noise = round_game(inferred('noise_score'))
@@ -169,7 +174,7 @@ def normalize(meta, source, cargos, translate, models):
         'weightMaxPayload': lv.get('weightMaxPayload', 0), 'friction': lv.get('friction', 0.02),
         'brakeDeceleration': lv.get('brakeDeceleration', 2.5),
         'engineType': '+'.join(sorted(set(e['type'] for e in engines))) or None,
-        'capacities': capacities, 'loadSpeed': load_speed, 'comfort': comfort*100,
+        'capacities': capacities, 'loadSpeed': load_speed, 'loadSpeedSource': load_source, 'comfort': comfort*100,
         'noise': noise, 'pollution': pollution, 'purchase': purchase, 'running': yearly,
         'fixedFormation': False,
     }
@@ -240,7 +245,8 @@ def main():
         v['capacities'] = {c['id']:sum(p['capacities'].get(c['id'],0) for p in parts) for c in cargos if any(c['id'] in p['capacities'] for p in parts)}
         passenger_capacity = sum(p['capacities'].get('PASSENGERS',0) for p in parts)
         v['comfort'] = sum(p['comfort']*p['capacities'].get('PASSENGERS',0) for p in parts)/passenger_capacity if passenger_capacity else 0
-        v['loadSpeed'] = sum(p['loadSpeed'] for p in parts if p['capacities'])
+        v['loadSpeed'] = min((p['loadSpeed'] for p in parts if p['capacities']), default=1)
+        v['loadSpeedSource'] = 'formation-minimum'
         vehicles[source] = v
     result = [v for k,v in sorted(vehicles.items()) if k not in hidden and (v['power'] > 0 or v['capacities'])]
     output = {'game':'Transport Fever 3', 'extractedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(), 'definitionHash':digest.hexdigest(), 'source':'Installed TF3 base vehicle, cargo, localization and metadata definitions', 'costModelHash':hashlib.sha256(cost_source).hexdigest(), 'cargos':sorted(cargos,key=lambda c:c['order']), 'vehicles':result, 'counts':{'vehicles':len(result),'cargoTypes':len(cargos),'fixedFormations':len(formations),'hiddenFormationParts':len(hidden)}}

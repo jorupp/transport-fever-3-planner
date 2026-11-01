@@ -1,0 +1,12 @@
+{
+  "engine": "Swiss Re 4/4 I",
+  "wagon": "Cargo Car 1960",
+  "wagonCount": 9,
+  "cargo": "LOGS",
+  "units": 135,
+  "vehicleLoadingRating": 2,
+  "stationMultiplier": 1,
+  "gameSpeedMultiplier": 1,
+  "loadingSeconds": 120,
+  "note": "User reported almost exactly two minutes to load 135 logs at normal speed with 2x-rated cars and a 1x station, and clarified this was nine Cargo Car 1960 wagons."
+}

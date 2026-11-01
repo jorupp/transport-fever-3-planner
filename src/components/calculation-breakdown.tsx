@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { analyzeOption, type Option, type Settings } from "@/lib/planner";
+import { analyzeOption, formationLoadingFactors, DEFAULT_PAYBACK_YEARS, LOADING_CALIBRATION, LOADING_REFERENCE_COMBINED_SCALE, LOADING_RATE_MULTIPLIES_BY_VEHICLE_COUNT, type Option, type Settings } from "@/lib/planner";
 
 const n = (value: number, decimals = 1) => value.toLocaleString("en-US", { maximumFractionDigits: decimals });
 type Analysis = ReturnType<typeof analyzeOption>;
@@ -21,9 +21,9 @@ export default function CalculationBreakdown({ option: o, settings, cargoName }:
     <section className="calculation-section">
       <h3>1. Formation inputs</h3>
       <p>Values below are per vehicle or complete authored set; the quantity column supplies the multiplier.</p>
-      <table className="calculation-inputs"><thead><tr><th>Component</th><th>Qty</th><th>Length<br />m</th><th>Empty mass<br />t</th><th>Power<br />kW</th><th>Listed effort<br />kN</th><th>Capacity<br />units</th><th>Base load<br />units/s</th></tr></thead><tbody>
+      <table className="calculation-inputs"><thead><tr><th>Component</th><th>Qty</th><th>Length<br />m</th><th>Empty mass<br />t</th><th>Power<br />kW</th><th>Listed effort<br />kN</th><th>Capacity<br />units</th><th>Base rate<br />×</th></tr></thead><tbody>
         {components.map(({ vehicle: v, count, label }) => <tr key={v.id}><th>{v.name}<small>{label}</small></th><td>{count}</td><td>{n(v.length, 2)}</td><td>{n(v.weightEmpty / 1000)}</td><td>{n(v.power, 0)}</td><td>{n(v.tractiveEffort, 2)}</td><td>{n(v.capacities[o.cargo] ?? 0, 2)}</td><td>{n(v.capacities[o.cargo] ? v.loadSpeed : 0, 2)}</td></tr>)}
-        <tr className="calculation-total"><th>Formation total</th><td>—</td><td>{n(a.length, 2)}</td><td>{n(a.emptyMass / 1000)}</td><td>{n(a.power / 1000, 0)}</td><td>{n(a.effort / 1000, 2)}</td><td>{n(o.capacity, 2)}</td><td>{n(a.baseLoadSpeed, 2)}</td></tr>
+        <tr className="calculation-total"><th>Formation total</th><td>—</td><td>{n(a.length, 2)}</td><td>{n(a.emptyMass / 1000)}</td><td>{n(a.power / 1000, 0)}</td><td>{n(a.effort / 1000, 2)}</td><td>{n(o.capacity, 2)}</td><td title="Minimum among components carrying the metrics cargo; not a sum">{n(a.baseLoadSpeed, 2)} (min)</td></tr>
       </tbody></table>
       <div className="calculation-equations">
         {o.wagon && lengthLimit !== null && <p><b>Maximum wagon count</b><code>floor(({n(lengthLimit, 2)} − {o.engines} × {n(o.engine.length, 2)}) ÷ {n(o.wagon.length, 2)}) = {o.wagons}</code><span>The calculation uses unrounded lengths.</span></p>}
@@ -63,18 +63,17 @@ export default function CalculationBreakdown({ option: o, settings, cargoName }:
       </tbody></table>
       <div className="calculation-equations">
         <p><b>Average speed</b><code>{n(o.distanceKm, 3)} km × 3,600 ÷ {n(a.trip.time, 3)} s = {n(o.averageSpeed, 3)} km/h</code><span>Includes acceleration, braking and all additional stops. Excludes cargo handling and station pauses.</span></p>
-        <p><b>Cargo loading speed</b><code>q = {n(a.baseLoadSpeed, 3)} base units/s × {n(a.cargoLoadFactor, 6)} cargo factor = {n(o.loadSpeed, 4)} units/s</code></p>
-        <p><b>Loading and unloading</b><code>{n(o.capacity, 2)} ÷ {n(o.loadSpeed, 4)} = {n(a.loadingTime, 3)} s each</code></p>
         <p><b>Total time used for throughput</b><code>{n(a.trip.time, 3)} travel + {n(a.loadingTime, 3)} loading + {n(a.unloadingTime, 3)} unloading + {n(a.arrivalTime, 2)} arrival pause = {n(a.totalTime, 3)} s</code><span>Origin loading starts ready; the destination arrival pause is counted once. Intermediate stops immediately restart and add no handling or waiting. Departure and door-closing pauses are excluded.</span></p>
         <p><b>Performance</b><code>{n(o.capacity, 2)} × 3,600 ÷ {n(a.totalTime, 3)} = {n(o.throughput, 3)} units/hour</code></p>
       </div>
+      <LoadingBreakdown option={o} settings={settings} cargoName={cargoName} />
     </section>
     <section className="calculation-section">
       <h3>4. Costs and other totals</h3>
       <div className="calculation-equations">
         <p><b>Purchase</b><code>round(${n(a.basePurchase, 0)} × {o.vehicleCostPercent}%) = ${n(o.purchase, 0)}</code></p>
         <p><b>Yearly running cost</b><code>round(${n(a.baseRunning, 0)} × {o.maintenanceCostPercent}%) = ${n(o.running, 0)}</code></p>
-        <p><b>Annualized cost</b><code>${n(o.running, 0)} + ${n(o.purchase, 0)} ÷ 20 = ${n(a.annualizedCost, 2)}</code></p>
+        <p><b>Annualized cost</b><code>${n(o.running, 0)} + ${n(o.purchase, 0)} ÷ {n(o.paybackYears ?? DEFAULT_PAYBACK_YEARS, 2)} years = ${n(a.annualizedCost, 2)}/year</code></p>
         <p><b>Cost per performance</b><code>${n(a.annualizedCost, 2)} ÷ {n(o.throughput, 3)} = ${n(o.costPerformance, 2)} per unit/hour annually</code></p>
         <p><b>Noise and pollution</b><code>Σ(quantity × vehicle score): noise {n(a.noise, 0)}, pollution {n(a.pollution, 0)}</code></p>
         {o.comfort !== null && <p><b>Passenger comfort</b><code>Σ(quantity × passenger capacity × comfort) ÷ {n(o.capacity, 2)} = {n(o.comfort, 2)} / 100</code></p>}
@@ -82,6 +81,32 @@ export default function CalculationBreakdown({ option: o, settings, cargoName }:
       <p className="calculation-note">Displayed substitutions are rounded for readability; calculations retain full precision. This is a flat-track estimate excluding traffic, gradients, curves, return trips and maintenance effects.</p>
     </section>
   </div>;
+}
+
+export function LoadingBreakdown({ option: o, settings, cargoName }: { option: Option; settings: Settings; cargoName: string }) {
+  const loading = formationLoadingFactors(o.engine, o.wagon, o.engines, o.wagons, o.cargo);
+  const base = loading.baseRate;
+  const factor = loading.scaledBaseRate > 0 ? o.loadSpeed / loading.scaledBaseRate : 0;
+  const seconds = o.capacity / Math.max(o.loadSpeed, .001);
+  const components = [{ vehicle: o.engine, count: o.engines }, ...(o.wagon ? [{ vehicle: o.wagon, count: o.wagons }] : [])];
+  const carrying = components.filter(({ vehicle }) => vehicle.capacities[o.cargo] > 0);
+  const limit = o.mode === "train" ? settings.trainLength : settings.tramLength;
+  const sources: Record<string, string> = { explicit: "Vehicle definition", default: "Default 1× (omitted in definition)", regression: "TF3 regression (explicit −1)", "formation-minimum": "Minimum among carrying set parts" };
+  return <section className="loading-breakdown calculation-section" aria-label="Loading calculation">
+    <h3>Loading and unloading · {cargoName}</h3>
+    <p>The formation uses the slowest base loading rate among components carrying this cargo. Components that cannot carry {cargoName} are excluded. Vehicle-count scaling is currently <strong>{LOADING_RATE_MULTIPLIES_BY_VEHICLE_COUNT ? "on" : "off"}</strong>.</p>
+    <table><thead><tr><th>Component</th><th>Qty</th><th>Capacity each</th><th>Base rate</th><th>Rate source</th></tr></thead><tbody>{components.map(({ vehicle: v, count }) => <tr key={v.id}><th>{v.name}</th><td>{count}</td><td>{n(v.capacities[o.cargo] ?? 0, 2)}</td><td>{v.capacities[o.cargo] ? `${n(v.loadSpeed, 3)}×` : "Excluded"}</td><td>{v.capacities[o.cargo] ? sources[v.loadSpeedSource ?? ""] ?? "Catalog value" : "Does not carry this cargo"}</td></tr>)}</tbody></table>
+    <div className="calculation-equations">
+      <p><b>Formation base rate</b><code>min({carrying.map(({ vehicle }) => n(vehicle.loadSpeed, 3)).join(", ")}) = {n(base, 3)}×</code></p>
+      <p><b>Reference measurement</b><code>{LOADING_CALIBRATION.units} ÷ ({LOADING_CALIBRATION.seconds} s × {LOADING_CALIBRATION.baseRate} × {LOADING_CALIBRATION.cargoFactor}) = {n(LOADING_REFERENCE_COMBINED_SCALE, 3)} combined multiplier</code><span>135 logs in nine Cargo Car 1960 wagons rated 2× took about 120 seconds at normal time and a 1× station. That original test alone was ambiguous. Follow-ups support vehicle-count scaling: seven 4× Stake Car 1945 wagons took 80 s from 1 to 140 logs (predicted 79.43 s); one 2× Cargo Car 1960 took 113 s from 1 to 15 logs (predicted 112 s). These intervals exclude arrival and departure pauses.</span></p>
+      <p><b>Active loading assumptions</b><code>Fixed scale = {n(loading.rateScale, 3)} · vehicle-count scaling = {LOADING_RATE_MULTIPLIES_BY_VEHICLE_COUNT ? "on" : "off"}</code><code>{loading.carryingVehicleCount} cargo-carrying vehicles → count multiplier {n(loading.countMultiplier, 0)}</code><span>Only vehicles carrying {cargoName} count. A complete authored set counts as one catalog vehicle. These assumptions can be changed independently for further testing.</span></p>
+      <p><b>Cargo-adjusted loading rate · Load/s</b><code>{n(base, 3)} × {n(factor, 6)} cargo factor × {n(loading.rateScale, 3)} fixed scale × {n(loading.countMultiplier, 0)} count multiplier = {n(o.loadSpeed, 6)} units/s</code><span>Assumes normal time and a 1× station. This is units per second for the formation, rather than the vehicle’s in-game × rating. The table rounds small fractional rates to four decimal places; hover for the precise value.</span></p>
+      <p><b>Full load and unload</b><code>{n(o.capacity, 2)} units ÷ {n(o.loadSpeed, 6)} units/s = {n(seconds, 3)} s ({n(seconds / 60, 2)} min) each</code><span>Two full handling operations contribute {n(seconds * 2, 3)} s to performance. Additional journey stops do not load or unload.</span></p>
+      {o.wagon && <p><b>Why this wagon count?</b><code>floor(({n(limit, 3)} m − {o.engines} × {n(o.engine.length, 5)} m) ÷ {n(o.wagon.length, 5)} m) = {o.wagons} wagons</code><span>Every row uses the maximum wagons that fit. Longer or more numerous engines leave less room; different wagon lengths also change the count. Calculations use unrounded lengths.</span></p>}
+    </div>
+    {(o.cargos?.length ?? 1) > 1 && <p className="calculation-note">Each selected cargo is evaluated as a separate full load. This breakdown uses {cargoName}, the cargo with the lowest throughput for this formation.</p>}
+    <p className="calculation-note">Count scaling is supported by the recorded homogeneous-wagon rail tests. Mixed-rate formations, other carriers and unloading still extrapolate from those observations under the active assumptions.</p>
+  </section>;
 }
 
 function TripGraph({ analysis: a }: { analysis: Analysis }) {

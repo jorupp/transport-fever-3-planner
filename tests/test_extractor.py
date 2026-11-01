@@ -9,6 +9,23 @@ spec.loader.exec_module(extractor)
 
 
 class ExtractorTests(unittest.TestCase):
+    def test_loading_default_and_explicit_regression_are_distinct(self):
+        meta = {
+            'transportVehicle': {'carrier':'RAIL','comfortFactor':0},
+            'landVehicle': {'topSpeed':20,'weightEmpty':10000},
+            'extent': {'bbMin':[0,0,0],'bbMax':[10,2,3]},
+            'emissions': {'noise':{'score':0},'pollution':{'score':0}},
+            'cost': {'price':100}, 'maintenance': {'runningCosts':10},
+        }
+        models={'RAIL':{'load_speed':{'_intercept':3}}}
+        def normalized():
+            return extractor.normalize(meta,'vehicle/waggon/test.mdl',[],lambda s:s,models)
+        self.assertEqual((normalized()['loadSpeed'],normalized()['loadSpeedSource']),(1,'default'))
+        meta['transportVehicle']['loadSpeed']=2
+        self.assertEqual((normalized()['loadSpeed'],normalized()['loadSpeedSource']),(2,'explicit'))
+        meta['transportVehicle']['loadSpeed']=-1
+        self.assertEqual((normalized()['loadSpeed'],normalized()['loadSpeedSource']),(3,'regression'))
+
     def test_braking_metadata_is_preserved_with_a_legacy_default(self):
         meta = {
             'transportVehicle': {'carrier':'RAIL','comfortFactor':0,'loadSpeed':2},

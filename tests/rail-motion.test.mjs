@@ -22,7 +22,7 @@ test('calibrated rail curve matches all four loaded/empty TF3 recordings',()=>{
     }
     const noPayload=calculateOptions([{...engine,weightMaxPayload:0},{...wagon,weightMaxPayload:0}],data.cargos,settings).find(o=>o.id===row.id);
     for (const key of ['acceleration','timeToMaxSpeed','distanceToMaxSpeed','timeTo1Km','timeTo5Km','peakSpeed','throughput']) assert.equal(row[key],noPayload[key],key);
-    assert.equal(row.loadSpeed,1.125); // 135 logs still take 120 s to load and 120 s to unload.
+    assert.equal(row.loadSpeed,1.125); // Minimum 2x base rate, applied once with the fixed calibration scale.
     assert.equal(row.arrivalDelaySeconds,2);
     assert(Math.abs(row.throughput-135*3600/(curve.trip(10000).time+240+2))<1e-9);
   }

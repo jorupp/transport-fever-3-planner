@@ -1,0 +1,30 @@
+{
+  "cargo": "LOGS",
+  "gameSpeedMultiplier": 1,
+  "stationMultiplier": 1,
+  "note": "Same station as the original nine-Cargo-Car-1960 test. Loading rates are checked from the first displayed cargo count to the full count, excluding arrival and departure pauses. Engine was not specified.",
+  "runs": [
+    {
+      "wagon": "Stake Car 1945",
+      "wagonCount": 7,
+      "capacity": 140,
+      "vehicleLoadingRating": 4,
+      "atTerminalTimestampSeconds": 28,
+      "loadingStatusTimestampSeconds": 31,
+      "firstCargo": { "timestampSeconds": 33, "units": 1 },
+      "fullCargo": { "timestampSeconds": 113, "units": 140 },
+      "acceleratingTimestampSeconds": 115,
+      "displayedLoadingSpeedPercent": 100
+    },
+    {
+      "wagon": "Cargo Car 1960",
+      "wagonCount": 1,
+      "capacity": 15,
+      "vehicleLoadingRating": 2,
+      "atTerminalTimestampSeconds": 22,
+      "loadingStatusTimestampSeconds": 24,
+      "firstCargo": { "timestampSeconds": 26, "units": 1 },
+      "fullCargo": { "timestampSeconds": 139, "units": 15 }
+    }
+  ]
+}

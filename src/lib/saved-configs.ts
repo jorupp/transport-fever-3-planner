@@ -18,7 +18,8 @@ export function readSavedConfigs(raw: string | null, cargoIds: readonly string[]
       typeof entry.name !== "string" || !entry.name.trim() || entry.name.trim().length > 100 || !isRecord(entry.settings)) continue;
     const s = entry.settings;
     const vehicleCostPercent = s.vehicleCostPercent ?? 125, maintenanceCostPercent = s.maintenanceCostPercent ?? 125;
-    const additionalStops = s.additionalStops ?? 0;
+    const additionalStops = s.additionalStops ?? 0, paybackYears = s.paybackYears ?? 20;
+    if (typeof paybackYears !== "number" || !Number.isFinite(paybackYears) || paybackYears <= 0) continue;
     if (!Number.isSafeInteger(additionalStops) || (additionalStops as number) < 0 || (additionalStops as number) >= Number.MAX_SAFE_INTEGER) continue;
     if (typeof vehicleCostPercent !== "number" || typeof maintenanceCostPercent !== "number" || ![50, 75, 100, 125, 150].includes(vehicleCostPercent) || ![50, 75, 100, 125, 150].includes(maintenanceCostPercent)) continue;
     if (!inRange(s.year, 1800, 2200, true) || !inRange(s.extraYears, 0, 200, true) ||
@@ -30,7 +31,7 @@ export function readSavedConfigs(raw: string | null, cargoIds: readonly string[]
     configs.push({ id: entry.id, name, settings: {
       year: s.year, extraYears: s.extraYears, trainLength: s.trainLength, tramLength: s.tramLength,
       distanceKm: s.distanceKm, additionalStops: additionalStops as number, minTopSpeed: s.minTopSpeed, cargos,
-      vehicleCostPercent, maintenanceCostPercent,
+      vehicleCostPercent, maintenanceCostPercent, paybackYears,
     } });
   }
   return configs;

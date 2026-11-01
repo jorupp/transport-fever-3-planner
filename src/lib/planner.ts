@@ -5,6 +5,7 @@ export type Vehicle = {
   weightEmpty: number; weightMaxPayload: number; friction: number; engineType: string | null;
   brakeDeceleration?: number;
   capacities: Record<string, number>; loadSpeed: number; comfort: number; noise: number;
+  loadSpeedSource?: string;
   pollution: number; purchase: number; running: number; fixedFormation: boolean;
   parts?: { name: string; source: string }[];
 };
@@ -13,7 +14,7 @@ export type Mode = "train" | "tram" | "road";
 export type FinanceSettings = { vehicleCostPercent: number; maintenanceCostPercent: number };
 export const DEFAULT_FINANCE: FinanceSettings = { vehicleCostPercent: 125, maintenanceCostPercent: 125 };
 export const FINANCE_PRESETS = [{ id: "easy", name: "Easy", percent: 50 }, { id: "normal", name: "Normal", percent: 100 }, { id: "hard", name: "Hard", percent: 125 }, { id: "very-hard", name: "Very hard", percent: 150 }] as const;
-export type Settings = { year: number; extraYears: number; trainLength: number; tramLength: number; distanceKm: number; additionalStops?: number; minTopSpeed: number; cargos: string[]; vehicleCostPercent?: number; maintenanceCostPercent?: number };
+export type Settings = { year: number; extraYears: number; trainLength: number; tramLength: number; distanceKm: number; additionalStops?: number; minTopSpeed: number; cargos: string[]; vehicleCostPercent?: number; maintenanceCostPercent?: number; paybackYears?: number };
 export type Option = {
   id: string; mode: Mode; engine: Vehicle; wagon: Vehicle | null; engines: number; wagons: number;
   cargo: string; // The selected cargo with the lowest estimated throughput (the metrics benchmark).
@@ -23,12 +24,26 @@ export type Option = {
   brakingAcceleration: number; brakingTime: number; brakingDistance: number; arrivalDelaySeconds: number;
   timeTo1Km: number; timeTo2Km: number; timeTo3Km: number; timeTo4Km: number; timeTo5Km: number;
   noise: number; pollution: number; comfort: number | null; purchase: number; running: number;
-  vehicleCostPercent: number; maintenanceCostPercent: number;
+  vehicleCostPercent: number; maintenanceCostPercent: number; paybackYears: number;
   loadSpeed: number; throughput: number; costPerformance: number; distanceKm: number; additionalStops: number; yearFrom: number; yearTo: number | null;
   availableAtStart: boolean; availableAtEnd: boolean; fullRange: boolean; lightRail: boolean; loadedMass: number;
 };
 // Leave a 5 m buffer below the game's default 160 m station length.
 export const DEFAULT_SETTINGS: Settings = { year: 1990, extraYears: 10, trainLength: 155, tramLength: 60, distanceKm: 10, minTopSpeed: 0, cargos: ["PASSENGERS"] };
+export const DEFAULT_PAYBACK_YEARS = 20;
+// Nine Cargo Car 1960 wagons / 135 logs took about 120 s. Follow-up tests
+// distinguish the hypotheses: seven 4x Stake Car 1945 wagons took 80 s from
+// 1 to 140 logs; one 2x Cargo Car 1960 took 113 s from 1 to 15 logs.
+// Count scaling predicts 79.43 s and 112 s respectively, without a fixed boost.
+// Keep both constants independent for further experiments.
+export const LOADING_RATE_SCALE: number = 1;
+export const LOADING_RATE_MULTIPLIES_BY_VEHICLE_COUNT: boolean = true;
+// Recorded at normal time and a 1x station: 135 logs, nine Cargo Car 1960
+// wagons rated 2x, about 120 seconds. Retain the observation independently
+// of the editable assumptions above.
+export const LOADING_CALIBRATION = { units: 135, seconds: 120, baseRate: 2, cargoFactor: .0625 } as const;
+export const LOADING_REFERENCE_COMBINED_SCALE = LOADING_CALIBRATION.units
+  / (LOADING_CALIBRATION.seconds * LOADING_CALIBRATION.baseRate * LOADING_CALIBRATION.cargoFactor);
 export const DEFAULT_RAIL_BRAKING = 2.5;
 // Measured stop-to-loading interval. Count it once at the trip's destination;
 // origin loading starts ready. Departure/door-closing pauses remain unmeasured.
@@ -52,7 +67,31 @@ export function compatible(engine: Vehicle, wagon: Vehicle) {
   return engine.carrier === wagon.carrier && engine.engineModes.some(m => wagon.modes.includes(m));
 }
 
+export function sameFormationSettings(a: Settings, b: Settings) {
+  return a.year === b.year && a.extraYears === b.extraYears && a.trainLength === b.trainLength && a.tramLength === b.tramLength
+    && [...new Set(a.cargos)].sort().join(",") === [...new Set(b.cargos)].sort().join(",");
+}
+
+export function formationBaseLoadSpeed(engine: Vehicle, wagon: Vehicle | null, cargo: string) {
+  const rates = [engine, wagon].filter((v): v is Vehicle => !!v && v.capacities[cargo] > 0).map(v => v.loadSpeed);
+  return rates.length ? Math.min(...rates) : 0;
+}
+
+export function formationLoadingFactors(engine: Vehicle, wagon: Vehicle | null, engines: number, wagons: number, cargo: string,
+  { rateScale = LOADING_RATE_SCALE, multiplyByVehicleCount = LOADING_RATE_MULTIPLIES_BY_VEHICLE_COUNT } = {}) {
+  const baseRate = formationBaseLoadSpeed(engine, wagon, cargo);
+  // Count cargo-carrying catalog vehicles only; a complete authored set is one
+  // catalog vehicle. A locomotive that cannot carry this cargo contributes zero.
+  const carryingVehicleCount = (engine.capacities[cargo] > 0 ? engines : 0) + (wagon && wagon.capacities[cargo] > 0 ? wagons : 0);
+  const countMultiplier = multiplyByVehicleCount ? carryingVehicleCount : 1;
+  return { baseRate, carryingVehicleCount, countMultiplier, rateScale,
+    scaledBaseRate: baseRate * rateScale * countMultiplier };
+}
+
 export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings: Settings, progress?: (value: number) => void): Option[] {
+  if (!Number.isFinite(settings.paybackYears ?? DEFAULT_PAYBACK_YEARS) || (settings.paybackYears ?? DEFAULT_PAYBACK_YEARS) <= 0) {
+    throw new RangeError("Purchase payback period must be a positive number of years.");
+  }
   for (const percent of [settings.vehicleCostPercent ?? DEFAULT_FINANCE.vehicleCostPercent, settings.maintenanceCostPercent ?? DEFAULT_FINANCE.maintenanceCostPercent]) {
     if (![50, 75, 100, 125, 150].includes(percent)) throw new RangeError("Finance multipliers must be 50–150% in 25% increments.");
   }
@@ -129,7 +168,9 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
     + (wagon?.capacities[cargo.id] ? wagon.weightMaxPayload * wagons : 0);
   const loadedMass = sum("weightEmpty") + payload * cargo.weightFactor;
   const speed = Math.min(engine.speed, wagon?.speed ?? Infinity);
-  const loadSpeed = ((engine.capacities[cargo.id] ? engine.loadSpeed * engines : 0) + (wagon?.loadSpeed ?? 0) * wagons) * cargo.loadSpeedFactor;
+  const loading = formationLoadingFactors(engine, wagon, engines, wagons, cargo.id);
+  const loadSpeed = loading.scaledBaseRate * cargo.loadSpeedFactor;
+  const paybackYears = settings.paybackYears ?? DEFAULT_PAYBACK_YEARS;
   // Rail calibration: loaded and empty runs have matching acceleration. Keep
   // theoretical loadedMass for reference; use empty mass for rail movement.
   // Tram/light-rail and road equipment retain their uncalibrated estimate.
@@ -171,7 +212,7 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
     brakingAcceleration, brakingTime, brakingDistance, arrivalDelaySeconds,
     timeTo1Km, timeTo2Km, timeTo3Km, timeTo4Km, timeTo5Km,
     comfort: cargo.id === "PASSENGERS" ? ((engine.capacities.PASSENGERS ?? 0) * engines * engine.comfort + (wagon?.capacities.PASSENGERS ?? 0) * wagons * (wagon?.comfort ?? 0)) / capacity : null,
-    purchase, running, loadSpeed, throughput, distanceKm: settings.distanceKm, additionalStops, costPerformance: throughput > 0 ? (running + purchase / 20) / throughput : Infinity,
+    purchase, running, loadSpeed, throughput, distanceKm: settings.distanceKm, additionalStops, paybackYears, costPerformance: throughput > 0 ? (running + purchase / paybackYears) / throughput : Infinity,
     vehicleCostPercent, maintenanceCostPercent,
     yearFrom, yearTo: Number.isFinite(until) ? until : null,
     availableAtStart: yearFrom <= settings.year && until >= settings.year,
@@ -297,11 +338,12 @@ export function analyzeOption(o: Option) {
     accelerationTime: segment.accelerationTime * segmentCount, accelerationDistance: segment.accelerationDistance * segmentCount,
     cruiseTime: segment.cruiseTime * segmentCount, cruiseDistance: segment.cruiseDistance * segmentCount,
     brakingTime: segment.brakingTime * segmentCount, brakingDistance: segment.brakingDistance * segmentCount };
-  const baseLoadSpeed = (o.engine.capacities[o.cargo] ? o.engine.loadSpeed * o.engines : 0) + (o.wagon?.loadSpeed ?? 0) * o.wagons;
+  const loading = formationLoadingFactors(o.engine, o.wagon, o.engines, o.wagons, o.cargo);
+  const baseLoadSpeed = loading.baseRate;
   const loadingTime = o.capacity / Math.max(o.loadSpeed, .001), arrivalTime = o.arrivalDelaySeconds;
   const totalTime = trip.time + 2 * loadingTime + arrivalTime;
   const transitionTime = curve && transitionSpeed < segment.speed ? curve.atSpeed(transitionSpeed).time : null;
-  const annualizedCost = o.running + o.purchase / 20;
+  const annualizedCost = o.running + o.purchase / (o.paybackYears ?? DEFAULT_PAYBACK_YEARS);
   function sampleAtTime(seconds: number) {
     const time = Math.max(0, Math.min(seconds, trip.time));
     const boundary = Math.round(time / segment.time);
@@ -337,7 +379,7 @@ export function analyzeOption(o: Option) {
   return {
     rail, power, effort, forceLimit, mass, resistance, resistanceForce: mass * resistance,
     transitionSpeed, transitionTime, trip, segment, segmentCount, segmentDistance: distance, additionalStops,
-    baseLoadSpeed, cargoLoadFactor: baseLoadSpeed > 0 ? o.loadSpeed / baseLoadSpeed : 0,
+    baseLoadSpeed, loading, cargoLoadFactor: loading.scaledBaseRate > 0 ? o.loadSpeed / loading.scaledBaseRate : 0,
     loadingTime, unloadingTime: loadingTime, arrivalTime, totalTime, annualizedCost,
     basePurchase: sum("purchase"), baseRunning: sum("running"), emptyMass: sum("weightEmpty"),
     length: sum("length"), noise: sum("noise"), pollution: sum("pollution"), sampleAtTime,

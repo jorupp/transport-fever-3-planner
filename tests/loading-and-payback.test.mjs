@@ -34,8 +34,7 @@ test('identical wagons load in parallel: more wagons increase rate and capacity 
   assert(rows.every(o=>o.loadSpeed===(o.engines+o.wagons)*.0625));
 });
 
-test('count scaling matches both follow-up loading intervals within timestamp precision',()=>{
-  const cargo=data.cargos.find(c=>c.id===followUps.cargo);
+test('parallel loading matches both follow-up loading intervals within timestamp precision',()=>{
   for(const run of followUps.runs){
     const car=data.vehicles.find(v=>v.name===run.wagon);
     assert.equal(car.loadSpeed,run.vehicleLoadingRating);
@@ -48,29 +47,20 @@ test('count scaling matches both follow-up loading intervals within timestamp pr
     const observed=run.fullCargo.timestampSeconds-run.firstCargo.timestampSeconds;
     const predicted=units/row.loadSpeed;
     assert(Math.abs(predicted-observed)<=1.1,`${run.wagon}: ${predicted} vs ${observed}`);
-    const fixed=formationLoadingFactors(engine,car,1,run.wagonCount,followUps.cargo,{rateScale:9,multiplyByVehicleCount:false});
-    const fixedPrediction=units/(fixed.scaledBaseRate*cargo.loadSpeedFactor);
-    assert(Math.abs(fixedPrediction-observed)>10,'the fixed-nine hypothesis fails the follow-up');
+
   }
   function optionFor(car,trainLength){
     return calculateOptions([engine,car],data.cargos,{...settings,trainLength}).find(o=>o.engines===1);
   }
 });
 
-test('fixed scale and vehicle-count scaling are independent hypotheses with the same nine-wagon reference',()=>{
-  const factors=(wagons,rateScale,multiplyByVehicleCount)=>formationLoadingFactors(engine,wagon,2,wagons,'LOGS',{rateScale,multiplyByVehicleCount});
-  const fixedNine=factors(9,9,false),countNine=factors(9,1,true);
-  assert.equal(fixedNine.countMultiplier,1);assert.equal(countNine.countMultiplier,9);
-  assert.equal(countNine.carryingVehicleCount,9,'locomotives without log capacity do not count');
-  assert.equal(fixedNine.scaledBaseRate*.0625,1.125);
-  assert.equal(countNine.scaledBaseRate*.0625,1.125);
-  const fixedThree=factors(3,9,false),countThree=factors(3,1,true);
-  assert.equal(45/(fixedThree.scaledBaseRate*.0625),40);
-  assert.equal(45/(countThree.scaledBaseRate*.0625),120);
-  assert.equal(factors(9,9,true).scaledBaseRate*.0625,10.125,'both multipliers apply when both are enabled');
+test('parallel loading counts only vehicles carrying the selected cargo',()=>{
+  const ordinary=formationLoadingFactors(engine,wagon,2,9,'LOGS');
+  assert.equal(ordinary.carryingVehicleCount,9);
+  assert.equal(ordinary.parallelBaseRate,18);
   const carryingEngine={...engine,capacities:{LOGS:10},loadSpeed:1};
-  const mixed=formationLoadingFactors(carryingEngine,wagon,2,3,'LOGS',{rateScale:1,multiplyByVehicleCount:true});
-  assert.equal(mixed.carryingVehicleCount,5);assert.equal(mixed.baseRate,1);assert.equal(mixed.scaledBaseRate,5);
+  const mixed=formationLoadingFactors(carryingEngine,wagon,2,3,'LOGS');
+  assert.equal(mixed.carryingVehicleCount,5);assert.equal(mixed.baseRate,1);assert.equal(mixed.parallelBaseRate,5);
 });
 
 test('1899 defaults to 1x and 1913 explicitly defines 2x; their rates scale by wagon count',()=>{

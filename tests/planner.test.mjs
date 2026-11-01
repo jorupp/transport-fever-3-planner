@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { calculateOptions, compatible, DEFAULT_SETTINGS, LOADING_RATE_SCALE, isMultipleUnitMenuVehicle } from '../src/lib/planner.ts';
+import { calculateOptions, compatible, DEFAULT_SETTINGS, isMultipleUnitMenuVehicle } from '../src/lib/planner.ts';
 import data from '../src/data/tf3-vehicles.json' with { type: 'json' };
 
 const passenger = data.cargos.find(c=>c.id==='PASSENGERS');
@@ -72,7 +72,7 @@ test('multiple units haul maximum wagons with one through five units; locomotive
     assert.equal(row.capacity,row.engines*20+row.wagons*20);
     assert.equal(row.purchase,Math.round((row.engines*unit.purchase+row.wagons*coach.purchase)*1.25));
     assert.equal(row.running,Math.round((row.engines*unit.running+row.wagons*coach.running)*1.25));
-    assert.equal(row.loadSpeed,Math.min(unit.loadSpeed,coach.loadSpeed)*passenger.loadSpeedFactor*LOADING_RATE_SCALE*(row.engines+row.wagons));
+    assert.equal(row.loadSpeed,Math.min(unit.loadSpeed,coach.loadSpeed)*passenger.loadSpeedFactor*(row.engines+row.wagons));
     assert.equal(row.noise,row.engines*unit.noise+row.wagons*coach.noise);
     assert.equal(row.pollution,row.engines*unit.pollution+row.wagons*coach.pollution);
     assert.equal(row.availableAtStart,false);assert.equal(row.availableAtEnd,false);

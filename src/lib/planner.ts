@@ -31,19 +31,6 @@ export type Option = {
 // Leave a 5 m buffer below the game's default 160 m station length.
 export const DEFAULT_SETTINGS: Settings = { year: 1990, extraYears: 10, trainLength: 155, tramLength: 60, distanceKm: 10, minTopSpeed: 0, cargos: ["PASSENGERS"] };
 export const DEFAULT_PAYBACK_YEARS = 20;
-// Nine Cargo Car 1960 wagons / 135 logs took about 120 s. Follow-up tests
-// distinguish the hypotheses: seven 4x Stake Car 1945 wagons took 80 s from
-// 1 to 140 logs; one 2x Cargo Car 1960 took 113 s from 1 to 15 logs.
-// Count scaling predicts 79.43 s and 112 s respectively, without a fixed boost.
-// Keep both constants independent for further experiments.
-export const LOADING_RATE_SCALE: number = 1;
-export const LOADING_RATE_MULTIPLIES_BY_VEHICLE_COUNT: boolean = true;
-// Recorded at normal time and a 1x station: 135 logs, nine Cargo Car 1960
-// wagons rated 2x, about 120 seconds. Retain the observation independently
-// of the editable assumptions above.
-export const LOADING_CALIBRATION = { units: 135, seconds: 120, baseRate: 2, cargoFactor: .0625 } as const;
-export const LOADING_REFERENCE_COMBINED_SCALE = LOADING_CALIBRATION.units
-  / (LOADING_CALIBRATION.seconds * LOADING_CALIBRATION.baseRate * LOADING_CALIBRATION.cargoFactor);
 export const DEFAULT_RAIL_BRAKING = 2.5;
 // Measured stop-to-loading interval. Count it once at the trip's destination;
 // origin loading starts ready. Departure/door-closing pauses remain unmeasured.
@@ -77,15 +64,12 @@ export function formationBaseLoadSpeed(engine: Vehicle, wagon: Vehicle | null, c
   return rates.length ? Math.min(...rates) : 0;
 }
 
-export function formationLoadingFactors(engine: Vehicle, wagon: Vehicle | null, engines: number, wagons: number, cargo: string,
-  { rateScale = LOADING_RATE_SCALE, multiplyByVehicleCount = LOADING_RATE_MULTIPLIES_BY_VEHICLE_COUNT } = {}) {
+export function formationLoadingFactors(engine: Vehicle, wagon: Vehicle | null, engines: number, wagons: number, cargo: string) {
   const baseRate = formationBaseLoadSpeed(engine, wagon, cargo);
   // Count cargo-carrying catalog vehicles only; a complete authored set is one
   // catalog vehicle. A locomotive that cannot carry this cargo contributes zero.
   const carryingVehicleCount = (engine.capacities[cargo] > 0 ? engines : 0) + (wagon && wagon.capacities[cargo] > 0 ? wagons : 0);
-  const countMultiplier = multiplyByVehicleCount ? carryingVehicleCount : 1;
-  return { baseRate, carryingVehicleCount, countMultiplier, rateScale,
-    scaledBaseRate: baseRate * rateScale * countMultiplier };
+  return { baseRate, carryingVehicleCount, parallelBaseRate: baseRate * carryingVehicleCount };
 }
 
 export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings: Settings, progress?: (value: number) => void): Option[] {
@@ -169,7 +153,7 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
   const loadedMass = sum("weightEmpty") + payload * cargo.weightFactor;
   const speed = Math.min(engine.speed, wagon?.speed ?? Infinity);
   const loading = formationLoadingFactors(engine, wagon, engines, wagons, cargo.id);
-  const loadSpeed = loading.scaledBaseRate * cargo.loadSpeedFactor;
+  const loadSpeed = loading.parallelBaseRate * cargo.loadSpeedFactor;
   const paybackYears = settings.paybackYears ?? DEFAULT_PAYBACK_YEARS;
   // Rail calibration: loaded and empty runs have matching acceleration. Keep
   // theoretical loadedMass for reference; use empty mass for rail movement.
@@ -379,7 +363,7 @@ export function analyzeOption(o: Option) {
   return {
     rail, power, effort, forceLimit, mass, resistance, resistanceForce: mass * resistance,
     transitionSpeed, transitionTime, trip, segment, segmentCount, segmentDistance: distance, additionalStops,
-    baseLoadSpeed, loading, cargoLoadFactor: loading.scaledBaseRate > 0 ? o.loadSpeed / loading.scaledBaseRate : 0,
+    baseLoadSpeed, loading, cargoLoadFactor: loading.parallelBaseRate > 0 ? o.loadSpeed / loading.parallelBaseRate : 0,
     loadingTime, unloadingTime: loadingTime, arrivalTime, totalTime, annualizedCost,
     basePurchase: sum("purchase"), baseRunning: sum("running"), emptyMass: sum("weightEmpty"),
     length: sum("length"), noise: sum("noise"), pollution: sum("pollution"), sampleAtTime,

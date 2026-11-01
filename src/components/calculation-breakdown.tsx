@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { analyzeOption, formationLoadingFactors, DEFAULT_PAYBACK_YEARS, LOADING_CALIBRATION, LOADING_REFERENCE_COMBINED_SCALE, LOADING_RATE_MULTIPLIES_BY_VEHICLE_COUNT, type Option, type Settings } from "@/lib/planner";
+import { analyzeOption, formationLoadingFactors, DEFAULT_PAYBACK_YEARS, type Option, type Settings } from "@/lib/planner";
 
 const n = (value: number, decimals = 1) => value.toLocaleString("en-US", { maximumFractionDigits: decimals });
 type Analysis = ReturnType<typeof analyzeOption>;
@@ -86,7 +86,7 @@ export default function CalculationBreakdown({ option: o, settings, cargoName }:
 export function LoadingBreakdown({ option: o, settings, cargoName }: { option: Option; settings: Settings; cargoName: string }) {
   const loading = formationLoadingFactors(o.engine, o.wagon, o.engines, o.wagons, o.cargo);
   const base = loading.baseRate;
-  const factor = loading.scaledBaseRate > 0 ? o.loadSpeed / loading.scaledBaseRate : 0;
+  const factor = loading.parallelBaseRate > 0 ? o.loadSpeed / loading.parallelBaseRate : 0;
   const seconds = o.capacity / Math.max(o.loadSpeed, .001);
   const components = [{ vehicle: o.engine, count: o.engines }, ...(o.wagon ? [{ vehicle: o.wagon, count: o.wagons }] : [])];
   const carrying = components.filter(({ vehicle }) => vehicle.capacities[o.cargo] > 0);
@@ -94,18 +94,18 @@ export function LoadingBreakdown({ option: o, settings, cargoName }: { option: O
   const sources: Record<string, string> = { explicit: "Vehicle definition", default: "Default 1× (omitted in definition)", regression: "TF3 regression (explicit −1)", "formation-minimum": "Minimum among carrying set parts" };
   return <section className="loading-breakdown calculation-section" aria-label="Loading calculation">
     <h3>Loading and unloading · {cargoName}</h3>
-    <p>The formation uses the slowest base loading rate among components carrying this cargo. Components that cannot carry {cargoName} are excluded. Vehicle-count scaling is currently <strong>{LOADING_RATE_MULTIPLIES_BY_VEHICLE_COUNT ? "on" : "off"}</strong>.</p>
+    <p>The formation uses the slowest base loading rate among components carrying this cargo. Components that cannot carry {cargoName} are excluded. Cargo-carrying vehicles load in parallel.</p>
     <table><thead><tr><th>Component</th><th>Qty</th><th>Capacity each</th><th>Base rate</th><th>Rate source</th></tr></thead><tbody>{components.map(({ vehicle: v, count }) => <tr key={v.id}><th>{v.name}</th><td>{count}</td><td>{n(v.capacities[o.cargo] ?? 0, 2)}</td><td>{v.capacities[o.cargo] ? `${n(v.loadSpeed, 3)}×` : "Excluded"}</td><td>{v.capacities[o.cargo] ? sources[v.loadSpeedSource ?? ""] ?? "Catalog value" : "Does not carry this cargo"}</td></tr>)}</tbody></table>
     <div className="calculation-equations">
       <p><b>Formation base rate</b><code>min({carrying.map(({ vehicle }) => n(vehicle.loadSpeed, 3)).join(", ")}) = {n(base, 3)}×</code></p>
-      <p><b>Reference measurement</b><code>{LOADING_CALIBRATION.units} ÷ ({LOADING_CALIBRATION.seconds} s × {LOADING_CALIBRATION.baseRate} × {LOADING_CALIBRATION.cargoFactor}) = {n(LOADING_REFERENCE_COMBINED_SCALE, 3)} combined multiplier</code><span>135 logs in nine Cargo Car 1960 wagons rated 2× took about 120 seconds at normal time and a 1× station. That original test alone was ambiguous. Follow-ups support vehicle-count scaling: seven 4× Stake Car 1945 wagons took 80 s from 1 to 140 logs (predicted 79.43 s); one 2× Cargo Car 1960 took 113 s from 1 to 15 logs (predicted 112 s). These intervals exclude arrival and departure pauses.</span></p>
-      <p><b>Active loading assumptions</b><code>Fixed scale = {n(loading.rateScale, 3)} · vehicle-count scaling = {LOADING_RATE_MULTIPLIES_BY_VEHICLE_COUNT ? "on" : "off"}</code><code>{loading.carryingVehicleCount} cargo-carrying vehicles → count multiplier {n(loading.countMultiplier, 0)}</code><span>Only vehicles carrying {cargoName} count. A complete authored set counts as one catalog vehicle. These assumptions can be changed independently for further testing.</span></p>
-      <p><b>Cargo-adjusted loading rate · Load/s</b><code>{n(base, 3)} × {n(factor, 6)} cargo factor × {n(loading.rateScale, 3)} fixed scale × {n(loading.countMultiplier, 0)} count multiplier = {n(o.loadSpeed, 6)} units/s</code><span>Assumes normal time and a 1× station. This is units per second for the formation, rather than the vehicle’s in-game × rating. The table rounds small fractional rates to four decimal places; hover for the precise value.</span></p>
+      <p><b>Measured loading checks</b><span>135 logs in nine Cargo Car 1960 wagons rated 2× took about 120 seconds at normal time and a 1× station (predicted 120 s). Seven 4× Stake Car 1945 wagons took 80 s from 1 to 140 logs (predicted 79.43 s); one 2× Cargo Car 1960 took 113 s from 1 to 15 logs (predicted 112 s). These intervals exclude arrival and departure pauses.</span></p>
+      <p><b>Parallel loading</b><code>{n(base, 3)}× base rate × {loading.carryingVehicleCount} cargo-carrying vehicles = {n(loading.parallelBaseRate, 3)}× combined rate</code><span>Only vehicles carrying {cargoName} count. A complete authored set counts as one catalog vehicle.</span></p>
+      <p><b>Cargo-adjusted loading rate · Load/s</b><code>{n(base, 3)} × {loading.carryingVehicleCount} vehicles × {n(factor, 6)} cargo factor = {n(o.loadSpeed, 6)} units/s</code><span>Assumes normal time and a 1× station. This is units per second for the formation, rather than the vehicle’s in-game × rating. The table rounds small fractional rates to four decimal places; hover for the precise value.</span></p>
       <p><b>Full load and unload</b><code>{n(o.capacity, 2)} units ÷ {n(o.loadSpeed, 6)} units/s = {n(seconds, 3)} s ({n(seconds / 60, 2)} min) each</code><span>Two full handling operations contribute {n(seconds * 2, 3)} s to performance. Additional journey stops do not load or unload.</span></p>
       {o.wagon && <p><b>Why this wagon count?</b><code>floor(({n(limit, 3)} m − {o.engines} × {n(o.engine.length, 5)} m) ÷ {n(o.wagon.length, 5)} m) = {o.wagons} wagons</code><span>Every row uses the maximum wagons that fit. Longer or more numerous engines leave less room; different wagon lengths also change the count. Calculations use unrounded lengths.</span></p>}
     </div>
     {(o.cargos?.length ?? 1) > 1 && <p className="calculation-note">Each selected cargo is evaluated as a separate full load. This breakdown uses {cargoName}, the cargo with the lowest throughput for this formation.</p>}
-    <p className="calculation-note">Count scaling is supported by the recorded homogeneous-wagon rail tests. Mixed-rate formations, other carriers and unloading still extrapolate from those observations under the active assumptions.</p>
+    <p className="calculation-note">Parallel loading is supported by the recorded homogeneous-wagon rail tests. Mixed-rate formations, other carriers and unloading still extrapolate from those observations.</p>
   </section>;
 }
 

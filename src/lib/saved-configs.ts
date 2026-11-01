@@ -1,7 +1,7 @@
 import type { Settings } from "./planner";
 
 export const CONFIG_STORAGE_KEY = "tf3-planner.configs.v1";
-export type SavedConfig = { id: string; name: string; settings: Settings };
+export type SavedConfig = { id: string; name: string; settings: Settings; checkedVehicles: string[] };
 
 const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === "object" && value !== null && !Array.isArray(value);
 const inRange = (value: unknown, min: number, max: number, integer = false): value is number =>
@@ -28,11 +28,17 @@ export function readSavedConfigs(raw: string | null, cargoIds: readonly string[]
     const cargos = [...new Set(s.cargos.filter((id): id is string => typeof id === "string" && cargoIds.includes(id)))];
     const name = entry.name.trim();
     if (!cargos.length || configs.some(c => c.id === entry.id || c.name.toLowerCase() === name.toLowerCase())) continue;
-    configs.push({ id: entry.id, name, settings: {
+    configs.push({ id: entry.id, name, checkedVehicles: readCheckedVehicles(entry.checkedVehicles), settings: {
       year: s.year, extraYears: s.extraYears, trainLength: s.trainLength, tramLength: s.tramLength,
       distanceKm: s.distanceKm, additionalStops: additionalStops as number, minTopSpeed: s.minTopSpeed, cargos,
       vehicleCostPercent, maintenanceCostPercent, paybackYears,
     } });
   }
   return configs;
+}
+
+function readCheckedVehicles(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return [...new Set(value.filter((id): id is string => typeof id === "string" && id.length <= 2048
+    && /^(train|tram|road):[^:]+:[1-9]\d*:[^:]+:\d+$/.test(id)))];
 }

@@ -8,9 +8,10 @@ import { useDevelopmentState } from "@/lib/use-development-state";
 
 const cargoIds = data.cargos.map(c => c.id);
 
-export default function SavedConfigs({ getSettings, onLoad }: {
+export default function SavedConfigs({ getSettings, getCheckedVehicles, onLoad }: {
   getSettings: () => Settings | null;
-  onLoad: (settings: Settings) => void;
+  getCheckedVehicles: () => string[];
+  onLoad: (settings: Settings, checkedVehicles: string[]) => void;
 }) {
   const [configs, setConfigs] = useState<SavedConfig[]>([]);
   const [ready, setReady] = useState(false);
@@ -58,7 +59,7 @@ export default function SavedConfigs({ getSettings, onLoad }: {
     }
     const settings = getSettings();
     if (!settings) return;
-    const config: SavedConfig = { id: update && selected ? selected.id : crypto.randomUUID(), name: trimmed, settings: { ...settings, cargos: [...settings.cargos] } };
+    const config: SavedConfig = { id: update && selected ? selected.id : crypto.randomUUID(), name: trimmed, settings: { ...settings, cargos: [...settings.cargos] }, checkedVehicles: [...getCheckedVehicles()] };
     const next = update ? configs.map(c => c.id === config.id ? config : c) : [...configs, config];
     if (persist(next, `${update ? "Updated" : "Saved"} “${trimmed}” locally.`)) { setSelectedId(config.id); setName(trimmed); }
   }
@@ -72,14 +73,14 @@ export default function SavedConfigs({ getSettings, onLoad }: {
         const config = configs.find(c => c.id === event.target.value);
         setSelectedId(config?.id ?? ""); setName(config?.name ?? ""); setError("");
         setMessage(config ? `Loaded “${config.name}”.` : "");
-        if (config) onLoad({ ...config.settings, cargos: [...config.settings.cargos] });
+        if (config) onLoad({ ...config.settings, cargos: [...config.settings.cargos] }, [...config.checkedVehicles]);
       }}>
         <option value="">{configs.length ? "Choose a config…" : "No saved configs"}</option>
         {configs.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
       </select>
       <input aria-label="Configuration name" placeholder="Configuration name" maxLength={100} value={name} onChange={event => { setName(event.target.value); setError(""); setMessage(""); }} />
-      <button type="submit" disabled={!ready || !name.trim()} title="Save the current parameters under a new name">Save new</button>
-      <button type="button" disabled={!ready || !selected || !name.trim()} onClick={() => save(true)} title="Replace the selected config with the current name and parameters">Update</button>
+      <button type="submit" disabled={!ready || !name.trim()} title="Save the current parameters and checked vehicles under a new name">Save new</button>
+      <button type="button" disabled={!ready || !selected || !name.trim()} onClick={() => save(true)} title="Replace the selected config with the current name, parameters and checked vehicles">Update</button>
       <button type="button" disabled={!ready || !selected} onClick={() => {
         if (selected && persist(configs.filter(c => c.id !== selected.id), `Deleted “${selected.name}”.`)) { setSelectedId(""); setName(""); }
       }}>Delete</button>

@@ -1,6 +1,6 @@
 # Transport Fever 3 Planner
 
-A local Next.js app for comparing train, tram and road formations against a year window, length limits and selected cargo. The catalog is extracted from **Transport Fever 3**, not Transport Fever 2. The installed game is never accessed by the web app at runtime.
+A local Next.js app for comparing train, tram, road and boat options against a year window, length limits and selected cargo. The catalog is extracted from **Transport Fever 3**, not Transport Fever 2. The installed game is never accessed by the web app at runtime.
 
 ## Run
 
@@ -25,7 +25,7 @@ npm run data:extract -- --game-dir "D:\SteamLibrary\steamapps\common\Transport F
 
 The extractor reads:
 
-- `base/content/vehicle/{train,tram,waggon,bus,truck}/*.zip`: vehicle metadata and multiple-unit definitions.
+- `base/content/vehicle/{train,tram,waggon,bus,truck,ship}/*.zip`: vehicle metadata and multiple-unit definitions.
 - `base/content/cargos/*.zip`: cargo classes, weight and loading factors.
 - `base/content/base.zip`: generated vehicle-stat regression weights and cost formulas.
 - `base/strings/en/LC_MESSAGES/base.mo`: English display names.
@@ -55,7 +55,7 @@ Check the left-hand box on any result to keep it for comparison. Checks follow f
 
 Vehicle rows and summary cards include tiny TF3 menu images beside the engine and wagon names. Thumbnails have a fixed 10 px height and retain each image's natural aspect ratio, so longer vehicles appear wider; they load lazily and share assets with the larger previews. The exporter measures the visible artwork's alpha bounds, and a thumbnail-only vertical offset centers that artwork within the text line despite uneven transparent padding. Hover or keyboard-focus a vehicle row or summary card to see the larger TF3 menu icons. These are the base artwork colors; company recoloring can change their in-game appearance. Fixed formations show their first authored component's icon. Hover previews render outside the scrolling table so they are not clipped.
 
-`npm run data:extract-visuals` reruns the standard-library Python exporter in `scripts/extract_tf3_visuals.py` after refreshing the vehicle catalog. It converts the installed TF3 TGA menu icons to portable PNGs in `public/vehicles`, and writes paths, image sizes, source references, an icon fingerprint and approximate body colors to `src/data/tf3-vehicle-visuals.json`. The app reads only these included assets. The swatch algorithm samples opaque body pixels, excludes dark undercarriages and transparent backgrounds, and groups similar shaded colors; it estimates visual appearance rather than reading a paint specification.
+`npm run data:extract-visuals` reruns the standard-library Python exporter in `scripts/extract_tf3_visuals.py` after refreshing the vehicle catalog. It converts the installed TF3 TGA menu icons to portable PNGs in `public/vehicles`, and writes paths, image sizes, source references, an icon fingerprint and approximate body colors to `src/data/tf3-vehicle-visuals.json`. The app reads only these locally generated assets; images in `public/vehicles` are intentionally ignored by Git and can be regenerated with the command above. The swatch algorithm samples opaque body pixels, excludes dark undercarriages and transparent backgrounds, and groups similar shaded colors; it estimates visual appearance rather than reading a paint specification.
 
 ## Finance settings
 
@@ -131,3 +131,11 @@ Main files: `src/components/planner.tsx` (UI), `src/lib/planner.ts` (pure calcul
 - **Performance targets:** trip distance, additional stops, and purchase payback. These update the metrics while retaining checks.
 
 **Include obsolete** defaults to off and is saved with named configurations. When enabled, any component introduced by the window's end year is eligible, including retired stock. Engine and wagon purchase windows do not need to overlap, allowing combinations such as 4-4-2 Atlantic with Cargo Car 1960. Compatibility and maximum length still apply. Grey/yellow styling and retirement badges continue to describe actual purchase availability; combinations with disjoint windows show **No overlap** instead of an inverted year range. Earlier saved configurations default to excluding obsolete vehicles.
+
+### Boats
+
+The **Boats** tab includes 27 base-game TF3 boats, ferries, hovercraft and towboat assemblies. Each result is one complete vessel with no length limit or wagon combinations. Cargo flexibility, availability/obsolete and speed filters, comfort for passengers, checked comparisons, named configs and CSV export work as in the other tabs. Physical hull length is informational only.
+
+Boat extraction reads `waterVehicle` metadata: `availPower` is converted from watts to kW, while speed, mass and cargo capacities come from the game definitions. WATER stat regressions include `maxRpm`. Costs follow TF3's WATER formula: average speed is 65% of raw top speed, running cost is based on speed and capacity with no locomotive-power surcharge, and base purchase price is six times base running cost unless explicitly overridden. Finance sliders apply afterward.
+
+Boat movement uses an **uncalibrated power-based constant estimate**: `a = availablePower / (loadedMass * max(topSpeed / 2, 1))` in SI units, with the existing 1 m/s² non-rail braking assumption. The planner shows this model in details and CSV. There is no fabricated tractive-effort figure. Propeller thrust, hull drag, turning, docking and currents are not modeled; the observed rail acceleration calibration does not apply. Loading uses the boat's base rate and cargo loading factor; rail loading measurements have not calibrated boat handling. The details graph, additional stops and cost/performance use this same estimate consistently.

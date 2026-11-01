@@ -1,7 +1,7 @@
 {
   "game": "Transport Fever 3",
   "source": "Installed TF3 base menu icons; unmodified base colors before company tinting",
-  "iconHash": "f9e146af1aed6ef91f0674321c71eb3b7723a9017bb1897d8e5c57d0da722351",
+  "iconHash": "296258412be63dbe91a22c0b4e4f29c2f532202923bef52c180b7e4a6bb1e7dd",
   "vehicles": {
     "vehicle/bus/aboag/aboag.mdl": {
       "image": "/vehicles/bus/aboag/aboag.png",
@@ -217,6 +217,249 @@
       "thumbnailOffsetY": -0.13125,
       "color": "#1a2731",
       "sourceIcon": "vehicle/bus/zuhai_gtq_6186bevbt3/icons/zuhai_gtq_6186bevbt3_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/baltica/baltica.mdl": {
+      "image": "/vehicles/ship/baltica/baltica.png",
+      "width": 428,
+      "height": 256,
+      "thumbnailOffsetY": -0.136719,
+      "color": "#444f58",
+      "sourceIcon": "vehicle/ship/baltica/icons/baltica_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/british_columbia/british_columbia.mdl": {
+      "image": "/vehicles/ship/british_columbia/british_columbia.png",
+      "width": 148,
+      "height": 256,
+      "thumbnailOffsetY": -0.306641,
+      "color": "#35515d",
+      "sourceIcon": "vehicle/ship/british_columbia/icons/british_columbia_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/cap_arkona/cap_arkona.mdl": {
+      "image": "/vehicles/ship/cap_arkona/cap_arkona.png",
+      "width": 744,
+      "height": 256,
+      "thumbnailOffsetY": 0.0,
+      "color": "#97aeb5",
+      "sourceIcon": "vehicle/ship/cap_arkona/icons/cap_arkona_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/damen_ferry/damen_ferry.mdl": {
+      "image": "/vehicles/ship/damen_ferry/damen_ferry.png",
+      "width": 680,
+      "height": 256,
+      "thumbnailOffsetY": -0.033203,
+      "color": "#273037",
+      "sourceIcon": "vehicle/ship/damen_ferry/icons/damen_ferry_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/damen_tanker/damen_tanker.mdl": {
+      "image": "/vehicles/ship/damen_tanker/damen_tanker.png",
+      "width": 796,
+      "height": 256,
+      "thumbnailOffsetY": 0.0,
+      "color": "#95a595",
+      "sourceIcon": "vehicle/ship/damen_tanker/icons/damen_tanker_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/dunara_castle/dunara_castle.mdl": {
+      "image": "/vehicles/ship/dunara_castle/dunara_castle.png",
+      "width": 904,
+      "height": 256,
+      "thumbnailOffsetY": 0.0,
+      "color": "#2a3135",
+      "sourceIcon": "vehicle/ship/dunara_castle/icons/dunara_castle_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/hadag_type_2000/hadag_type_2000.mdl": {
+      "image": "/vehicles/ship/hadag_type_2000/hadag_type_2000.png",
+      "width": 480,
+      "height": 256,
+      "thumbnailOffsetY": -0.107422,
+      "color": "#942324",
+      "sourceIcon": "vehicle/ship/hadag_type_2000/icons/hadag_type_2000_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/herkules_xi_universal/herkules_xi_universal.mdl": {
+      "image": "/vehicles/ship/herkules_xi_universal/herkules_xi_universal.png",
+      "width": 1188,
+      "height": 256,
+      "thumbnailOffsetY": -0.136719,
+      "color": "#364955",
+      "sourceIcon": "vehicle/ship/herkules_xi_universal/icons/herkules_xi_universal_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/hong_kong_ferry_boat/hong_kong_ferry_boat.mdl": {
+      "image": "/vehicles/ship/hong_kong_ferry_boat/hong_kong_ferry_boat.png",
+      "width": 540,
+      "height": 256,
+      "thumbnailOffsetY": -0.041016,
+      "color": "#256d44",
+      "sourceIcon": "vehicle/ship/hong_kong_ferry_boat/icons/hong_kong_ferry_boat_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/hovercraft_ap1_88/hovercraft_ap1_88.mdl": {
+      "image": "/vehicles/ship/hovercraft_ap1_88/hovercraft_ap1_88.png",
+      "width": 424,
+      "height": 256,
+      "thumbnailOffsetY": -0.158203,
+      "color": "#95a9ae",
+      "sourceIcon": "vehicle/ship/hovercraft_ap1_88/icons/hovercraft_ap1_88_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/kakadua/kakadua.mdl": {
+      "image": "/vehicles/ship/kakadua/kakadua.png",
+      "width": 396,
+      "height": 256,
+      "thumbnailOffsetY": -0.117188,
+      "color": "#a8b4b9",
+      "sourceIcon": "vehicle/ship/kakadua/icons/kakadua_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/luise_deymann/luise_deymann.mdl": {
+      "image": "/vehicles/ship/luise_deymann/luise_deymann.png",
+      "width": 1344,
+      "height": 256,
+      "thumbnailOffsetY": -0.1875,
+      "color": "#384648",
+      "sourceIcon": "vehicle/ship/luise_deymann/icons/luise_deymann_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/ms_diamant/ms_diamant.mdl": {
+      "image": "/vehicles/ship/ms_diamant/ms_diamant.png",
+      "width": 1040,
+      "height": 256,
+      "thumbnailOffsetY": -0.044922,
+      "color": "#e4e8d7",
+      "sourceIcon": "vehicle/ship/ms_diamant/icons/ms_diamant_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/ms_stadt_kiel/ms_stadt_kiel.mdl": {
+      "image": "/vehicles/ship/ms_stadt_kiel/ms_stadt_kiel.png",
+      "width": 484,
+      "height": 256,
+      "thumbnailOffsetY": 0.0,
+      "color": "#b1c8c7",
+      "sourceIcon": "vehicle/ship/ms_stadt_kiel/icons/ms_stadt_kiel_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/oita_hovercraft/oita_hovercraft.mdl": {
+      "image": "/vehicles/ship/oita_hovercraft/oita_hovercraft.png",
+      "width": 424,
+      "height": 256,
+      "thumbnailOffsetY": -0.248047,
+      "color": "#d7d1b9",
+      "sourceIcon": "vehicle/ship/oita_hovercraft/icons/oita_hovercraft_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/ps_trillium/ps_trillium.mdl": {
+      "image": "/vehicles/ship/ps_trillium/ps_trillium.png",
+      "width": 804,
+      "height": 256,
+      "thumbnailOffsetY": 0.0,
+      "color": "#96aaae",
+      "sourceIcon": "vehicle/ship/ps_trillium/icons/ps_trillium_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/solar_shuttle/solar_shuttle.mdl": {
+      "image": "/vehicles/ship/solar_shuttle/solar_shuttle.png",
+      "width": 408,
+      "height": 256,
+      "thumbnailOffsetY": -0.191406,
+      "color": "#263947",
+      "sourceIcon": "vehicle/ship/solar_shuttle/icons/solar_shuttle_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/sternwheeler/sternwheeler.mdl": {
+      "image": "/vehicles/ship/sternwheeler/sternwheeler.png",
+      "width": 620,
+      "height": 256,
+      "thumbnailOffsetY": -0.048828,
+      "color": "#455b6e",
+      "sourceIcon": "vehicle/ship/sternwheeler/icons/sternwheeler_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/sydfart/sydfart.mdl": {
+      "image": "/vehicles/ship/sydfart/sydfart.png",
+      "width": 508,
+      "height": 256,
+      "thumbnailOffsetY": -0.134766,
+      "color": "#53778a",
+      "sourceIcon": "vehicle/ship/sydfart/icons/sydfart_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/terra_nova/terra_nova.mdl": {
+      "image": "/vehicles/ship/terra_nova/terra_nova.png",
+      "width": 828,
+      "height": 256,
+      "thumbnailOffsetY": -0.292969,
+      "color": "#8a4a27",
+      "sourceIcon": "vehicle/ship/terra_nova/icons/terra_nova_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/tora_typ/tora_typ.mdl": {
+      "image": "/vehicles/ship/tora_typ/tora_typ.png",
+      "width": 976,
+      "height": 256,
+      "thumbnailOffsetY": 0.0,
+      "color": "#702327",
+      "sourceIcon": "vehicle/ship/tora_typ/icons/tora_typ_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/virgo_universal/virgo_universal.mdl": {
+      "image": "/vehicles/ship/virgo_universal/virgo_universal.png",
+      "width": 1208,
+      "height": 256,
+      "thumbnailOffsetY": -0.175781,
+      "color": "#3b5868",
+      "sourceIcon": "vehicle/ship/virgo_universal/icons/virgo_universal_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/votrans_tanker/votrans_tanker.mdl": {
+      "image": "/vehicles/ship/votrans_tanker/votrans_tanker.png",
+      "width": 828,
+      "height": 256,
+      "thumbnailOffsetY": -0.158203,
+      "color": "#ebe9d9",
+      "sourceIcon": "vehicle/ship/votrans_tanker/icons/votrans_tanker_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/votrans_universal/votrans_universal.mdl": {
+      "image": "/vehicles/ship/votrans_universal/votrans_universal.png",
+      "width": 828,
+      "height": 256,
+      "thumbnailOffsetY": -0.244141,
+      "color": "#374953",
+      "sourceIcon": "vehicle/ship/votrans_universal/icons/votrans_universal_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/waimarie/waimarie.mdl": {
+      "image": "/vehicles/ship/waimarie/waimarie.png",
+      "width": 528,
+      "height": 256,
+      "thumbnailOffsetY": -0.283203,
+      "color": "#8a1717",
+      "sourceIcon": "vehicle/ship/waimarie/icons/waimarie_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/wopper/wopper.mdl": {
+      "image": "/vehicles/ship/wopper/wopper.png",
+      "width": 592,
+      "height": 256,
+      "thumbnailOffsetY": -0.080078,
+      "color": "#172d37",
+      "sourceIcon": "vehicle/ship/wopper/icons/wopper_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/ship/yara_birkeland/yara_birkeland.mdl": {
+      "image": "/vehicles/ship/yara_birkeland/yara_birkeland.png",
+      "width": 1120,
+      "height": 256,
+      "thumbnailOffsetY": 0.0,
+      "color": "#1562bc",
+      "sourceIcon": "vehicle/ship/yara_birkeland/icons/yara_birkeland_icon_small@2x.tga",
       "representativePart": null
     },
     "vehicle/train/alco_hh600/alco_hh600.mdl": {

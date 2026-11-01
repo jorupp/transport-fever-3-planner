@@ -42,5 +42,5 @@ export function readSavedConfigs(raw: string | null, cargoIds: readonly string[]
 function readCheckedVehicles(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return [...new Set(value.filter((id): id is string => typeof id === "string" && id.length <= 2048
-    && /^(train|tram|road):[^:]+:[1-9]\d*:[^:]+:\d+$/.test(id)))];
+    && /^(train|tram|road|boat):[^:]+:[1-9]\d*:[^:]+:\d+$/.test(id)))];
 }

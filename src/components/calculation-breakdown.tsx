@@ -16,14 +16,14 @@ export default function CalculationBreakdown({ option: o, settings, cargoName }:
   const speeds = Array.from(new Set([0, ...(a.rail && a.transitionSpeed * 3.6 < o.peakSpeed ? [a.transitionSpeed * 3.6] : []),
     o.peakSpeed / 4, o.peakSpeed / 2, o.peakSpeed * .75, o.peakSpeed])).sort((x, y) => x - y);
   return <div className="calculation-breakdown">
-    <p className="calculation-context">{settings.year}–{settings.year + settings.extraYears} · {lengthLimit === null ? "No road length limit" : `${n(lengthLimit)} m formation limit`} · {n(o.distanceKm, 2)} km trip · {a.additionalStops} additional stops · {a.segmentCount} × {n(a.segmentDistance / 1000, 3)} km segments · {cargoName}{(o.cargos?.length ?? 1) > 1 ? " (lowest-throughput cargo)" : ""}</p>
+    <p className="calculation-context">{settings.year}–{settings.year + settings.extraYears} · {lengthLimit === null ? "No formation length limit" : `${n(lengthLimit)} m formation limit`} · {n(o.distanceKm, 2)} km trip · {a.additionalStops} additional stops · {a.segmentCount} × {n(a.segmentDistance / 1000, 3)} km segments · {cargoName}{(o.cargos?.length ?? 1) > 1 ? " (lowest-throughput cargo)" : ""}</p>
     <TripGraph analysis={a} />
     <section className="calculation-section">
       <h3>1. Formation inputs</h3>
       <p>Values below are per vehicle or complete authored set; the quantity column supplies the multiplier.</p>
       <table className="calculation-inputs"><thead><tr><th>Component</th><th>Qty</th><th>Length<br />m</th><th>Empty mass<br />t</th><th>Power<br />kW</th><th>Listed effort<br />kN</th><th>Capacity<br />units</th><th>Base rate<br />×</th></tr></thead><tbody>
-        {components.map(({ vehicle: v, count, label }) => <tr key={v.id}><th>{v.name}<small>{label}</small></th><td>{count}</td><td>{n(v.length, 2)}</td><td>{n(v.weightEmpty / 1000)}</td><td>{n(v.power, 0)}</td><td>{n(v.tractiveEffort, 2)}</td><td>{n(v.capacities[o.cargo] ?? 0, 2)}</td><td>{n(v.capacities[o.cargo] ? v.loadSpeed : 0, 2)}</td></tr>)}
-        <tr className="calculation-total"><th>Formation total</th><td>—</td><td>{n(a.length, 2)}</td><td>{n(a.emptyMass / 1000)}</td><td>{n(a.power / 1000, 0)}</td><td>{n(a.effort / 1000, 2)}</td><td>{n(o.capacity, 2)}</td><td title="Minimum among components carrying the metrics cargo; not a sum">{n(a.baseLoadSpeed, 2)} (min)</td></tr>
+        {components.map(({ vehicle: v, count, label }) => <tr key={v.id}><th>{v.name}<small>{label}</small></th><td>{count}</td><td>{n(v.length, 2)}</td><td>{n(v.weightEmpty / 1000)}</td><td>{n(v.power, 0)}</td><td>{v.carrier === "WATER" ? "—" : n(v.tractiveEffort, 2)}</td><td>{n(v.capacities[o.cargo] ?? 0, 2)}</td><td>{n(v.capacities[o.cargo] ? v.loadSpeed : 0, 2)}</td></tr>)}
+        <tr className="calculation-total"><th>Formation total</th><td>—</td><td>{n(a.length, 2)}</td><td>{n(a.emptyMass / 1000)}</td><td>{n(a.power / 1000, 0)}</td><td>{o.mode === "boat" ? "—" : n(a.effort / 1000, 2)}</td><td>{n(o.capacity, 2)}</td><td title="Minimum among components carrying the metrics cargo; not a sum">{n(a.baseLoadSpeed, 2)} (min)</td></tr>
       </tbody></table>
       <div className="calculation-equations">
         {o.wagon && lengthLimit !== null && <p><b>Maximum wagon count</b><code>floor(({n(lengthLimit, 2)} − {o.engines} × {n(o.engine.length, 2)}) ÷ {n(o.wagon.length, 2)}) = {o.wagons}</code><span>The calculation uses unrounded lengths.</span></p>}
@@ -47,7 +47,9 @@ export default function CalculationBreakdown({ option: o, settings, cargoName }:
           return <tr key={kmh}><td>{n(kmh, 2)}</td><td>{v <= a.transitionSpeed ? "Traction" : "Power"}</td><td>{n(force / 1000, 3)}</td><td>{n(a.resistanceForce / 1000, 3)}</td><td>{n((force - a.resistanceForce) / 1000, 3)}</td><td>{n(force * v / 1000, 2)}</td><td>{n(force / a.mass - a.resistance, 4)}</td></tr>;
         })}</tbody></table>
         <p className="calculation-note">This table shows the force available while accelerating at each speed. Cruising and braking use the phases shown in the graph.</p>
-      </> : <div className="calculation-equations">
+      </> : o.mode === "boat" ? <div className="calculation-equations">
+        <p><b>Power-based boat estimate (uncalibrated)</b><code>P = {n(a.power / 1000, 0)} kW = {n(a.power, 0)} W</code><code>a = P ÷ (m × max(vmax ÷ 2, 1)) = {n(a.power, 0)} ÷ ({n(a.mass, 0)} × {n(Math.max(o.speed / 7.2, 1), 4)}) = {n(effectiveA, 4)} m/s²</code><span>TF3 supplies available power and mass for boats, but no listed tractive effort. This constant approximation uses power at half top speed and loaded mass. Propeller thrust, hull drag, turning, docking and currents are not modeled. Boat braking uses the uncalibrated 1 m/s² assumption. Rail calibration does not apply.</span></p>
+      </div> : <div className="calculation-equations">
         <p><b>Constant estimate for tram / road equipment</b><code>a₀ = F ÷ m = {n(a.effort, 0)} ÷ {n(a.mass, 0)} = {n(o.acceleration, 4)} m/s²</code><code>a = min(a₀, P ÷ (m × max(vmax ÷ 2, 1))) = {n(effectiveA, 4)} m/s²</code><span>{n(a.power / 1000, 0)} kW installed power, {n(a.effort / 1000, 2)} kN listed effort. This carrier uses the earlier constant approximation; the doubled rail traction and rail resistance model do not apply.</span></p>
       </div>}
     </section>

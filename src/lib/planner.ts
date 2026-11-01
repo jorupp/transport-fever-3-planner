@@ -10,7 +10,8 @@ export type Vehicle = {
   parts?: { name: string; source: string }[];
 };
 export type Cargo = { id: string; name: string; classes: string[]; weightFactor: number; loadSpeedFactor: number };
-export type Mode = "train" | "tram" | "road";
+export type Mode = "train" | "tram" | "road" | "boat";
+export const MODES: Mode[] = ["train", "tram", "road", "boat"];
 export type FinanceSettings = { vehicleCostPercent: number; maintenanceCostPercent: number };
 export const DEFAULT_FINANCE: FinanceSettings = { vehicleCostPercent: 125, maintenanceCostPercent: 125 };
 export const FINANCE_PRESETS = [{ id: "easy", name: "Easy", percent: 50 }, { id: "normal", name: "Normal", percent: 100 }, { id: "hard", name: "Hard", percent: 125 }, { id: "very-hard", name: "Very hard", percent: 150 }] as const;
@@ -20,7 +21,7 @@ export type Option = {
   cargo: string; // The selected cargo with the lowest estimated throughput (the metrics benchmark).
   cargos: string[]; capacity: number; length: number; speed: number; acceleration: number;
   performanceAcceleration: number | null; timeToMaxSpeed: number | null; distanceToMaxSpeed: number | null; peakSpeed: number; averageSpeed: number;
-  motionModel: "calibrated-rail" | "constant-estimate"; motionMass: number;
+  motionModel: "calibrated-rail" | "constant-estimate" | "water-estimate"; motionMass: number;
   brakingAcceleration: number; brakingTime: number; brakingDistance: number; arrivalDelaySeconds: number;
   timeTo1Km: number; timeTo2Km: number; timeTo3Km: number; timeTo4Km: number; timeTo5Km: number;
   noise: number; pollution: number; comfort: number | null; purchase: number; running: number;
@@ -44,6 +45,7 @@ export function isMultipleUnitMenuVehicle(vehicle: Vehicle) {
 }
 
 export function belongsToMode(v: Vehicle, mode: Mode) {
+  if (mode === "boat") return v.carrier === "WATER";
   if (mode === "road") return v.carrier === "ROAD";
   if (mode === "tram") return v.carrier === "TRAM";
   return v.carrier === "RAIL" || v.modes.some(m => m === "TRAM_TRACK" || m === "ELECTRIC_TRAM_TRACK");
@@ -97,7 +99,7 @@ export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings:
   const wagons = available.filter(v => v.power === 0 && Object.keys(v.capacities).length > 0);
   let done = 0;
   for (const engine of powered) {
-    for (const mode of ["train", "tram", "road"] as const) {
+    for (const mode of MODES) {
       if (!belongsToMode(engine, mode)) continue;
       const limit = mode === "train" ? settings.trainLength : mode === "tram" ? settings.tramLength : Infinity;
       const multipleUnit = isMultipleUnitMenuVehicle(engine);
@@ -107,13 +109,13 @@ export function calculateOptions(vehicles: Vehicle[], cargos: Cargo[], settings:
         const maximum = Math.floor((limit + 1e-7) / engine.length);
         if (maximum >= 1) result.push(makeMultiCargoOption(engine, null, maximum, 0, mode, selectedCargos, settings));
       }
-      const engineCounts = mode === "road" ? [1] : multipleUnit ? [1, 2, 3, 4, 5] : [1, 2];
+      const engineCounts = mode === "road" || mode === "boat" ? [1] : multipleUnit ? [1, 2, 3, 4, 5] : [1, 2];
       for (const engines of engineCounts) {
         if (engine.length * engines > limit + 1e-7) continue;
         let hasWagonOption = false;
         // An authored passenger multiple unit is one complete vehicle. Its loose parts never enter the catalog.
         const selfContained = engine.fixedFormation && Object.keys(engine.capacities).length > 0;
-        if (mode !== "road" && !selfContained) {
+        if (mode !== "road" && mode !== "boat" && !selfContained) {
           for (const wagon of wagons) {
             if (!selectedCargos.every(c => wagon.capacities[c.id] > 0) || !belongsToMode(wagon, mode) || !compatible(engine, wagon)) continue;
             const count = Math.floor((limit - engine.length * engines + 1e-7) / wagon.length);
@@ -168,7 +170,11 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
     wagon ? (wagon.brakeDeceleration ?? DEFAULT_RAIL_BRAKING) : Infinity) : 1;
   const arrivalDelaySeconds = rail ? RAIL_ARRIVAL_DELAY_SECONDS : 0;
   const railTrip = rail?.trip(distanceMeters, brakingAcceleration);
-  const acceleration = rail?.initialAcceleration ?? sum("tractiveEffort") * 1000 / motionMass;
+  // Boats expose available shaft power, but no listed tractive effort. Use the
+  // power at half top speed for an uncalibrated constant acceleration estimate.
+  const acceleration = engine.carrier === "WATER"
+    ? sum("power") * 1000 / (motionMass * Math.max(vmax / 2, 1))
+    : rail?.initialAcceleration ?? sum("tractiveEffort") * 1000 / motionMass;
   const a = Math.min(acceleration, sum("power") * 1000 / (motionMass * Math.max(vmax / 2, 1)));
   const constantTimeToMax = vmax / a, constantDistanceToMax = vmax * vmax / (2 * a);
   const timeToMaxSpeed = rail ? rail.timeToMaxSpeed : constantTimeToMax;
@@ -192,7 +198,7 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
     capacity, length: sum("length"), speed, acceleration, noise: sum("noise"), pollution: sum("pollution"),
     performanceAcceleration: rail ? (timeToMaxSpeed === null ? null : vmax / timeToMaxSpeed) : a,
     timeToMaxSpeed, distanceToMaxSpeed, peakSpeed: peak * 3.6, averageSpeed: settings.distanceKm * 3600 / travelSeconds,
-    motionModel: rail ? "calibrated-rail" : "constant-estimate", motionMass,
+    motionModel: rail ? "calibrated-rail" : engine.carrier === "WATER" ? "water-estimate" : "constant-estimate", motionMass,
     brakingAcceleration, brakingTime, brakingDistance, arrivalDelaySeconds,
     timeTo1Km, timeTo2Km, timeTo3Km, timeTo4Km, timeTo5Km,
     comfort: cargo.id === "PASSENGERS" ? ((engine.capacities.PASSENGERS ?? 0) * engines * engine.comfort + (wagon?.capacities.PASSENGERS ?? 0) * wagons * (wagon?.comfort ?? 0)) / capacity : null,

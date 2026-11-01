@@ -52,7 +52,7 @@ test('legacy configurations default to Hard and independent custom finance value
 });
 
 test('checked formations round-trip across all tabs; legacy or malformed checks load safely', () => {
-  const checkedVehicles = ['train:swiss_re_44_i:1:cargo_car_1960:9', 'tram:toyama_8000:2:~:0', 'road:aboag:1:~:0'];
+  const checkedVehicles = ['train:swiss_re_44_i:1:cargo_car_1960:9', 'tram:toyama_8000:2:~:0', 'road:aboag:1:~:0', 'boat:baltica:1:~:0'];
   const saved = { ...config, checkedVehicles };
   assert.deepEqual(readSavedConfigs(stored([saved]), cargoIds), [saved]);
   const legacy = { ...config }; delete legacy.checkedVehicles;

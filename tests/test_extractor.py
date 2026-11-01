@@ -9,6 +9,31 @@ spec.loader.exec_module(extractor)
 
 
 class ExtractorTests(unittest.TestCase):
+    def test_water_metadata_uses_watts_and_water_cost_formula(self):
+        meta = {
+            'transportVehicle': {'carrier':'WATER','comfortFactor':0,'loadSpeed':20,
+                'transportModes':['SMALL_SHIP'],'engineTransportModes':['SMALL_SHIP'],
+                'compartments':[{'loadConfigs':[{'cargoEntry':{'capacity':80,'cargoTypeSet':{'cargoClassesIncluded':['UNIVERSAL']}}}]}]},
+            'waterVehicle': {'topSpeed':10,'availPower':800000,'weightEmpty':150000,'weightMaxPayload':24000,'maxRpm':133},
+            'extent': {'bbMin':[0,0,0],'bbMax':[30,7,12]},
+            'emissions': {'noise':{'score':65},'pollution':{'score':25}},
+            'cost': {'price':-1}, 'maintenance': {'runningCosts':-1},
+        }
+        cargos=[{'id':'LOGS','classes':['UNIVERSAL']}]
+        vehicle=extractor.normalize(meta,'vehicle/ship/test/test.mdl',cargos,lambda s:s,{})
+        self.assertEqual(vehicle['power'],800)
+        self.assertEqual(vehicle['tractiveEffort'],0, 'do not invent rail tractive effort for boats')
+        self.assertEqual(vehicle['speed'],36)
+        self.assertEqual(vehicle['capacities'],{'LOGS':20})
+        # WATER average speed = topSpeed * .65, no locomotive power surcharge.
+        running=extractor.round_game(10*.65*20*(3700/1000*365*4/8))
+        self.assertEqual(vehicle['running'],running)
+        self.assertEqual(vehicle['purchase'],running*6)
+        meta['transportVehicle']['loadSpeed']=-1
+        models={'WATER':{'load_speed':{'_intercept':1,'max_rpm':.1}}}
+        vehicle=extractor.normalize(meta,'vehicle/ship/test/test.mdl',cargos,lambda s:s,models)
+        self.assertEqual(vehicle['loadSpeed'],14.5)
+
     def test_loading_default_and_explicit_regression_are_distinct(self):
         meta = {
             'transportVehicle': {'carrier':'RAIL','comfortFactor':0},

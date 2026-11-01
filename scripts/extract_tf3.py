@@ -104,19 +104,22 @@ def capacity_by_cargo(tv, cargos):
 
 
 def normalize(meta, source, cargos, translate, models):
-    tv = obj(meta.get('transportVehicle')); lv = obj(meta.get('landVehicle'))
-    if not tv or not lv or tv.get('carrier') not in ['RAIL', 'TRAM', 'ROAD']:
+    tv = obj(meta.get('transportVehicle'))
+    water = tv.get('carrier') == 'WATER'
+    lv = obj(meta.get('waterVehicle' if water else 'landVehicle'))
+    if not tv or not lv or tv.get('carrier') not in ['RAIL', 'TRAM', 'ROAD', 'WATER']:
         return None
     extent = obj(meta.get('extent'))
     if not extent.get('bbMax') or not extent.get('bbMin'):
         raise ValueError(f'Missing vehicle extent: {source}')
     dimensions = [a-b for a, b in zip(extent['bbMax'], extent['bbMin'])]
     engines = arr(lv.get('engines'))
-    power = sum(e.get('power', 0) for e in engines)
+    power = lv.get('availPower', 0) / 1000 if water else sum(e.get('power', 0) for e in engines)
     effort = sum(e.get('tractiveEffort', 0) for e in engines)
     modes = arr(tv.get('transportModes')); engine_modes = arr(tv.get('engineTransportModes'))
     availability = obj(meta.get('availability')); emissions = obj(meta.get('emissions'))
     features = {'year_from': availability.get('yearFrom', 1900)-1900, 'top_speed': lv.get('topSpeed', 0), 'volume': math.prod(dimensions), 'power': power, 'tractive_effort': effort, 'weight_empty': lv.get('weightEmpty', 0), 'has_engine_transport_modes': int(bool(engine_modes))}
+    if water: features['max_rpm'] = lv.get('maxRpm', 0)
     for e in engines:
         key = 'has_engine_type_' + e['type']; features[key] = features.get(key, 0)+1
     for mode in modes:
@@ -152,8 +155,9 @@ def normalize(meta, source, cargos, translate, models):
         max_capacity += max(choices, default=0)/4
     speed = lv.get('topSpeed', 0)*3.6
     average_speed = ((speed**0.78+4) if tv['carrier'] in ['ROAD','TRAM'] else (speed**0.86+10))/3.6
+    if water: average_speed = lv.get('topSpeed', 0) * .65
     c = 3700/1000*365*4/8
-    if tv['carrier'] == 'ROAD' or (tv['carrier'] == 'TRAM' and power > 0 and max_capacity > 0):
+    if tv['carrier'] in ['ROAD', 'WATER'] or (tv['carrier'] == 'TRAM' and power > 0 and max_capacity > 0):
         running = round_game(average_speed*max_capacity*c)
     else:
         running = round_game(average_speed*max_capacity*c*0.5)
@@ -212,7 +216,7 @@ def main():
                     data = table(text, 'return')
                     cargos.append({'id': data.get('id', path.stem.upper()), 'name': translate(data['name']), 'classes': arr(data.get('cargoClasses')), 'weightFactor': data.get('weightFactor', 1), 'loadSpeedFactor': data.get('loadSpeedFactor', 1), 'order': data.get('order', 999)})
     vehicles, formations, hidden = {}, [], set()
-    for category in ['train', 'tram', 'waggon', 'bus', 'truck']:
+    for category in ['train', 'tram', 'waggon', 'bus', 'truck', 'ship']:
         for path in sorted((root/'vehicle'/category).glob('*.zip')):
             with zipfile.ZipFile(path) as z:
                 for name in z.namelist():

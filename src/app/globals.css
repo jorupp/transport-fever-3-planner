@@ -1352,8 +1352,8 @@ main { max-width: none; padding: 26px 24px 0; margin: 0 auto; }
 .parameter-group fieldset legend, .parameter-group .field-legend { margin-bottom: 8px; }
 .parameter-group .cargo-field { margin-top: 14px; }
 .parameter-group .construction-note { margin-top: 10px; }
-.obsolete-toggle { display: flex; align-items: center; gap: 7px; margin-top: 10px; font-size: 12px; }
-.obsolete-toggle input { margin: 0; accent-color: #185b35; }
+.year-fields .obsolete-toggle { display: flex; align-items: center; gap: 8px; width: fit-content; margin: 12px 0 0; color: var(--ink); font-size: 12px; line-height: 18px; cursor: pointer; }
+.year-fields .obsolete-toggle input[type="checkbox"] { flex: 0 0 14px; width: 14px; height: 14px; margin: 0; padding: 0; accent-color: var(--green); cursor: pointer; }
 .filter-speed { margin-top: 12px; max-width: 150px; }
 .performance-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .performance-fields label > span { font-size: 10px; white-space: nowrap; }

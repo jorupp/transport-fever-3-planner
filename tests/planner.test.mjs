@@ -74,7 +74,7 @@ test('light rail appears in both tabs and cannot couple to railway wagons',()=>{
   const engine=v({carrier:'TRAM',category:'tram',engineModes:['ELECTRIC_TRAM','ELECTRIC_TRAM_TRACK'],modes:['TRAM','ELECTRIC_TRAM','TRAM_TRACK','ELECTRIC_TRAM_TRACK'],capacities:{PASSENGERS:10}});
   assert.equal(compatible(engine,w()),false);
   const rows=calculateOptions([engine,w()],cargo,DEFAULT_SETTINGS);
-  assert.deepEqual([...new Set(rows.map(o=>o.mode))],['train','tram']);
+  assert.deepEqual([...new Set(rows.map(o=>o.mode))],['train','tram','road']);
   assert(rows.every(o=>o.wagon===null));
   const tramCar=w({carrier:'TRAM',category:'tram',modes:['TRAM','ELECTRIC_TRAM']});
   const withCars=calculateOptions([engine,tramCar,w()],cargo,DEFAULT_SETTINGS);
@@ -252,7 +252,7 @@ test('real TF3 catalog invariants across multiple eras and every cargo',()=>{
     const start=performance.now();const rows=data.cargos.flatMap(c=>calculateOptions(data.vehicles,data.cargos,{...settings,cargos:[c.id]}));
     assert.equal(new Set(rows.map(o=>`${o.id}:${o.cargo}`)).size,rows.length);
     for(const o of rows){
-      const limit=o.mode==='train'?settings.trainLength:o.mode==='tram'?settings.tramLength:Infinity;
+      const limit=o.mode==='train'?settings.trainLength:o.mode==='tram'||o.engine.carrier==='TRAM'?settings.tramLength:Infinity;
       assert(o.length<=limit+1e-6);assert(o.capacity>0);assert(o.yearFrom<=(o.yearTo??Infinity));
       assert(o.yearFrom<=year+20&&(o.yearTo??Infinity)>=year);
       assert(Number.isFinite(o.acceleration)&&o.acceleration>0);assert(Number.isFinite(o.costPerformance)&&o.costPerformance>0);

@@ -1,7 +1,7 @@
 {
   "game": "Transport Fever 3",
   "source": "Installed TF3 base menu icons; unmodified base colors before company tinting",
-  "iconHash": "296258412be63dbe91a22c0b4e4f29c2f532202923bef52c180b7e4a6bb1e7dd",
+  "iconHash": "4b8bf9c5daae6e9e576b84297cfcc75093d6d80801c84a476e27565cacb4b852",
   "vehicles": {
     "vehicle/bus/aboag/aboag.mdl": {
       "image": "/vehicles/bus/aboag/aboag.png",
@@ -217,6 +217,276 @@
       "thumbnailOffsetY": -0.13125,
       "color": "#1a2731",
       "sourceIcon": "vehicle/bus/zuhai_gtq_6186bevbt3/icons/zuhai_gtq_6186bevbt3_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/airbus_a310_300f/airbus_a310_300f.mdl": {
+      "image": "/vehicles/plane/airbus_a310_300f/airbus_a310_300f.png",
+      "width": 748,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#f7f4e6",
+      "sourceIcon": "vehicle/plane/airbus_a310_300f/icons/airbus_a310_300f_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/airbus_a320/airbus_a320.mdl": {
+      "image": "/vehicles/plane/airbus_a320/airbus_a320.png",
+      "width": 600,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#708692",
+      "sourceIcon": "vehicle/plane/airbus_a320/icons/airbus_a320_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/bae_146/bae_146.mdl": {
+      "image": "/vehicles/plane/bae_146/bae_146.png",
+      "width": 468,
+      "height": 160,
+      "thumbnailOffsetY": -0.08125,
+      "color": "#97b1c5",
+      "sourceIcon": "vehicle/plane/bae_146/icons/bae_146_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/bae_146_cargo/bae_146_cargo.mdl": {
+      "image": "/vehicles/plane/bae_146_cargo/bae_146_cargo.png",
+      "width": 468,
+      "height": 160,
+      "thumbnailOffsetY": -0.08125,
+      "color": "#96b1c5",
+      "sourceIcon": "vehicle/plane/bae_146_cargo/icons/bae_146_cargo_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/boeing_737_700/boeing_737_700.mdl": {
+      "image": "/vehicles/plane/boeing_737_700/boeing_737_700.png",
+      "width": 536,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#f7f4e7",
+      "sourceIcon": "vehicle/plane/boeing_737_700/icons/boeing_737_700_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/boeing_737_700_cargo/boeing_737_700_cargo.mdl": {
+      "image": "/vehicles/plane/boeing_737_700_cargo/boeing_737_700_cargo.png",
+      "width": 536,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#d9eaec",
+      "sourceIcon": "vehicle/plane/boeing_737_700_cargo/icons/boeing_737_700_cargo_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/bombardier_cs300/bombardier_cs300.mdl": {
+      "image": "/vehicles/plane/bombardier_cs300/bombardier_cs300.png",
+      "width": 620,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#7192a9",
+      "sourceIcon": "vehicle/plane/bombardier_cs300/icons/bombardier_cs300_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/bombardier_dhc_8_402pf/bombardier_dhc_8_402pf.mdl": {
+      "image": "/vehicles/plane/bombardier_dhc_8_402pf/bombardier_dhc_8_402pf.png",
+      "width": 528,
+      "height": 160,
+      "thumbnailOffsetY": -0.0875,
+      "color": "#1a3695",
+      "sourceIcon": "vehicle/plane/bombardier_dhc_8_402pf/icons/bombardier_dhc_8_402pf_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/bombardier_q400/bombardier_q400.mdl": {
+      "image": "/vehicles/plane/bombardier_q400/bombardier_q400.png",
+      "width": 528,
+      "height": 160,
+      "thumbnailOffsetY": -0.0875,
+      "color": "#96a8af",
+      "sourceIcon": "vehicle/plane/bombardier_q400/icons/bombardier_q400_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/bristol_freighter/bristol_freighter.mdl": {
+      "image": "/vehicles/plane/bristol_freighter/bristol_freighter.png",
+      "width": 336,
+      "height": 160,
+      "thumbnailOffsetY": -0.090625,
+      "color": "#b63942",
+      "sourceIcon": "vehicle/plane/bristol_freighter/icons/bristol_freighter_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/canadair_cl_44/canadair_cl_44.mdl": {
+      "image": "/vehicles/plane/canadair_cl_44/canadair_cl_44.png",
+      "width": 660,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#f8f3e5",
+      "sourceIcon": "vehicle/plane/canadair_cl_44/icons/canadair_cl_44_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/convair_cv_990/convair_cv_990.mdl": {
+      "image": "/vehicles/plane/convair_cv_990/convair_cv_990.png",
+      "width": 668,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#f8f4e6",
+      "sourceIcon": "vehicle/plane/convair_cv_990/icons/convair_cv_990_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/curtiss_c46_commando/curtiss_c46_commando.mdl": {
+      "image": "/vehicles/plane/curtiss_c46_commando/curtiss_c46_commando.png",
+      "width": 376,
+      "height": 160,
+      "thumbnailOffsetY": -0.05625,
+      "color": "#a4382c",
+      "sourceIcon": "vehicle/plane/curtiss_c46_commando/icons/curtiss_c46_commando_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/de_havilland_comet_4b/de_havilland_comet_4b.mdl": {
+      "image": "/vehicles/plane/de_havilland_comet_4b/de_havilland_comet_4b.png",
+      "width": 540,
+      "height": 160,
+      "thumbnailOffsetY": -0.0875,
+      "color": "#f1ecd9",
+      "sourceIcon": "vehicle/plane/de_havilland_comet_4b/icons/de_havilland_comet_4b_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/douglas_dc10_30/douglas_dc10_30.mdl": {
+      "image": "/vehicles/plane/douglas_dc10_30/douglas_dc10_30.png",
+      "width": 848,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#75ccea",
+      "sourceIcon": "vehicle/plane/douglas_dc10_30/icons/douglas_dc10_30_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/douglas_dc10_30_cf/douglas_dc10_30_cf.mdl": {
+      "image": "/vehicles/plane/douglas_dc10_30_cf/douglas_dc10_30_cf.png",
+      "width": 848,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#4c0605",
+      "sourceIcon": "vehicle/plane/douglas_dc10_30_cf/icons/douglas_dc10_30_cf_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/douglas_dc3/douglas_dc3.mdl": {
+      "image": "/vehicles/plane/douglas_dc3/douglas_dc3.png",
+      "width": 316,
+      "height": 160,
+      "thumbnailOffsetY": -0.134375,
+      "color": "#8b2431",
+      "sourceIcon": "vehicle/plane/douglas_dc3/icons/douglas_dc3_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/douglas_dc4/douglas_dc4.mdl": {
+      "image": "/vehicles/plane/douglas_dc4/douglas_dc4.png",
+      "width": 464,
+      "height": 160,
+      "thumbnailOffsetY": -0.0375,
+      "color": "#f7eee3",
+      "sourceIcon": "vehicle/plane/douglas_dc4/icons/douglas_dc4_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/fokker_100/fokker_100.mdl": {
+      "image": "/vehicles/plane/fokker_100/fokker_100.png",
+      "width": 572,
+      "height": 160,
+      "thumbnailOffsetY": -0.078125,
+      "color": "#6ad6f2",
+      "sourceIcon": "vehicle/plane/fokker_100/icons/fokker_100_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/fokker_f_vii_a/fokker_f_vii_a.mdl": {
+      "image": "/vehicles/plane/fokker_f_vii_a/fokker_f_vii_a.png",
+      "width": 232,
+      "height": 160,
+      "thumbnailOffsetY": -0.303125,
+      "color": "#253355",
+      "sourceIcon": "vehicle/plane/fokker_f_vii_a/icons/fokker_f_vii_a_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/hercules_l100/hercules_l100.mdl": {
+      "image": "/vehicles/plane/hercules_l100/hercules_l100.png",
+      "width": 480,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#184568",
+      "sourceIcon": "vehicle/plane/hercules_l100/icons/hercules_l100_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/junkers_f_13/junkers_f_13.mdl": {
+      "image": "/vehicles/plane/junkers_f_13/junkers_f_13.png",
+      "width": 152,
+      "height": 160,
+      "thumbnailOffsetY": -0.321875,
+      "color": "#728d9a",
+      "sourceIcon": "vehicle/plane/junkers_f_13/icons/junkers_f_13_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/junkers_ju_52/junkers_ju_52.mdl": {
+      "image": "/vehicles/plane/junkers_ju_52/junkers_ju_52.png",
+      "width": 296,
+      "height": 160,
+      "thumbnailOffsetY": -0.159375,
+      "color": "#466678",
+      "sourceIcon": "vehicle/plane/junkers_ju_52/icons/junkers_ju_52_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/short_330/short_330.mdl": {
+      "image": "/vehicles/plane/short_330/short_330.png",
+      "width": 284,
+      "height": 160,
+      "thumbnailOffsetY": -0.253125,
+      "color": "#92a6a9",
+      "sourceIcon": "vehicle/plane/short_330/icons/short_330_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/sukhoi_superjet_100/sukhoi_superjet_100.mdl": {
+      "image": "/vehicles/plane/sukhoi_superjet_100/sukhoi_superjet_100.png",
+      "width": 480,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#f7f3e9",
+      "sourceIcon": "vehicle/plane/sukhoi_superjet_100/icons/sukhoi_superjet_100_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/super_connie/super_connie.mdl": {
+      "image": "/vehicles/plane/super_connie/super_connie.png",
+      "width": 564,
+      "height": 160,
+      "thumbnailOffsetY": -0.059375,
+      "color": "#2b3235",
+      "sourceIcon": "vehicle/plane/super_connie/icons/super_connie_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/super_connie_cargo/super_connie_cargo.mdl": {
+      "image": "/vehicles/plane/super_connie_cargo/super_connie_cargo.png",
+      "width": 564,
+      "height": 160,
+      "thumbnailOffsetY": -0.059375,
+      "color": "#aa4f2b",
+      "sourceIcon": "vehicle/plane/super_connie_cargo/icons/super_connie_cargo_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/tupolev_tu_204/tupolev_tu_204.mdl": {
+      "image": "/vehicles/plane/tupolev_tu_204/tupolev_tu_204.png",
+      "width": 732,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#f5f2e6",
+      "sourceIcon": "vehicle/plane/tupolev_tu_204/icons/tupolev_tu_204_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/tupolev_tu_204_cargo/tupolev_tu_204_cargo.mdl": {
+      "image": "/vehicles/plane/tupolev_tu_204_cargo/tupolev_tu_204_cargo.png",
+      "width": 732,
+      "height": 160,
+      "thumbnailOffsetY": 0.0,
+      "color": "#ecebd8",
+      "sourceIcon": "vehicle/plane/tupolev_tu_204_cargo/icons/tupolev_tu_204_cargo_icon_small@2x.tga",
+      "representativePart": null
+    },
+    "vehicle/plane/vickers_victoria/vickers_victoria.mdl": {
+      "image": "/vehicles/plane/vickers_victoria/vickers_victoria.png",
+      "width": 248,
+      "height": 160,
+      "thumbnailOffsetY": -0.234375,
+      "color": "#673a47",
+      "sourceIcon": "vehicle/plane/vickers_victoria/icons/vickers_victoria_icon_small@2x.tga",
       "representativePart": null
     },
     "vehicle/ship/baltica/baltica.mdl": {

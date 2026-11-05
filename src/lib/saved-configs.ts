@@ -21,6 +21,9 @@ export function readSavedConfigs(raw: string | null, cargoIds: readonly string[]
     if (typeof includeObsolete !== "boolean") continue;
     const vehicleCostPercent = s.vehicleCostPercent ?? 125, maintenanceCostPercent = s.maintenanceCostPercent ?? 125;
     const additionalStops = s.additionalStops ?? 0, paybackYears = s.paybackYears ?? 20;
+    const turns = s.turns ?? 0, speedLimit = s.speedLimit ?? 0;
+    if (!inRange(turns, 0, Number.MAX_SAFE_INTEGER - 1, true) || !inRange(speedLimit, 0, Number.MAX_VALUE)) continue;
+    if (turns > 0 && (additionalStops as number) > 0) continue;
     if (typeof paybackYears !== "number" || !Number.isFinite(paybackYears) || paybackYears <= 0) continue;
     if (!Number.isSafeInteger(additionalStops) || (additionalStops as number) < 0 || (additionalStops as number) >= Number.MAX_SAFE_INTEGER) continue;
     if (typeof vehicleCostPercent !== "number" || typeof maintenanceCostPercent !== "number" || ![50, 75, 100, 125, 150].includes(vehicleCostPercent) || ![50, 75, 100, 125, 150].includes(maintenanceCostPercent)) continue;
@@ -33,7 +36,7 @@ export function readSavedConfigs(raw: string | null, cargoIds: readonly string[]
     configs.push({ id: entry.id, name, checkedVehicles: readCheckedVehicles(entry.checkedVehicles), settings: {
       year: s.year, extraYears: s.extraYears, includeObsolete, trainLength: s.trainLength, tramLength: s.tramLength,
       distanceKm: s.distanceKm, additionalStops: additionalStops as number, minTopSpeed: s.minTopSpeed, cargos,
-      vehicleCostPercent, maintenanceCostPercent, paybackYears,
+      vehicleCostPercent, maintenanceCostPercent, paybackYears, turns, speedLimit,
     } });
   }
   return configs;
@@ -42,5 +45,5 @@ export function readSavedConfigs(raw: string | null, cargoIds: readonly string[]
 function readCheckedVehicles(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return [...new Set(value.filter((id): id is string => typeof id === "string" && id.length <= 2048
-    && /^(train|tram|road|boat):[^:]+:[1-9]\d*:[^:]+:\d+$/.test(id)))];
+    && /^(train|tram|road|boat|airplane):[^:]+:[1-9]\d*:[^:]+:\d+$/.test(id)))];
 }

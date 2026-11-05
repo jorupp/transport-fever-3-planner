@@ -1,6 +1,6 @@
 # Transport Fever 3 Planner
 
-A local Next.js app for comparing train, tram, road and boat options against a year window, length limits and selected cargo. The catalog is extracted from **Transport Fever 3**, not Transport Fever 2. The installed game is never accessed by the web app at runtime.
+A local Next.js app for comparing train, tram, road, boat and airplane options against a year window, length limits and selected cargo. The catalog is extracted from **Transport Fever 3**, not Transport Fever 2. The installed game is never accessed by the web app at runtime.
 
 ## Run
 
@@ -25,7 +25,7 @@ npm run data:extract -- --game-dir "D:\SteamLibrary\steamapps\common\Transport F
 
 The extractor reads:
 
-- `base/content/vehicle/{train,tram,waggon,bus,truck,ship}/*.zip`: vehicle metadata and multiple-unit definitions.
+- `base/content/vehicle/{train,tram,waggon,bus,truck,ship,plane}/*.zip`: vehicle metadata and multiple-unit definitions.
 - `base/content/cargos/*.zip`: cargo classes, weight and loading factors.
 - `base/content/base.zip`: generated vehicle-stat regression weights and cost formulas.
 - `base/strings/en/LC_MESSAGES/base.mo`: English display names.
@@ -128,7 +128,7 @@ Main files: `src/components/planner.tsx` (UI), `src/lib/planner.ts` (pure calcul
 
 - **Vehicle construction:** maximum train/tram length and cargo selection. Only changes here clear checked formations.
 - **Filters:** availability window, Include obsolete, and minimum top speed. Checked formations remain selected when these filters hide them and return checked when visible again.
-- **Performance targets:** trip distance, additional stops, and purchase payback. These update the metrics while retaining checks.
+- **Performance targets:** trip distance, additional stops or turns, route speed limit, and purchase payback. These update the metrics while retaining checks.
 
 **Include obsolete** defaults to off and is saved with named configurations. When enabled, any component introduced by the window's end year is eligible, including retired stock. Engine and wagon purchase windows do not need to overlap, allowing combinations such as 4-4-2 Atlantic with Cargo Car 1960. Compatibility and maximum length still apply. Grey/yellow styling and retirement badges continue to describe actual purchase availability; combinations with disjoint windows show **No overlap** instead of an inverted year range. Earlier saved configurations default to excluding obsolete vehicles.
 
@@ -139,3 +139,13 @@ The **Boats** tab includes 27 base-game TF3 boats, ferries, hovercraft and towbo
 Boat extraction reads `waterVehicle` metadata: `availPower` is converted from watts to kW, while speed, mass and cargo capacities come from the game definitions. WATER stat regressions include `maxRpm`. Costs follow TF3's WATER formula: average speed is 65% of raw top speed, running cost is based on speed and capacity with no locomotive-power surcharge, and base purchase price is six times base running cost unless explicitly overridden. Finance sliders apply afterward.
 
 Boat movement uses an **uncalibrated power-based constant estimate**: `a = availablePower / (loadedMass * max(topSpeed / 2, 1))` in SI units, with the existing 1 m/s² non-rail braking assumption. The planner shows this model in details and CSV. There is no fabricated tractive-effort figure. Propeller thrust, hull drag, turning, docking and currents are not modeled; the observed rail acceleration calibration does not apply. Loading uses the boat's base rate and cargo loading factor; rail loading measurements have not calibrated boat handling. The details graph, additional stops and cost/performance use this same estimate consistently.
+
+### Airplanes, shared road/tram comparisons, turns and speed limits
+
+**Airplanes** includes 30 base-game TF3 aircraft, with extracted menu artwork. Each option is one aircraft without a length limit. The extractor reads `airVehicle.maxThrust` in newtons, mass, top speed and time to full thrust; thrust is not mislabeled as kW. TF3's AIR regression uses raw thrust under its `power` feature name. Costs use TF3's AIR average-speed polynomial `(-0.0000203 * min(v_kmh, 4000)^2 + 0.17 * min(v_kmh, 4000) + 28.36) / 3.6`, followed by capacity and the standard cost factors. Movement is an **uncalibrated constant-thrust estimate**, `a = maxThrust / loadedMass`, with 1 m/s² braking. Thrust ramp-up, flight phases, aerodynamic drag, taxiing and airport queues are excluded.
+
+**Road vehicles** also includes every powered tram supporting the selected cargos. Trams retain the same engine counts, compatible wagons and tram-length limit as in the Tram tab, including complete articulated sets. Ordinary road vehicles remain single vehicles with no length limit. Physical TRAM carriers share the same movement model across tabs, including when light rail appears in Trains.
+
+**Turns** defaults to zero and applies only to ROAD/TRAM carriers. Turns and additional stops are mutually exclusive; entering a positive value clears the other field, and validation rejects conflicting saved or programmatic settings. Place `n` turns at distances `D/(n+1), 2D/(n+1), ...`. For each intermediate segment, brake before the turn to half the actual approach peak, rather than half the vehicle's rated top speed. Carry that exit speed into the next segment and accelerate again. Only the journey endpoints are complete stops. With entry speed `u`, acceleration `a`, braking `b`, segment length `L`, and exit/peak ratio `r` (0.5 at turns, zero at the destination), the unconstrained peak is `sqrt((2L + u^2/a) / (1/a + (1-r^2)/b))`, capped at the route ceiling. Remaining distance is cruising. The graph and throughput sum these different segments, and very large turn counts pack the steady middle to stay responsive.
+
+**Speed limit** defaults to zero (unlimited) and caps all carriers. Effective ceiling = minimum of rated formation speed and any positive route limit. It affects travel, checkpoint times, time/distance to ceiling, graphs and cost/performance, but leaves rated speed, purchase/running costs, the minimum-top-speed filter, and acceleration capability unchanged. Checkpoint times describe uninterrupted launch under the route ceiling, excluding intermediate stops/turns. Both settings are saved with named configs, exported to CSV, and retain checked formations. Older configs default to zero turns and no speed limit.

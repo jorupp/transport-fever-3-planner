@@ -11,23 +11,24 @@ export default function CalculationBreakdown({ option: o, settings, cargoName }:
   const a = useMemo(() => analyzeOption(o), [o]);
   const components = [{ vehicle: o.engine, count: o.engines, label: o.engine.fixedFormation ? "Powered set" : "Engine / vehicle" },
     ...(o.wagon ? [{ vehicle: o.wagon, count: o.wagons, label: "Wagon" }] : [])];
-  const lengthLimit = o.mode === "train" ? settings.trainLength : o.mode === "tram" ? settings.tramLength : null;
+  const lengthLimit = o.mode === "train" ? settings.trainLength : o.mode === "tram" || o.engine.carrier === "TRAM" ? settings.tramLength : null;
   const effectiveA = o.performanceAcceleration ?? 0;
   const speeds = Array.from(new Set([0, ...(a.rail && a.transitionSpeed * 3.6 < o.peakSpeed ? [a.transitionSpeed * 3.6] : []),
     o.peakSpeed / 4, o.peakSpeed / 2, o.peakSpeed * .75, o.peakSpeed])).sort((x, y) => x - y);
   return <div className="calculation-breakdown">
-    <p className="calculation-context">{settings.year}–{settings.year + settings.extraYears} · {lengthLimit === null ? "No formation length limit" : `${n(lengthLimit)} m formation limit`} · {n(o.distanceKm, 2)} km trip · {a.additionalStops} additional stops · {a.segmentCount} × {n(a.segmentDistance / 1000, 3)} km segments · {cargoName}{(o.cargos?.length ?? 1) > 1 ? " (lowest-throughput cargo)" : ""}</p>
+    <p className="calculation-context">{settings.year}–{settings.year + settings.extraYears} · {lengthLimit === null ? "No formation length limit" : `${n(lengthLimit)} m formation limit`} · {n(o.distanceKm, 2)} km trip · {a.additionalStops} additional stops · {a.turns} turns · {a.segmentCount} × {n(a.segmentDistance / 1000, 3)} km segments · {cargoName}{(o.cargos?.length ?? 1) > 1 ? " (lowest-throughput cargo)" : ""}</p>
+    {a.turns > 0 && <p className="calculation-note">{a.turns} equally spaced turns, {n(a.segmentDistance / 1000, 3)} km apart. Each intermediate segment exits at half its own approach peak, then accelerates again. Only origin and destination are complete stops.</p>}
     <TripGraph analysis={a} />
     <section className="calculation-section">
       <h3>1. Formation inputs</h3>
       <p>Values below are per vehicle or complete authored set; the quantity column supplies the multiplier.</p>
-      <table className="calculation-inputs"><thead><tr><th>Component</th><th>Qty</th><th>Length<br />m</th><th>Empty mass<br />t</th><th>Power<br />kW</th><th>Listed effort<br />kN</th><th>Capacity<br />units</th><th>Base rate<br />×</th></tr></thead><tbody>
-        {components.map(({ vehicle: v, count, label }) => <tr key={v.id}><th>{v.name}<small>{label}</small></th><td>{count}</td><td>{n(v.length, 2)}</td><td>{n(v.weightEmpty / 1000)}</td><td>{n(v.power, 0)}</td><td>{v.carrier === "WATER" ? "—" : n(v.tractiveEffort, 2)}</td><td>{n(v.capacities[o.cargo] ?? 0, 2)}</td><td>{n(v.capacities[o.cargo] ? v.loadSpeed : 0, 2)}</td></tr>)}
-        <tr className="calculation-total"><th>Formation total</th><td>—</td><td>{n(a.length, 2)}</td><td>{n(a.emptyMass / 1000)}</td><td>{n(a.power / 1000, 0)}</td><td>{o.mode === "boat" ? "—" : n(a.effort / 1000, 2)}</td><td>{n(o.capacity, 2)}</td><td title="Minimum among components carrying the metrics cargo; not a sum">{n(a.baseLoadSpeed, 2)} (min)</td></tr>
+      <table className="calculation-inputs"><thead><tr><th>Component</th><th>Qty</th><th>Length<br />m</th><th>Empty mass<br />t</th><th>Power<br />kW</th><th>{o.mode === "airplane" ? "Thrust" : "Listed effort"}<br />kN</th><th>Capacity<br />units</th><th>Base rate<br />×</th></tr></thead><tbody>
+        {components.map(({ vehicle: v, count, label }) => <tr key={v.id}><th>{v.name}<small>{label}</small></th><td>{count}</td><td>{n(v.length, 2)}</td><td>{n(v.weightEmpty / 1000)}</td><td>{v.carrier === "AIR" ? "—" : n(v.power, 0)}</td><td>{v.carrier === "AIR" ? n((v.thrust ?? 0) / 1000, 2) : v.carrier === "WATER" ? "—" : n(v.tractiveEffort, 2)}</td><td>{n(v.capacities[o.cargo] ?? 0, 2)}</td><td>{n(v.capacities[o.cargo] ? v.loadSpeed : 0, 2)}</td></tr>)}
+        <tr className="calculation-total"><th>Formation total</th><td>—</td><td>{n(a.length, 2)}</td><td>{n(a.emptyMass / 1000)}</td><td>{o.mode === "airplane" ? "—" : n(a.power / 1000, 0)}</td><td>{o.mode === "airplane" ? n((o.engine.thrust ?? 0) / 1000, 2) : o.mode === "boat" ? "—" : n(a.effort / 1000, 2)}</td><td>{n(o.capacity, 2)}</td><td title="Minimum among components carrying the metrics cargo; not a sum">{n(a.baseLoadSpeed, 2)} (min)</td></tr>
       </tbody></table>
       <div className="calculation-equations">
         {o.wagon && lengthLimit !== null && <p><b>Maximum wagon count</b><code>floor(({n(lengthLimit, 2)} − {o.engines} × {n(o.engine.length, 2)}) ÷ {n(o.wagon.length, 2)}) = {o.wagons}</code><span>The calculation uses unrounded lengths.</span></p>}
-        <p><b>Speed ceiling</b><code>min({n(o.engine.speed, 2)}{o.wagon ? `, ${n(o.wagon.speed, 2)}` : ""}) = {n(o.speed, 2)} km/h = {n(o.speed / 3.6, 4)} m/s</code></p>
+        <p><b>Speed ceiling</b><code>min({n(o.engine.speed, 2)}{o.wagon ? `, ${n(o.wagon.speed, 2)}` : ""}{o.speedLimit > 0 ? `, ${n(o.speedLimit, 2)} route limit` : ""}) = {n(o.effectiveSpeed ?? o.speed, 2)} km/h = {n((o.effectiveSpeed ?? o.speed) / 3.6, 4)} m/s</code><span>Rated vehicle speed is unchanged. Acceleration capability still uses rated speed; lowering the route ceiling does not increase engine power or acceleration.</span></p>
         <p><b>Mass used for movement</b><code>m = {n(a.mass, 0)} kg{a.rail ? " (empty formation)" : " (empty mass + cargo payload)"}</code><span>Theoretical loaded mass: {n(o.loadedMass / 1000)} t.{a.rail ? " Matching loaded and empty TF3 recordings support ignoring payload for rail movement in this calibration." : " Payload uses the selected cargo’s weight factor."}</span></p>
       </div>
     </section>
@@ -47,7 +48,7 @@ export default function CalculationBreakdown({ option: o, settings, cargoName }:
           return <tr key={kmh}><td>{n(kmh, 2)}</td><td>{v <= a.transitionSpeed ? "Traction" : "Power"}</td><td>{n(force / 1000, 3)}</td><td>{n(a.resistanceForce / 1000, 3)}</td><td>{n((force - a.resistanceForce) / 1000, 3)}</td><td>{n(force * v / 1000, 2)}</td><td>{n(force / a.mass - a.resistance, 4)}</td></tr>;
         })}</tbody></table>
         <p className="calculation-note">This table shows the force available while accelerating at each speed. Cruising and braking use the phases shown in the graph.</p>
-      </> : o.mode === "boat" ? <div className="calculation-equations">
+      </> : o.mode === "airplane" ? <div className="calculation-equations"><p><b>Thrust-based airplane estimate (uncalibrated)</b><code>a = thrust / loaded mass = {n(o.engine.thrust ?? 0, 0)} N / {n(a.mass, 0)} kg = {n(effectiveA, 4)} m/s²</code><span>Uses TF3’s maximum thrust as constant force, with a 1 m/s² braking assumption. Thrust ramp-up, aerodynamic drag, taxiing, takeoff, climb, descent, landing and airport queues are not modeled. This is a comparative estimate, not a flight simulation.</span></p></div> : o.mode === "boat" ? <div className="calculation-equations">
         <p><b>Power-based boat estimate (uncalibrated)</b><code>P = {n(a.power / 1000, 0)} kW = {n(a.power, 0)} W</code><code>a = P ÷ (m × max(vmax ÷ 2, 1)) = {n(a.power, 0)} ÷ ({n(a.mass, 0)} × {n(Math.max(o.speed / 7.2, 1), 4)}) = {n(effectiveA, 4)} m/s²</code><span>TF3 supplies available power and mass for boats, but no listed tractive effort. This constant approximation uses power at half top speed and loaded mass. Propeller thrust, hull drag, turning, docking and currents are not modeled. Boat braking uses the uncalibrated 1 m/s² assumption. Rail calibration does not apply.</span></p>
       </div> : <div className="calculation-equations">
         <p><b>Constant estimate for tram / road equipment</b><code>a₀ = F ÷ m = {n(a.effort, 0)} ÷ {n(a.mass, 0)} = {n(o.acceleration, 4)} m/s²</code><code>a = min(a₀, P ÷ (m × max(vmax ÷ 2, 1))) = {n(effectiveA, 4)} m/s²</code><span>{n(a.power / 1000, 0)} kW installed power, {n(a.effort / 1000, 2)} kN listed effort. This carrier uses the earlier constant approximation; the doubled rail traction and rail resistance model do not apply.</span></p>
@@ -55,16 +56,16 @@ export default function CalculationBreakdown({ option: o, settings, cargoName }:
     </section>
     <section className="calculation-section">
       <h3>3. Travel, braking and station handling</h3>
-      <p>{a.rail ? "Time and distance integrate the changing acceleration: t = ∫dv/a(v), x = ∫v·dv/a(v)." : "Time and distance use t = v/a and x = v²/(2a)."} The trip peak solves xaccel(v) + v²/(2b) = segment distance, capped by the attainable top speed. Any remaining distance is cruising.</p>
-      <p><strong>{n(o.distanceKm, 3)} km ÷ ({a.additionalStops} + 1) = {n(a.segmentDistance / 1000, 3)} km per segment.</strong> Each of the {a.segmentCount} segments starts and ends at rest. The totals below sum all segments; intermediate stops have no waiting or cargo handling.</p>
+      <p>{a.rail ? "Time and distance integrate the changing acceleration: t = ∫dv/a(v), x = ∫v·dv/a(v)." : a.turns ? "Each segment uses tacc = (vpeak - ventry)/a and xacc = (vpeak² - ventry²)/(2a), with analogous braking differences." : "Time and distance use t = v/a and x = v²/(2a)."} {a.turns ? "For intermediate segments vexit = vpeak/2, so xbrake = 0.75vpeak²/(2b). The final segment brakes to zero. Solve xacc + xbrake = segment distance, capped by the route ceiling." : "The trip peak solves xaccel(v) + v²/(2b) = segment distance, capped by the route ceiling."} Any remaining distance is cruising.</p>
+      <p><strong>{n(o.distanceKm, 3)} km ÷ ({a.turns || a.additionalStops} + 1) = {n(a.segmentDistance / 1000, 3)} km per segment.</strong> {a.turns ? "Intermediate turns retain half the actual approach peak. Only origin and destination are at rest." : `Each of the ${a.segmentCount} segments starts and ends at rest.`} The totals below sum all segments; intermediate stops have no waiting or cargo handling.</p>
       <table className="calculation-phases"><thead><tr><th>Phase</th><th>Time, s</th><th>Distance, m</th><th>Calculation</th></tr></thead><tbody>
-        <tr><th>Accelerate</th><td>{n(a.trip.accelerationTime, 3)}</td><td>{n(a.trip.accelerationDistance, 3)}</td><td>{a.segmentCount}× ({a.rail ? "integrate the traction / power curve" : "vpeak ÷ a; vpeak² ÷ (2a)"})</td></tr>
-        <tr><th>Cruise</th><td>{n(a.trip.cruiseTime, 3)}</td><td>{n(a.trip.cruiseDistance, 3)}</td><td>{a.segmentCount}× (remaining segment distance ÷ {n(a.trip.speed, 4)} m/s)</td></tr>
-        <tr><th>Brake</th><td>{n(a.trip.brakingTime, 3)}</td><td>{n(a.trip.brakingDistance, 3)}</td><td>{a.segmentCount}× ({n(a.trip.speed, 4)} ÷ {n(o.brakingAcceleration, 2)}; vpeak² ÷ (2 × {n(o.brakingAcceleration, 2)}))</td></tr>
+        <tr><th>Accelerate</th><td>{n(a.trip.accelerationTime, 3)}</td><td>{n(a.trip.accelerationDistance, 3)}</td><td>{a.turns ? "Sum (vpeak - ventry) / a; (vpeak² - ventry²) / (2a)" : `${a.segmentCount}× (${a.rail ? "integrate the traction / power curve" : "vpeak / a; vpeak² / (2a)"})`}</td></tr>
+        <tr><th>Cruise</th><td>{n(a.trip.cruiseTime, 3)}</td><td>{n(a.trip.cruiseDistance, 3)}</td><td>{a.turns ? "Sum remaining distance / each segment peak speed" : `${a.segmentCount}× (remaining segment distance / ${n(a.trip.speed, 4)} m/s)`}</td></tr>
+        <tr><th>Brake</th><td>{n(a.trip.brakingTime, 3)}</td><td>{n(a.trip.brakingDistance, 3)}</td><td>{a.turns ? "Sum (vpeak - vexit) / b; (vpeak² - vexit²) / (2b); vexit = vpeak/2 at turns, 0 at destination" : `${a.segmentCount}× (${n(a.trip.speed, 4)} / ${n(o.brakingAcceleration, 2)}; vpeak² / (2b))`}</td></tr>
         <tr className="calculation-total"><th>Moving total</th><td>{n(a.trip.time, 3)}</td><td>{n(o.distanceKm * 1000, 3)}</td><td>Accelerate + cruise + brake</td></tr>
       </tbody></table>
       <div className="calculation-equations">
-        <p><b>Average speed</b><code>{n(o.distanceKm, 3)} km × 3,600 ÷ {n(a.trip.time, 3)} s = {n(o.averageSpeed, 3)} km/h</code><span>Includes acceleration, braking and all additional stops. Excludes cargo handling and station pauses.</span></p>
+        <p><b>Average speed</b><code>{n(o.distanceKm, 3)} km × 3,600 ÷ {n(a.trip.time, 3)} s = {n(o.averageSpeed, 3)} km/h</code><span>Includes acceleration, braking, additional stops and applicable turns. Excludes cargo handling and station pauses.</span></p>
         <p><b>Total time used for throughput</b><code>{n(a.trip.time, 3)} travel + {n(a.loadingTime, 3)} loading + {n(a.unloadingTime, 3)} unloading + {n(a.arrivalTime, 2)} arrival pause = {n(a.totalTime, 3)} s</code><span>Origin loading starts ready; the destination arrival pause is counted once. Intermediate stops immediately restart and add no handling or waiting. Departure and door-closing pauses are excluded.</span></p>
         <p><b>Performance</b><code>{n(o.capacity, 2)} × 3,600 ÷ {n(a.totalTime, 3)} = {n(o.throughput, 3)} units/hour</code></p>
       </div>
@@ -118,15 +119,18 @@ function TripGraph({ analysis: a }: { analysis: Analysis }) {
   // include every segment. A representative segment remains fully inspectable.
   const showFullJourney = a.segmentCount <= 50;
   const plottedCount = scope === "acceleration" || !showFullJourney ? 1 : a.segmentCount;
-  const duration = scope === "acceleration" ? a.segment.accelerationTime : a.segment.time * plottedCount;
+  const plotSegments = useMemo(() => a.turnSections
+    ? a.turnSections.flatMap(section => Array.from({ length: Math.min(section.repeat, plottedCount) }, (_, i) => ({ ...section, startTime: section.startTime + i * section.time }))).slice(0, plottedCount)
+    : Array.from({ length: plottedCount }, (_, i) => ({ ...a.segment, startTime: i * a.segment.time })), [a, plottedCount]);
+  const duration = scope === "acceleration" ? a.segment.accelerationTime : showFullJourney ? a.trip.time : a.segment.time;
   const points = useMemo(() => {
     if (!Number.isFinite(duration) || duration <= 0) return [];
     const times = Array.from({ length: 181 }, (_, i) => i === 180 ? duration : duration * i / 180);
     const epsilon = Math.min(.0001, duration * 1e-7, a.segment.time * 1e-5);
-    for (let i = 0; i < plottedCount; i++) {
-      for (const local of [a.transitionTime, a.segment.accelerationTime, a.segment.accelerationTime + a.segment.cruiseTime, a.segment.time]) {
+    for (const segment of plotSegments) {
+      for (const local of [a.transitionTime, segment.accelerationTime, segment.accelerationTime + segment.cruiseTime, segment.time]) {
         if (local === null) continue;
-        const t = i * a.segment.time + local;
+        const t = segment.startTime + local;
         if (t > 0 && t <= duration) {
           times.push(t, Math.max(0, t - epsilon));
           if (t + epsilon < duration) times.push(t + epsilon);
@@ -137,7 +141,7 @@ function TripGraph({ analysis: a }: { analysis: Analysis }) {
       scope === "acceleration" && time === duration
         ? { ...a.sampleAtTime(Math.max(0, duration - Math.min(.0001, duration * 1e-7))), time }
         : a.sampleAtTime(time));
-  }, [a, duration, scope, plottedCount]);
+  }, [a, duration, scope, plotSegments]);
   if (!points.length) return <p className="calculation-note">This formation cannot complete the trip under the movement model.</p>;
   const selected = points[Math.min(index, points.length - 1)];
   const left = 64, right = 930, width = right - left;
@@ -148,12 +152,12 @@ function TripGraph({ analysis: a }: { analysis: Analysis }) {
   const sy = (v: number) => 150 - v / speedMax * 120;
   const ay = (v: number) => 272 - (v - accelerationMin) / (accelerationMax - accelerationMin) * 92;
   const line = (y: (p: Point) => number) => points.map(p => `${x(p.time).toFixed(3)},${y(p).toFixed(3)}`).join(" ");
-  const phases = Array.from({ length: plottedCount }, (_, i) => [
-    { name: a.rail ? "Traction limited" : "Constant estimate", end: a.transitionTime ?? a.segment.accelerationTime, color: "#e2eee8" },
-    ...(a.transitionTime === null ? [] : [{ name: "Power limited", end: a.segment.accelerationTime, color: "#fff0cf" }]),
-    { name: "Cruising", end: a.segment.accelerationTime + a.segment.cruiseTime, color: "#e3edf8" },
-    { name: "Braking", end: a.segment.time, color: "#f8e4e0" },
-  ].map(p => ({ ...p, id: `${i}-${p.name}`, end: Math.min(i * a.segment.time + p.end, duration) }))).flat();
+  const phases = plotSegments.map((segment, i) => [
+    { name: a.rail ? "Traction limited" : "Constant estimate", end: a.transitionTime ?? segment.accelerationTime, color: "#e2eee8" },
+    ...(a.transitionTime === null ? [] : [{ name: "Power limited", end: segment.accelerationTime, color: "#fff0cf" }]),
+    { name: "Cruising", end: segment.accelerationTime + segment.cruiseTime, color: "#e3edf8" },
+    { name: "Braking", end: segment.time, color: "#f8e4e0" },
+  ].map(p => ({ ...p, id: `${i}-${p.name}`, end: Math.min(segment.startTime + p.end, duration) }))).flat();
   const legend = phases.filter((p, i) => p.end - (phases[i - 1]?.end ?? 0) > 1e-6)
     .filter((p, i, all) => all.findIndex(other => other.name === p.name) === i);
   function inspect(clientX: number, rect: DOMRect) {
@@ -165,7 +169,7 @@ function TripGraph({ analysis: a }: { analysis: Analysis }) {
   return <section className="trip-graph" aria-label="Trip speed and acceleration graph">
     <div className="trip-graph-heading"><h3>Speed and acceleration · {n(duration)} seconds</h3><span>Hover the plot or move the time slider</span></div>
     <div className="trip-graph-scope" role="group" aria-label="Graph time range">{(["acceleration", "trip"] as const).map(value => <button type="button" key={value} aria-pressed={scope === value} onClick={() => { setScope(value); setIndex(0); }}>{value === "acceleration" ? "Acceleration only" : showFullJourney ? "Whole trip" : "One segment"}</button>)}</div>
-    {a.segmentCount > 1 && <p className="calculation-note">{a.segmentCount} identical segments of {n(a.segmentDistance / 1000, 3)} km. {showFullJourney ? "Acceleration view shows the first launch; whole trip shows each complete stop and restart." : "The graph shows one representative segment to stay responsive; performance totals include every segment."}</p>}
+    {a.segmentCount > 1 && <p className="calculation-note">{a.segmentCount} {a.turns ? "turn-separated segments" : "identical segments"} of {n(a.segmentDistance / 1000, 3)} km. {showFullJourney ? a.turns ? "Whole trip shows each slowdown to half the approach speed and subsequent acceleration." : "Acceleration view shows the first launch; whole trip shows each complete stop and restart." : "The graph shows one representative segment to stay responsive; performance totals include every segment."}</p>}
     <div className="trip-phase-legend">{legend.map(p => <span key={p.name}><i style={{ background: p.color }} />{p.name}</span>)}</div>
     <svg viewBox="0 0 960 314" role="img" aria-label="Speed in kilometers per hour and acceleration in meters per second squared against travel time in seconds" onPointerMove={e => inspect(e.clientX, e.currentTarget.getBoundingClientRect())}>
       <title>Trip speed and acceleration</title><desc>The upper panel shows speed, the lower panel acceleration. Shading identifies traction, power, cruise and brake phases. Use the time slider for numeric values.</desc>

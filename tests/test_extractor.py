@@ -9,6 +9,27 @@ spec.loader.exec_module(extractor)
 
 
 class ExtractorTests(unittest.TestCase):
+    def test_air_thrust_regression_and_air_cost_formula(self):
+        meta = {
+            'transportVehicle': {'carrier':'AIR','comfortFactor':-1,'loadSpeed':3,
+                'transportModes':['AIRCRAFT'],'engineTransportModes':['AIRCRAFT'],
+                'compartments':[{'loadConfigs':[{'cargoEntry':{'capacity':200,'cargoTypeSet':{'cargoTypesIncluded':['PASSENGERS']}}}]}]},
+            'airVehicle': {'topSpeed':200,'maxThrust':100000,'timeToFullThrust':3,'weightEmpty':25000},
+            'extent': {'bbMin':[0,0,0],'bbMax':[30,30,10]},
+            'emissions': {'noise':{'score':50},'pollution':{'score':25}},
+            'cost': {'price':-1}, 'maintenance': {'runningCosts':-1},
+        }
+        models={'AIR':{'comfort_factor':{'_intercept':-1,'power':.00001}}}
+        result=extractor.normalize(meta,'vehicle/plane/test/test.mdl',[{'id':'PASSENGERS','classes':[]}],lambda s:s,models)
+        self.assertEqual(result['thrust'],100000)
+        self.assertEqual(result['power'],0,'thrust is not electrical/mechanical power in kW')
+        self.assertEqual(result['timeToFullThrust'],3)
+        self.assertEqual(result['comfort'],50,'AIR regression power feature is raw thrust in N')
+        speed=(-.0000203*720**2+.17*720+28.36)/3.6
+        running=extractor.round_game(speed*50*(3700/1000*365*4/8))
+        self.assertEqual(result['running'],running)
+        self.assertEqual(result['purchase'],running*6)
+
     def test_water_metadata_uses_watts_and_water_cost_formula(self):
         meta = {
             'transportVehicle': {'carrier':'WATER','comfortFactor':0,'loadSpeed':20,

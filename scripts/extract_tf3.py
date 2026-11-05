@@ -106,8 +106,9 @@ def capacity_by_cargo(tv, cargos):
 def normalize(meta, source, cargos, translate, models):
     tv = obj(meta.get('transportVehicle'))
     water = tv.get('carrier') == 'WATER'
-    lv = obj(meta.get('waterVehicle' if water else 'landVehicle'))
-    if not tv or not lv or tv.get('carrier') not in ['RAIL', 'TRAM', 'ROAD', 'WATER']:
+    air = tv.get('carrier') == 'AIR'
+    lv = obj(meta.get('airVehicle' if air else 'waterVehicle' if water else 'landVehicle'))
+    if not tv or not lv or tv.get('carrier') not in ['RAIL', 'TRAM', 'ROAD', 'WATER', 'AIR']:
         return None
     extent = obj(meta.get('extent'))
     if not extent.get('bbMax') or not extent.get('bbMin'):
@@ -120,6 +121,7 @@ def normalize(meta, source, cargos, translate, models):
     availability = obj(meta.get('availability')); emissions = obj(meta.get('emissions'))
     features = {'year_from': availability.get('yearFrom', 1900)-1900, 'top_speed': lv.get('topSpeed', 0), 'volume': math.prod(dimensions), 'power': power, 'tractive_effort': effort, 'weight_empty': lv.get('weightEmpty', 0), 'has_engine_transport_modes': int(bool(engine_modes))}
     if water: features['max_rpm'] = lv.get('maxRpm', 0)
+    if air: features['power'] = lv.get('maxThrust', 0) # TF3's AIR regression uses thrust under this feature name.
     for e in engines:
         key = 'has_engine_type_' + e['type']; features[key] = features.get(key, 0)+1
     for mode in modes:
@@ -156,8 +158,11 @@ def normalize(meta, source, cargos, translate, models):
     speed = lv.get('topSpeed', 0)*3.6
     average_speed = ((speed**0.78+4) if tv['carrier'] in ['ROAD','TRAM'] else (speed**0.86+10))/3.6
     if water: average_speed = lv.get('topSpeed', 0) * .65
+    if air:
+        cost_speed = min(speed, 4000)
+        average_speed = (-.0000203 * cost_speed**2 + .17 * cost_speed + 28.36) / 3.6
     c = 3700/1000*365*4/8
-    if tv['carrier'] in ['ROAD', 'WATER'] or (tv['carrier'] == 'TRAM' and power > 0 and max_capacity > 0):
+    if tv['carrier'] in ['ROAD', 'WATER', 'AIR'] or (tv['carrier'] == 'TRAM' and power > 0 and max_capacity > 0):
         running = round_game(average_speed*max_capacity*c)
     else:
         running = round_game(average_speed*max_capacity*c*0.5)
@@ -181,6 +186,7 @@ def normalize(meta, source, cargos, translate, models):
         'capacities': capacities, 'loadSpeed': load_speed, 'loadSpeedSource': load_source, 'comfort': comfort*100,
         'noise': noise, 'pollution': pollution, 'purchase': purchase, 'running': yearly,
         'fixedFormation': False,
+        **({'thrust': lv.get('maxThrust', 0), 'timeToFullThrust': lv.get('timeToFullThrust', 0)} if air else {}),
     }
 
 
@@ -216,7 +222,7 @@ def main():
                     data = table(text, 'return')
                     cargos.append({'id': data.get('id', path.stem.upper()), 'name': translate(data['name']), 'classes': arr(data.get('cargoClasses')), 'weightFactor': data.get('weightFactor', 1), 'loadSpeedFactor': data.get('loadSpeedFactor', 1), 'order': data.get('order', 999)})
     vehicles, formations, hidden = {}, [], set()
-    for category in ['train', 'tram', 'waggon', 'bus', 'truck', 'ship']:
+    for category in ['train', 'tram', 'waggon', 'bus', 'truck', 'ship', 'plane']:
         for path in sorted((root/'vehicle'/category).glob('*.zip')):
             with zipfile.ZipFile(path) as z:
                 for name in z.namelist():

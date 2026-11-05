@@ -121,3 +121,18 @@ test('airplane catalog, thrust model, artwork and saved performance settings rou
   const legacy={...config,settings:{...settings}};delete legacy.settings.turns;delete legacy.settings.speedLimit;
   assert.equal(read(legacy)[0].settings.turns,0);assert.equal(read(legacy)[0].settings.speedLimit,0);
 });
+
+test('aircraft brake as strongly as they accelerate, including short trips and repeated stops',()=>{
+  const comet=data.vehicles.find(v=>v.name==='De Havilland DH.106 Comet');
+  for(const overrides of [{distanceKm:20},{distanceKm:1},{distanceKm:20,additionalStops:3},{distanceKm:20,speedLimit:100}]){
+    const o=calculateOptions([comet],data.cargos,{...settings,...overrides})[0];
+    const a=analyzeOption(o);
+    close(o.brakingAcceleration,o.acceleration);
+    close(a.trip.accelerationTime,a.trip.brakingTime);
+    close(a.trip.accelerationDistance,a.trip.brakingDistance);
+    close(o.averageSpeed,o.distanceKm*3600/a.trip.time);
+    close(o.throughput,o.capacity*3600/a.totalTime);
+    close(o.brakingTime,o.peakSpeed/3.6/o.acceleration);
+    close(a.trip.accelerationDistance+a.trip.cruiseDistance+a.trip.brakingDistance,o.distanceKm*1000);
+  }
+});

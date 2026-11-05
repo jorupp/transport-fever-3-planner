@@ -182,7 +182,8 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
   const distanceMeters = settings.distanceKm * 1000 / segmentCount;
   const rail = engine.carrier === "RAIL" ? createRailMotion(motionMass, sum("power") * 1000, sum("tractiveEffort") * 1000, vmax,
     (engine.friction * engine.weightEmpty * engines + (wagon ? wagon.friction * wagon.weightEmpty * wagons : 0)) / motionMass) : null;
-  const brakingAcceleration = rail ? Math.min(engine.brakeDeceleration ?? DEFAULT_RAIL_BRAKING,
+  // Temporary aircraft calibration: decelerate at the same thrust/mass rate as launch.
+  const brakingAcceleration = engine.carrier === "AIR" ? (engine.thrust ?? 0) / motionMass : rail ? Math.min(engine.brakeDeceleration ?? DEFAULT_RAIL_BRAKING,
     wagon ? (wagon.brakeDeceleration ?? DEFAULT_RAIL_BRAKING) : Infinity) : 1;
   const arrivalDelaySeconds = rail ? RAIL_ARRIVAL_DELAY_SECONDS : 0;
   const railTrip = rail?.trip(distanceMeters, brakingAcceleration);
@@ -199,9 +200,9 @@ function makeOption(engine: Vehicle, wagon: Vehicle | null, engines: number, wag
     ? rail.launchAtDistance(distance).time
     : distance <= constantDistanceToMax ? Math.sqrt(2 * distance / a) : constantTimeToMax + (distance - constantDistanceToMax) / vmax);
   const turnJourney = turns > 0 ? createTurnJourney(settings.distanceKm * 1000, turns, a, brakingAcceleration, vmax) : null;
-  const peak = turnJourney?.trip.speed ?? (railTrip ? railTrip.speed : Math.min(vmax, Math.sqrt(2 * distanceMeters / (1 / a + 1))));
+  const peak = turnJourney?.trip.speed ?? (railTrip ? railTrip.speed : Math.min(vmax, Math.sqrt(2 * distanceMeters / (1 / a + 1 / brakingAcceleration))));
   const segmentSeconds = railTrip ? railTrip.time
-    : peak / a + peak + Math.max(0, distanceMeters - peak * peak / (2 * a) - peak * peak / 2) / peak;
+    : peak / a + peak / brakingAcceleration + Math.max(0, distanceMeters - peak * peak / (2 * a) - peak * peak / (2 * brakingAcceleration)) / peak;
   const travelSeconds = turnJourney?.trip.time ?? segmentSeconds * segmentCount;
   const brakingTime = turnJourney ? turnJourney.sections[turnJourney.sections.length - 1].brakingTime : peak / brakingAcceleration;
   const brakingDistance = turnJourney ? turnJourney.sections[turnJourney.sections.length - 1].brakingDistance : peak * peak / (2 * brakingAcceleration);
